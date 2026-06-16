@@ -4,39 +4,108 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>EduCall – Biometric Attendance · Mythros Support Services Ltd</title>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <style>
 /* ═══════════════════════════════════════════════════════════
    EDUCALL v2 — DESIGN SYSTEM
-   Primary: #003461 navy · Secondary: #1b6d24 green
-   Font: Manrope (display) + Inter (body)
-   8pt grid · Material Symbols icons
+   Brand Palette (official EduCall colour scale):
+   ─ Brand green (secondary): #84e05b base · #203816 darkest
+   ─ Forest green (primary):  #4d6045 mid  · #1d3314 text-safe
+   ─ Neutrals: green-tinted greys #f3fcef → #000000
+   Font: Outfit · 8pt grid · Material Symbols
 ═══════════════════════════════════════════════════════════ */
 :root{
-  --pri:#003461;--pri2:#004b87;--on-pri:#fff;
-  --sec:#1b6d24;--sec-cont:#a0f399;--on-sec-cont:#217128;
+  /* ── Full brand green scale (secondary / CTA) ─────────── */
+  --brand-50: #f3fcef;
+  --brand-100:#d9f5cc;
+  --brand-200:#c6f1b4;
+  --brand-300:#adea91;
+  --brand-400:#9de67c;
+  --brand-500:#84e05b;   /* BRAND BASE */
+  --brand-600:#78cc53;
+  --brand-700:#5e9f41;   /* AA on white */
+  --brand-800:#497b32;
+  --brand-900:#375e26;
+  --brand-950:#203816;   /* AAAAAA — darkest */
+
+  /* ── Primary forest green scale ───────────────────────── */
+  --pri-50: #e9ebe8;
+  --pri-100:#bac1b7;
+  --pri-200:#98a394;
+  --pri-300:#6a7a63;
+  --pri-400:#4d6045;
+  --pri-950:#1d3314;     /* darkest — body text */
+
+  /* ── Semantic tokens ──────────────────────────────────── */
+  /* Primary = dark forest for headers, filled buttons */
+  --pri:    #1d3314;
+  --pri2:   #375e26;
+  --on-pri: #ffffff;
+
+  /* Secondary = brand green for accents, chips, kiosk */
+  --sec:       #5e9f41;
+  --sec-cont:  #c6f1b4;
+  --on-sec-cont:#203816;
+
+  /* Danger / error */
   --ter:#6e0009;--ter-cont:#ffa098;
   --err:#ba1a1a;--err-cont:#ffdad6;
-  --surf:#f8f9ff;--surf-lo:#f0f4fd;--surf-hi:#e4e8f1;
-  --surf-0:#fff;--surf-1:#f0f4fd;--surf-2:#eaeef7;--surf-3:#e4e8f1;--surf-4:#dee3eb;
-  --txt:#171c22;--txt2:#424750;--out:#727781;--out-var:#c2c6d1;
-  --inv:#2c3137;
-  --tint:#27609d;
-  --grad:linear-gradient(135deg,#003461 0%,#004b87 100%);
-  --family-grad:linear-gradient(135deg,#1b6d24 0%,#2e8b3a 100%);
-  --fh:'Manrope',sans-serif;
-  --fb:'Inter',sans-serif;
+
+  /* Surfaces — green-tinted white palette */
+  --surf:   #f3fcef;     /* page bg */
+  --surf-0: #ffffff;     /* card bg */
+  --surf-1: #edf9e8;     /* sidebar, lo-card */
+  --surf-2: #d9f5cc;     /* hover bg */
+  --surf-3: #c6f1b4;     /* active selected */
+  --surf-4: #adea91;     /* stronger selected */
+  --surf-hi:#c6f1b4;     /* highlight */
+  --surf-lo:#f3fcef;
+  --out-var:#98a394;     /* border colour */
+
+  /* Text */
+  --txt:  #1d3314;       /* primary body text */
+  --txt2: #4d6045;       /* secondary text */
+  --out:  #6a7a63;       /* muted / placeholder */
+  --inv:  #1d3314;       /* toast background */
+
+  /* Tint — links, focus rings */
+  --tint: #5e9f41;
+
+  /* Gradients */
+  --grad:        linear-gradient(135deg,#1d3314 0%,#375e26 100%);
+  --family-grad: linear-gradient(135deg,#375e26 0%,#5e9f41 100%);
+  --brand-grad:  linear-gradient(135deg,#84e05b 0%,#5e9f41 100%);
+
+  /* Typography */
+  --fh:'Outfit',sans-serif;
+  --fb:'Outfit',sans-serif;
+
+  /* Radii */
   --r8:8px;--r12:12px;--r16:16px;--r20:20px;
-  --sh-sm:0 2px 8px rgba(23,28,34,.05);
-  --sh-md:0 4px 16px rgba(23,28,34,.07);
-  --sh-lg:0 12px 32px rgba(23,28,34,.1);
+
+  /* Shadows — green-tinted */
+  --sh-sm:0 2px 8px rgba(29,51,20,.07);
+  --sh-md:0 4px 16px rgba(29,51,20,.10);
+  --sh-lg:0 12px 32px rgba(29,51,20,.14);
+
+  /* Button sizing tokens */
+  --btn-h:44px;
+  --btn-h-sm:36px;
+  --btn-pad-v:10px;
+  --btn-pad-h:20px;
+  --btn-pad-h-sm:14px;
+  --btn-fz:15px;
+  --btn-fz-sm:13px;
+  --btn-lh:1.3;
+  --btn-rad:10px;
+  --btn-rad-pill:100px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px}
-body{font-family:var(--fb);background:var(--surf);color:var(--txt);min-height:100vh;-webkit-font-smoothing:antialiased}
+body{font-family:var(--fb);background:var(--surf);color:var(--txt);min-height:100vh;-webkit-font-smoothing:antialiased;letter-spacing:-.01em}
 .mi{font-family:'Material Symbols Outlined';font-style:normal;font-weight:400;line-height:1;display:inline-block;vertical-align:middle;user-select:none;font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24;font-size:20px}
 .mi.fill{font-variation-settings:'FILL' 1,'wght' 300,'GRAD' 0,'opsz' 48}
 
@@ -64,7 +133,7 @@ body{font-family:var(--fb);background:var(--surf);color:var(--txt);min-height:10
 .export-opt:hover{background:var(--surf-1)}
 .sb-nav{padding:8px 0;flex:1}
 .sb-section{padding:10px 16px 4px;font-size:10px;font-weight:700;color:var(--out);text-transform:uppercase;letter-spacing:.08em}
-.nav-btn{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:8px;margin:1px 8px;color:var(--txt2);font-size:12.5px;font-weight:500;cursor:pointer;border:none;background:transparent;width:calc(100% - 16px);text-align:left;position:relative;transition:background .12s;font-family:var(--fb)}
+.nav-btn{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:8px;margin:1px 8px;color:var(--txt2);font-size:13px;font-weight:500;cursor:pointer;border:none;background:transparent;width:calc(100% - 16px);text-align:left;position:relative;min-height:44px;transition:background .12s,color .12s;font-family:var(--fb)}
 .nav-btn:hover{background:var(--surf-hi)}
 .nav-btn.active{background:var(--surf-4);color:var(--pri);font-weight:600}
 .nav-btn.active::before{content:'';position:absolute;left:-8px;top:50%;transform:translateY(-50%);width:4px;height:24px;border-radius:0 2px 2px 0;background:var(--tint)}
@@ -86,6 +155,9 @@ body{font-family:var(--fb);background:var(--surf);color:var(--txt);min-height:10
 .tb-actions{display:flex;gap:8px;align-items:center;flex-shrink:0;flex-wrap:wrap}
 .content{padding:20px 28px 40px;animation:fadeUp .25s ease-out}
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.msg-row:hover{background:var(--surf-2)!important}
+.msg-unread{font-weight:700}
 
 /* ── CARDS ── */
 .card{background:var(--surf-0);border-radius:var(--r16);padding:20px;box-shadow:var(--sh-sm)}
@@ -117,25 +189,177 @@ body{font-family:var(--fb);background:var(--surf);color:var(--txt);min-height:10
 .badge-late{background:#fef3c7;color:#78350f}
 .badge-family{background:#d1fae5;color:#065f46}
 
-/* ── BUTTONS ── */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:9px 18px;border-radius:var(--r8);font-family:var(--fb);font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .15s}
-.btn-pri{background:var(--grad);color:#fff;box-shadow:0 4px 14px rgba(0,52,97,.22);font-size:14px;font-weight:700}
-.btn-pri:hover{opacity:.92;transform:translateY(-1px)}
-.btn-sec{background:var(--surf-3);color:var(--txt)}
-.btn-sec:hover{background:var(--surf-4)}
-.btn-ok{background:var(--sec-cont);color:var(--on-sec-cont)}
-.btn-danger{background:var(--ter-cont);color:var(--ter)}
-.btn-family{background:var(--family-grad);color:#fff}
-.btn-sm{padding:6px 13px;font-size:12px}
-.btn-icon{padding:7px;border-radius:8px}
-.btn-full{width:100%}
+/* ══════════════════════════════════════════════════════════
+   BUTTONS — full spec (anatomy · types · hierarchy · states)
+   Based on: Outfit 15px label, 44px min touch target,
+   horizontal padding ≈ 2× vertical, filled > ghost > link
+══════════════════════════════════════════════════════════ */
 
-/* ── FORMS ── */
-.fg{margin-bottom:14px}
-.fl{display:block;font-size:10px;font-weight:700;color:var(--txt2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
-.fi{width:100%;padding:9px 13px;background:var(--surf-0);border:none;border-radius:var(--r8);outline:none;font-family:var(--fb);font-size:13px;color:var(--txt);box-shadow:0 0 0 1.5px var(--out-var);transition:box-shadow .15s}
-.fi:focus{box-shadow:0 0 0 2px var(--tint)}
-.fs{width:100%;padding:9px 13px;background:var(--surf-0);border:none;border-radius:var(--r8);outline:none;font-family:var(--fb);font-size:13px;color:var(--txt);box-shadow:0 0 0 1.5px var(--out-var);cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23727781' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center;padding-right:30px}
+/* Base — anatomy + invisible padding (44px min tap target) */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:7px;
+  padding:var(--btn-pad-v) var(--btn-pad-h);
+  min-height:var(--btn-h);
+  border-radius:var(--btn-rad);
+  font-family:var(--fb);
+  font-size:var(--btn-fz);
+  font-weight:600;
+  line-height:var(--btn-lh);
+  letter-spacing:.01em;
+  cursor:pointer;
+  border:2px solid transparent;
+  text-decoration:none;
+  user-select:none;
+  position:relative;
+  /* smooth all state transitions */
+  transition:background .15s ease,color .15s ease,border-color .15s ease,
+             box-shadow .15s ease,transform .1s ease,opacity .15s ease;
+}
+.btn:focus-visible{
+  outline:none;
+  box-shadow:0 0 0 3px rgba(39,96,157,.45);
+}
+/* Disabled state — applies to all variants */
+.btn:disabled,.btn[disabled],.btn.disabled{
+  opacity:.42;
+  cursor:not-allowed;
+  pointer-events:none;
+  box-shadow:none !important;
+  transform:none !important;
+}
+/* Loading / progress state */
+.btn.loading{
+  pointer-events:none;
+  opacity:.85;
+}
+.btn.loading::after{
+  content:'';
+  width:14px;height:14px;
+  border-radius:50%;
+  border:2px solid currentColor;
+  border-top-color:transparent;
+  animation:spin .7s linear infinite;
+  flex-shrink:0;
+}
+
+/* ── PRIMARY (Filled) — highest hierarchy ─────────────────
+   Solid filled, strongest visual weight, main CTA.
+   Hover: slightly lighter + lift. Active: press down.       */
+.btn-pri{
+  background:var(--grad);
+  color:#fff;
+  border-color:transparent;
+  box-shadow:0 4px 14px rgba(29,51,20,.22);
+  font-weight:700;
+}
+.btn-pri:hover:not(:disabled){
+  background:linear-gradient(135deg,#375e26 0%,#497b32 100%);
+  box-shadow:0 6px 18px rgba(29,51,20,.28);
+  transform:translateY(-1px);
+}
+.btn-pri:active:not(:disabled){
+  background:linear-gradient(135deg,#1d3314 0%,#203816 100%);
+  box-shadow:0 2px 6px rgba(29,51,20,.18);
+  transform:translateY(0) scale(.98);
+}
+
+/* ── SECONDARY (Ghost / Outlined) — medium hierarchy ──────
+   Outlined with transparent fill. Hover: fill with tint.   */
+.btn-sec{
+  background:transparent;
+  color:var(--txt);
+  border-color:var(--out-var);
+}
+.btn-sec:hover:not(:disabled){
+  background:var(--surf-2);
+  border-color:var(--txt2);
+  color:var(--txt);
+}
+.btn-sec:active:not(:disabled){
+  background:var(--surf-3);
+  transform:scale(.98);
+}
+
+/* ── TERTIARY (Link / Text) — lowest hierarchy ─────────────
+   No border, no fill — text with underline on hover.
+   Underline aids accessibility for visual impairments.      */
+.btn-ter{
+  background:transparent;
+  color:var(--tint);
+  border-color:transparent;
+  padding-left:4px;padding-right:4px;
+  font-weight:600;
+  text-decoration:none;
+}
+.btn-ter:hover:not(:disabled){
+  text-decoration:underline;
+  color:var(--pri2);
+}
+.btn-ter:active:not(:disabled){
+  color:var(--pri);
+  transform:scale(.97);
+}
+
+/* ── ACTION VARIANTS ─────────────────────────────────────── */
+.btn-ok{
+  background:var(--sec-cont);color:var(--on-sec-cont);
+  border-color:transparent;
+}
+.btn-ok:hover:not(:disabled){filter:brightness(.94);box-shadow:0 3px 10px rgba(29,51,20,.18)}
+.btn-ok:active:not(:disabled){filter:brightness(.88);transform:scale(.98)}
+
+.btn-danger{
+  background:var(--ter-cont);color:var(--ter);
+  border-color:transparent;
+}
+.btn-danger:hover:not(:disabled){filter:brightness(.94)}
+.btn-danger:active:not(:disabled){filter:brightness(.88);transform:scale(.98)}
+
+.btn-family{
+  background:var(--family-grad);color:#fff;
+  border-color:transparent;
+  box-shadow:0 4px 14px rgba(29,51,20,.22);
+}
+.btn-family:hover:not(:disabled){filter:brightness(1.08);transform:translateY(-1px)}
+.btn-family:active:not(:disabled){filter:brightness(.92);transform:scale(.98)}
+
+/* ── SIZE VARIANTS ──────────────────────────────────────────
+   sm: desktop precision (36px), still ≥44px touch via padding
+   btn (default): 44px — Apple HIG / Material minimum          */
+.btn-sm{
+  padding:7px var(--btn-pad-h-sm);
+  min-height:var(--btn-h-sm);
+  font-size:var(--btn-fz-sm);
+  border-radius:8px;
+}
+.btn-icon{
+  padding:10px;
+  min-height:var(--btn-h);
+  min-width:var(--btn-h);
+  border-radius:var(--btn-rad);
+  border-color:transparent;
+  background:transparent;
+  color:var(--txt2);
+}
+.btn-icon:hover:not(:disabled){background:var(--surf-3);color:var(--txt)}
+.btn-icon:active:not(:disabled){background:var(--surf-4);transform:scale(.94)}
+
+.btn-full{width:100%}
+.btn-pill{border-radius:var(--btn-rad-pill)}
+
+
+/* ── FORMS (per input design spec) ──────────────────────────
+   Label above field, 44px min input height, 16px field gap.
+   Placeholder = supplemental hint only, never the label.   */
+.fg{margin-bottom:16px} /* 16px between fields per spec */
+.fl{display:block;font-size:11px;font-weight:700;color:var(--txt2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.fi{width:100%;padding:10px 13px;min-height:44px;background:var(--surf-0);border:none;border-radius:var(--r8);outline:none;font-family:var(--fb);font-size:14px;color:var(--txt);box-shadow:0 0 0 1.5px var(--out-var);transition:box-shadow .15s,background .15s}
+.fi:hover{box-shadow:0 0 0 1.5px var(--tint);background:var(--surf-0)}
+.fi:focus{box-shadow:0 0 0 2.5px var(--tint);background:white}
+.fi::placeholder{color:var(--out);font-size:13px}
+.fs{width:100%;padding:10px 13px;min-height:44px;background:var(--surf-0);border:none;border-radius:var(--r8);outline:none;font-family:var(--fb);font-size:14px;color:var(--txt);box-shadow:0 0 0 1.5px var(--out-var);cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23727781' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:34px;transition:box-shadow .15s}
+.fs:hover{box-shadow:0 0 0 1.5px var(--tint)}
+.fs:focus{outline:none;box-shadow:0 0 0 2.5px var(--tint)}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
 .g-full{grid-column:1/-1}
@@ -190,7 +414,7 @@ tr:hover td{background:var(--surf-hi)}
 @keyframes spin{to{transform:rotate(360deg)}}
 .fp-lrg{font-size:76px;color:rgba(255,255,255,.72);transition:color .3s}
 .fp-bg.scanning .fp-lrg{color:white}
-.fp-bg.success .fp-lrg{color:#a0f399}
+.fp-bg.success .fp-lrg{color:#84e05b}
 .fp-bg.err-state .fp-lrg{color:#ffa098}
 .kiosk-result{background:rgba(255,255,255,.93);border-radius:14px;padding:16px 20px;display:none;align-items:center;gap:14px;margin-top:20px;animation:fadeUp .3s ease-out;text-align:left}
 .kiosk-result.show{display:flex}
@@ -198,15 +422,16 @@ tr:hover td{background:var(--surf-hi)}
 .recent-item{display:flex;align-items:center;gap:9px;padding:7px 11px;border-radius:9px;background:rgba(255,255,255,.07);margin-bottom:3px}
 .recent-name{font-size:12px;font-weight:600;color:rgba(255,255,255,.8);flex:1}
 .rtype{font-size:10px;font-weight:700;padding:2px 7px;border-radius:9px}
-.rtype.in{background:rgba(160,243,153,.2);color:#a0f399}
+.rtype.in{background:rgba(132,224,91,.2);color:#84e05b}
 .rtype.out{background:rgba(163,201,255,.2);color:#a3c9ff}
 .rtype.family{background:rgba(167,243,208,.2);color:#6ee7b7}
 
 /* ── FAMILY PORTAL ── */
-.family-wrap{background:var(--family-grad);min-height:100vh;display:flex;flex-direction:column;width:100%}
-.family-hdr{padding:20px 28px;display:flex;align-items:center;justify-content:space-between}
-.family-card{background:rgba(255,255,255,.1);backdrop-filter:blur(20px);border-radius:24px;padding:32px 36px;text-align:center;width:100%;max-width:420px}
-.family-mode-btn{padding:9px 20px;border-radius:20px;border:none;cursor:pointer;font-size:12px;font-weight:600;font-family:var(--fb);min-height:38px;transition:all .15s}
+/* ── FAMILY PORTAL — dark navy background for full contrast ─ */
+.family-wrap{background:linear-gradient(160deg,#0f1e10 0%,#1a2f1c 50%,#0d1a0e 100%);min-height:100vh;display:flex;flex-direction:column;width:100%}
+.family-hdr{padding:20px 28px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.08)}
+.family-card{background:rgba(255,255,255,.06);backdrop-filter:blur(20px);border-radius:24px;padding:28px 32px;text-align:center;width:100%;max-width:480px;border:1px solid rgba(255,255,255,.12)}
+.family-mode-btn{padding:10px 22px;border-radius:22px;border:none;cursor:pointer;font-size:13px;font-weight:600;font-family:var(--fb);min-height:44px;letter-spacing:.01em;transition:all .15s}
 
 /* ── LOGIN PAGE ── */
 .login-page{min-height:100vh;background:var(--surf);display:flex;align-items:center;justify-content:center;padding:24px}
@@ -225,7 +450,7 @@ tr:hover td{background:var(--surf-hi)}
 /* ── FAMILY MEMBER CARDS ── */
 .family-member-card{padding:14px 16px;border-radius:12px;border:1.5px solid var(--out-var);display:flex;align-items:center;gap:12px;cursor:pointer;transition:all .15s}
 .family-member-card:hover{border-color:var(--sec);background:var(--surf-1)}
-.family-member-card.selected{border-color:var(--sec);background:#f0fdf4;box-shadow:0 0 0 3px rgba(27,109,36,.12)}
+.family-member-card.selected{border-color:var(--sec);background:#f0fdf4;box-shadow:0 0 0 3px rgba(29,51,20,.12)}
 .fam-av{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#fff;flex-shrink:0;font-family:var(--fh)}
 
 /* ── ONLINE PILL ── */
@@ -242,7 +467,7 @@ tr:hover td{background:var(--surf-hi)}
 
 /* ── NOTIFICATION CHANNEL TOGGLES ── */
 .notif-channel{display:flex;align-items:center;justify-content:space-between;padding:10px 13px;border-radius:10px;border:1.5px solid var(--out-var);margin-bottom:7px;transition:border-color .15s}
-.notif-channel.active{border-color:var(--pri);background:rgba(0,52,97,.04)}
+.notif-channel.active{border-color:var(--pri);background:rgba(29,51,20,.04)}
 .notif-ch-info{display:flex;align-items:center;gap:10px}
 .notif-ch-icon{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:17px}
 .notif-toggle{width:40px;height:24px;border-radius:12px;background:var(--surf-hi);cursor:pointer;position:relative;transition:background .2s;flex-shrink:0;border:none}
@@ -255,19 +480,29 @@ tr:hover td{background:var(--surf-hi)}
 .settings-tab:hover:not(.active){color:var(--txt);background:var(--surf-hi)}
 /* ── EDITABLE CLASS BADGES ── */
 .cls-badge-edit{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;background:var(--surf-2);color:var(--txt2);margin:3px;cursor:pointer;border:1.5px solid transparent;transition:all .12s}
-.cls-badge-edit:hover{border-color:var(--pri);color:var(--pri);background:rgba(0,52,97,.06)}
+.cls-badge-edit:hover{border-color:var(--pri);color:var(--pri);background:rgba(29,51,20,.06)}
 .cls-badge-edit input{background:none;border:none;outline:none;font-size:11px;font-weight:600;font-family:var(--fb);color:inherit;width:52px;min-width:32px;text-align:center}
-/* ── CTA HOVER & ACTIVE FEEDBACK — applies to every clickable control ── */
-button,[onclick]{cursor:pointer}
-button:not(:disabled):hover,[onclick]:hover{filter:brightness(.94)}
-button:not(:disabled):active,[onclick]:active{filter:brightness(.88)}
-.btn-icon{border-radius:8px;transition:background .12s,filter .12s}
-.btn-icon:hover{background:var(--surf-3)}
-.sb-close,.sb-hamburger{border-radius:8px;transition:background .12s}
+/* ── GLOBAL CTA INTERACTIVITY (non-.btn clickables) ──────────
+   .btn handles its own states above. This covers [onclick] divs,
+   role-btn tiles, nav items, chips used as buttons, etc.
+   Min 44px touch target via min-height on containers.          */
+[onclick]:not(.btn):not(button){cursor:pointer}
+[onclick]:not(.btn):not(button):hover{filter:brightness(.95)}
+[onclick]:not(.btn):not(button):active{filter:brightness(.88)}
+.sb-close,.sb-hamburger{border-radius:8px;transition:background .12s,color .12s;min-height:44px;min-width:44px;display:flex;align-items:center;justify-content:center}
 .sb-close:hover,.sb-hamburger:hover{background:var(--surf-hi)}
-.role-btn:hover,.family-mode-btn:hover{transform:translateY(-1px);box-shadow:var(--sh-sm)}
+.sb-close:active,.sb-hamburger:active{background:var(--surf-3)}
+.role-btn{transition:background .15s,transform .15s,box-shadow .15s;min-height:82px}
+.role-btn:hover{transform:translateY(-2px);box-shadow:var(--sh-md)}
+.role-btn:active{transform:translateY(0) scale(.97)}
+.family-mode-btn{transition:background .15s,color .15s,transform .15s}
+.family-mode-btn:hover{transform:translateY(-1px)}
+.family-mode-btn:active{transform:scale(.97)}
+.notif-toggle{transition:background .2s}
 .notif-toggle:hover{filter:brightness(.92)}
 .fi:hover,.fs:hover{box-shadow:0 0 0 1.5px var(--tint)}
+/* Nav buttons already have their own hover — reinforce active */
+.nav-btn:active{transform:scale(.98)}
 @media(max-width:768px){
   .sidebar{position:fixed;top:0;left:0;height:100vh;z-index:50;transform:translateX(-100%);box-shadow:2px 0 16px rgba(0,0,0,.15)}
   .sidebar.open{transform:translateX(0)}
@@ -302,7 +537,7 @@ button:not(:disabled):active,[onclick]:active{filter:brightness(.88)}
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
       </div>
       <div style="font-family:var(--fh);font-size:28px;font-weight:800;color:var(--pri);letter-spacing:-.03em">EduCall</div>
-      <div style="font-size:13px;color:var(--out);margin-top:4px">Biometric Subject Attendance · SS1–SS3 & Primary</div>
+      <div style="font-size:13px;color:var(--out);margin-top:4px">Digital Operating System For Schools</div>
     </div>
 
     <!-- Role tabs -->
@@ -335,7 +570,7 @@ button:not(:disabled):active,[onclick]:active{filter:brightness(.88)}
       <div class="fg" id="l-email-wrap"><label class="fl" id="l-email-label">Email address</label><input class="fi" type="text" id="l-email" placeholder="you@school.edu.ng"></div>
       <div class="fg" id="l-pass-wrap"><label class="fl">Password</label><input class="fi" type="password" id="l-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"></div>
       <div id="l-err" style="display:none;padding:8px 12px;background:var(--err-cont);color:#690005;border-radius:8px;font-size:12px;margin-bottom:12px"></div>
-      <button class="btn btn-pri btn-full" onclick="doLogin()" style="height:44px;font-size:14px;border-radius:10px"><span class="mi" style="font-size:17px">login</span><span id="login-btn-txt">Sign in to EduCall</span></button>
+      <button class="btn btn-pri btn-full" onclick="doLogin()" style="border-radius:12px"><span class="mi" style="font-size:18px">login</span><span id="login-btn-txt">Sign in to EduCall</span></button>
     </div>
 
     <!-- Training Access -->
@@ -352,8 +587,8 @@ button:not(:disabled):active,[onclick]:active{filter:brightness(.88)}
       <button class="btn btn-sec btn-full btn-sm" onclick="fillTrainingLogin()"><span class="mi" style="font-size:15px">key</span>Use Training Login for Selected Role</button>
     </div>
 
-    <div style="text-align:center;margin-top:14px;font-size:12px;color:var(--out)">
-      New school? <span onclick="showPg('pg-register')" style="color:var(--tint);font-weight:600;cursor:pointer">Register here</span>
+    <div style="text-align:center;margin-top:14px;font-size:13px;color:var(--out)">
+      New school? <span onclick="showPg('pg-register')" class="btn btn-ter" style="display:inline-flex;vertical-align:middle;padding:2px 6px;min-height:unset">Register here</span>
     </div>
   </div>
 </div>
@@ -444,7 +679,7 @@ button:not(:disabled):active,[onclick]:active{filter:brightness(.88)}
         <div style="font-family:var(--fh);font-size:18px;font-weight:800;margin-bottom:6px">School Registered!</div>
         <div style="font-size:13px;color:var(--out);margin-bottom:16px" id="reg-success-msg">Your EduCall account is ready.</div>
         <div style="background:var(--surf-1);border-radius:10px;padding:13px;margin-bottom:16px;text-align:left;font-size:12px;line-height:1.9" id="reg-success-detail"></div>
-        <button class="btn btn-pri btn-full" onclick="loginAfterReg()" style="height:44px;font-size:14px">Enter EduCall Dashboard →</button>
+        <button class="btn btn-pri btn-full" onclick="loginAfterReg()" style="border-radius:12px">Enter EduCall Dashboard →</button>
       </div>
     </div>
     <div style="text-align:center;margin-top:14px;font-size:12px;color:var(--out)">Already registered? <span onclick="showPg('pg-login')" style="color:var(--tint);font-weight:600;cursor:pointer">Sign in</span></div>
@@ -498,7 +733,7 @@ button:not(:disabled):active,[onclick]:active{filter:brightness(.88)}
         <div style="font-family:var(--fh);font-size:36px;font-weight:800;color:white;letter-spacing:-.04em;line-height:1" id="k-clock">08:00</div>
         <div style="display:flex;align-items:center;justify-content:flex-end;gap:6px;margin-top:4px">
           <div style="font-size:11px;color:rgba(255,255,255,.5)" id="k-date">—</div>
-          <span class="online-pill" id="k-online" style="background:rgba(160,243,153,.2);color:#a0f399"><span class="online-dot" style="background:#a0f399"></span>Online</span>
+          <span class="online-pill" id="k-online" style="background:rgba(132,224,91,.2);color:#84e05b"><span class="online-dot" style="background:#84e05b"></span>Online</span>
         </div>
       </div>
     </div>
@@ -523,7 +758,7 @@ button:not(:disabled):active,[onclick]:active{filter:brightness(.88)}
             <div><div style="font-size:15px;font-weight:700;color:var(--txt)" id="kr-name">Student Name</div><div style="font-size:12px;color:var(--out);margin-top:2px" id="kr-meta">SS2A · Maths</div></div>
             <div style="margin-left:auto;text-align:right"><div style="font-family:var(--fh);font-size:22px;font-weight:800;color:var(--pri);letter-spacing:-.02em" id="kr-time">08:34</div><div style="font-size:10px;color:var(--out);text-transform:uppercase;letter-spacing:.05em" id="kr-type">Checked In</div></div>
           </div>
-          <button class="btn btn-full" onclick="simulateScan()" style="background:white;color:var(--pri);border:none;margin-top:14px;height:44px;font-size:14px;border-radius:10px"><span class="mi" style="font-size:16px">fingerprint</span> Simulate Biometric Scan</button>
+          <button class="btn btn-sec btn-full" onclick="simulateScan()" style="background:white;color:var(--pri);border:2px solid rgba(255,255,255,.3);margin-top:14px;border-radius:12px"><span class="mi" style="font-size:17px">fingerprint</span> Simulate Biometric Scan</button>
         </div>
         <!-- Recent -->
         <div style="margin-top:18px">
@@ -554,96 +789,127 @@ button:not(:disabled):active,[onclick]:active{filter:brightness(.88)}
       </div>
     </div>
 
-    <div style="flex:1;display:flex;align-items:center;justify-content:center;padding:24px">
-      <div style="width:100%;max-width:520px">
+    <div style="flex:1;overflow-y:auto;padding:20px 24px">
+      <div style="max-width:560px;margin:0 auto">
 
-        <!-- Mode toggle -->
+        <!-- Mode toggle — FILLED primary vs ghost secondary per hierarchy guide -->
         <div style="display:flex;gap:8px;justify-content:center;margin-bottom:20px">
-          <button id="fam-mode-drop" class="family-mode-btn" style="background:rgba(255,255,255,.22);color:white" onclick="setFamMode('drop')"><span class="mi" style="font-size:15px;vertical-align:middle">directions_car</span> Drop Off</button>
-          <button id="fam-mode-pick" class="family-mode-btn" style="background:rgba(255,255,255,.08);color:rgba(255,255,255,.5)" onclick="setFamMode('pick')"><span class="mi" style="font-size:15px;vertical-align:middle">child_care</span> Collection</button>
+          <button id="fam-mode-drop" onclick="setFamMode('drop')"
+            style="flex:1;max-width:200px;padding:11px 20px;border-radius:12px;border:none;cursor:pointer;font-family:var(--fb);font-size:14px;font-weight:700;min-height:44px;background:white;color:#1d3314;box-shadow:0 4px 12px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;gap:7px;transition:all .15s">
+            <span class="mi" style="font-size:17px">directions_car</span>Drop Off
+          </button>
+          <button id="fam-mode-pick" onclick="setFamMode('pick')"
+            style="flex:1;max-width:200px;padding:11px 20px;border-radius:12px;border:2px solid rgba(255,255,255,.3);cursor:pointer;font-family:var(--fb);font-size:14px;font-weight:600;min-height:44px;background:transparent;color:rgba(255,255,255,.6);display:flex;align-items:center;justify-content:center;gap:7px;transition:all .15s">
+            <span class="mi" style="font-size:17px">child_care</span>Collection
+          </button>
         </div>
 
-        <!-- Family card -->
-        <div class="family-card">
-          <div style="font-family:var(--fh);font-size:22px;font-weight:800;color:white;margin-bottom:6px" id="fam-title">Drop Off Child</div>
-          <div style="font-size:13px;color:rgba(255,255,255,.6);margin-bottom:28px" id="fam-sub">Select your child and confirm handover</div>
-
-          <!-- Who are you -->
-          <div style="margin-bottom:20px">
-            <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">Who is collecting/dropping off?</div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px" id="fam-member-select">
-              <div onclick="selectFamMember(this,'parent')" data-type="parent" style="padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.8);cursor:pointer;text-align:center">
-                <div style="font-size:20px;margin-bottom:3px">👨</div>
-                <div style="font-size:11px;font-weight:700;color:white">Parent</div>
+        <!-- STEP 1 — Child selection — WHITE cards on dark bg = clear contrast -->
+        <div style="background:white;border-radius:16px;padding:20px;margin-bottom:12px;box-shadow:0 4px 20px rgba(0,0,0,.2)">
+          <div style="font-size:10px;font-weight:700;color:var(--out);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px">Step 1 — Select Child</div>
+          <div style="display:grid;gap:8px" id="fam-child-list">
+            <!-- Chidinma -->
+            <div onclick="selectFamChild(this,'Chidinma Okafor','P3','CO')" data-child="Chidinma Okafor"
+              style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;border:2px solid var(--out-var);background:var(--surf-0);cursor:pointer;transition:all .15s">
+              <div style="width:40px;height:40px;border-radius:10px;background:var(--brand-200);color:var(--pri);font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--fh)">CO</div>
+              <div style="flex:1;text-align:left">
+                <div style="font-size:14px;font-weight:700;color:var(--txt)">Chidinma Okafor</div>
+                <div style="font-size:11px;color:var(--out);margin-top:1px">P3 · Age 8</div>
               </div>
-              <div onclick="selectFamMember(this,'driver')" data-type="driver" style="padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.2);cursor:pointer;text-align:center">
-                <div style="font-size:20px;margin-bottom:3px">🚗</div>
-                <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.7)">Driver</div>
-              </div>
-              <div onclick="selectFamMember(this,'maid')" data-type="maid" style="padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.2);cursor:pointer;text-align:center">
-                <div style="font-size:20px;margin-bottom:3px">👩‍🍳</div>
-                <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.7)">Maid / Carer</div>
-              </div>
-              <div onclick="selectFamMember(this,'guardian')" data-type="guardian" style="padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.2);cursor:pointer;text-align:center">
-                <div style="font-size:20px;margin-bottom:3px">🤝</div>
-                <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.7)">Guardian</div>
-              </div>
+              <span style="padding:3px 9px;border-radius:20px;font-size:10px;font-weight:700;background:#ede9fe;color:#5b21b6">SEN · ASD</span>
             </div>
-          </div>
-
-          <!-- Select child -->
-          <div style="margin-bottom:20px">
-            <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px">Select Child</div>
-            <div style="display:grid;gap:6px" id="fam-child-list">
-              <div onclick="selectFamChild(this,'Chidinma Okafor','P3','CHI')" data-child="Chidinma Okafor" style="display:flex;align-items:center;gap:10px;padding:10px 13px;border-radius:11px;background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.3);cursor:pointer">
-                <div style="width:36px;height:36px;border-radius:9px;background:rgba(255,255,255,.2);color:white;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--fh)">CO</div>
-                <div style="flex:1;text-align:left"><div style="font-size:13px;font-weight:600;color:white">Chidinma Okafor</div><div style="font-size:10px;color:rgba(255,255,255,.6)">P3 · Age 8 · 🧠 ASD</div></div>
-                <span style="font-size:10px;background:rgba(167,243,208,.2);color:#6ee7b7;padding:2px 8px;border-radius:10px;font-weight:700">SEN</span>
+            <!-- Emeka -->
+            <div onclick="selectFamChild(this,'Emeka Okafor','P1','EO')" data-child="Emeka Okafor"
+              style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;border:2px solid var(--out-var);background:var(--surf-0);cursor:pointer;transition:all .15s">
+              <div style="width:40px;height:40px;border-radius:10px;background:var(--brand-100);color:var(--pri);font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--fh)">EO</div>
+              <div style="flex:1;text-align:left">
+                <div style="font-size:14px;font-weight:700;color:var(--txt)">Emeka Okafor</div>
+                <div style="font-size:11px;color:var(--out);margin-top:1px">P1 · Age 6</div>
               </div>
-              <div onclick="selectFamChild(this,'Emeka Okafor','P1','EO')" data-child="Emeka Okafor" style="display:flex;align-items:center;gap:10px;padding:10px 13px;border-radius:11px;background:rgba(255,255,255,.08);border:2px solid rgba(255,255,255,.15);cursor:pointer">
-                <div style="width:36px;height:36px;border-radius:9px;background:rgba(255,255,255,.12);color:white;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--fh)">EO</div>
-                <div style="flex:1;text-align:left"><div style="font-size:13px;font-weight:600;color:white">Emeka Okafor</div><div style="font-size:10px;color:rgba(255,255,255,.6)">P1 · Age 6 · Guardian check-in required</div></div>
-                <span style="font-size:10px;background:rgba(255,255,255,.12);color:rgba(255,255,255,.7);padding:2px 8px;border-radius:10px;font-weight:700">Primary</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Confirm button -->
-          <div id="fam-confirm-wrap" style="display:none">
-            <div style="background:rgba(255,255,255,.93);border-radius:12px;padding:14px 16px;margin-bottom:14px;display:flex;align-items:center;gap:12px" id="fam-confirm-card">
-              <div style="width:42px;height:42px;border-radius:11px;background:var(--family-grad);color:white;display:flex;align-items:center;justify-content:center;font-family:var(--fh);font-size:14px;font-weight:800;flex-shrink:0" id="fam-ch-av">CO</div>
-              <div style="flex:1"><div style="font-size:14px;font-weight:700;color:var(--txt)" id="fam-ch-name">Child</div><div style="font-size:11px;color:var(--out)" id="fam-ch-meta">P3 · Maid</div></div>
-              <div style="text-align:right"><div style="font-size:10px;color:var(--out);text-transform:uppercase;letter-spacing:.05em" id="fam-action-lbl">Dropping off</div></div>
-            </div>
-            <button class="btn btn-family btn-full" onclick="confirmFamHandover()" style="height:46px;font-size:14px;border-radius:11px"><span class="mi" style="font-size:17px">check_circle</span><span id="fam-btn-txt">Confirm Drop Off</span></button>
-          </div>
-
-          <div id="fam-success" style="display:none;margin-top:12px">
-            <div style="background:rgba(167,243,208,.25);border-radius:12px;padding:14px 16px;text-align:center">
-              <span class="mi" style="font-size:28px;color:#a0f399;display:block;margin-bottom:6px">check_circle</span>
-              <div style="font-size:14px;font-weight:700;color:white" id="fam-success-msg">Handover recorded</div>
-              <div style="font-size:11px;color:rgba(255,255,255,.6);margin-top:3px">Parent notified via WhatsApp</div>
+              <span style="padding:3px 9px;border-radius:20px;font-size:10px;font-weight:700;background:#d1fae5;color:#065f46">Guardian req'd</span>
             </div>
           </div>
         </div>
 
-        <!-- Handover log -->
-        <div style="margin-top:18px">
-          <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.08em;margin-bottom:9px">Today's Handovers</div>
+        <!-- STEP 2 — Collector type — WHITE card, coloured badges per type -->
+        <div style="background:white;border-radius:16px;padding:20px;margin-bottom:12px;box-shadow:0 4px 20px rgba(0,0,0,.2)">
+          <div style="font-size:10px;font-weight:700;color:var(--out);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px">Step 2 — Who is collecting / dropping off?</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px" id="fam-member-select">
+            <div onclick="selectFamMember(this,'parent')" data-type="parent"
+              style="padding:14px 10px;border-radius:12px;border:2px solid #1d3314;background:#1d3314;cursor:pointer;text-align:center;transition:all .15s">
+              <div style="font-size:24px;margin-bottom:5px">👨</div>
+              <div style="font-size:12px;font-weight:700;color:white">Parent</div>
+            </div>
+            <div onclick="selectFamMember(this,'driver')" data-type="driver"
+              style="padding:14px 10px;border-radius:12px;border:2px solid var(--out-var);background:var(--surf-1);cursor:pointer;text-align:center;transition:all .15s">
+              <div style="font-size:24px;margin-bottom:5px">🚗</div>
+              <div style="font-size:12px;font-weight:700;color:var(--txt2)">Driver</div>
+            </div>
+            <div onclick="selectFamMember(this,'maid')" data-type="maid"
+              style="padding:14px 10px;border-radius:12px;border:2px solid var(--out-var);background:var(--surf-1);cursor:pointer;text-align:center;transition:all .15s">
+              <div style="font-size:24px;margin-bottom:5px">👩‍🍳</div>
+              <div style="font-size:12px;font-weight:700;color:var(--txt2)">Maid / Carer</div>
+            </div>
+            <div onclick="selectFamMember(this,'guardian')" data-type="guardian"
+              style="padding:14px 10px;border-radius:12px;border:2px solid var(--out-var);background:var(--surf-1);cursor:pointer;text-align:center;transition:all .15s">
+              <div style="font-size:24px;margin-bottom:5px">🤝</div>
+              <div style="font-size:12px;font-weight:700;color:var(--txt2)">Guardian</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CONFIRM — clearly differentiated: white summary card + brand-green filled CTA button -->
+        <div id="fam-confirm-wrap" style="display:none">
+          <div style="background:white;border-radius:16px;padding:16px 18px;margin-bottom:10px;display:flex;align-items:center;gap:12px;box-shadow:0 4px 20px rgba(0,0,0,.2)" id="fam-confirm-card">
+            <div style="width:46px;height:46px;border-radius:12px;background:var(--brand-200);color:var(--pri);display:flex;align-items:center;justify-content:center;font-family:var(--fh);font-size:15px;font-weight:800;flex-shrink:0" id="fam-ch-av">CO</div>
+            <div style="flex:1">
+              <div style="font-size:15px;font-weight:800;color:var(--txt)" id="fam-ch-name">Child name</div>
+              <div style="font-size:11px;color:var(--out);margin-top:2px" id="fam-ch-meta">P3 · Driver</div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-size:9px;color:var(--out);text-transform:uppercase;letter-spacing:.07em" id="fam-action-lbl">Collection</div>
+            </div>
+          </div>
+          <div style="padding:9px 12px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:9px;font-size:11px;color:rgba(255,255,255,.75);margin-bottom:10px;display:flex;align-items:center;gap:7px">
+            <span class="mi" style="font-size:15px;color:#84e05b">notifications_active</span>
+            Parent will receive a WhatsApp notification the moment you confirm.
+          </div>
+          <!-- PRIMARY CTA: brand green filled — maximum visual weight, distinct from everything else -->
+          <button onclick="confirmFamHandover()"
+            style="width:100%;padding:14px 24px;border-radius:12px;border:none;cursor:pointer;font-family:var(--fh);font-size:16px;font-weight:800;min-height:52px;background:#84e05b;color:#1d3314;box-shadow:0 6px 20px rgba(0,0,0,.25);display:flex;align-items:center;justify-content:center;gap:9px;transition:all .15s;letter-spacing:-.01em">
+            <span class="mi" style="font-size:20px">verified</span><span id="fam-btn-txt">Confirm Collection — Notify Parent</span>
+          </button>
+        </div>
+
+        <!-- SUCCESS state -->
+        <div id="fam-success" style="display:none;margin-top:12px">
+          <div style="background:white;border-radius:16px;padding:24px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.2)">
+            <div style="width:56px;height:56px;border-radius:50%;background:#84e05b;display:flex;align-items:center;justify-content:center;margin:0 auto 12px">
+              <span class="mi" style="font-size:30px;color:#1d3314">verified</span>
+            </div>
+            <div style="font-size:16px;font-weight:800;color:var(--txt)" id="fam-success-msg">Collection confirmed</div>
+            <div style="font-size:12px;color:var(--out);margin-top:4px">Parent notified via WhatsApp ✓</div>
+          </div>
+        </div>
+
+        <!-- TODAY'S LOG -->
+        <div style="margin-top:16px">
+          <div style="font-size:10px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Today's Handovers</div>
           <div id="fam-log">
-            <div style="display:flex;align-items:center;gap:9px;padding:8px 12px;border-radius:10px;background:rgba(255,255,255,.08);margin-bottom:4px">
-              <div style="width:28px;height:28px;border-radius:7px;background:rgba(255,255,255,.15);color:rgba(255,255,255,.8);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:var(--fh)">CO</div>
-              <div style="flex:1;font-size:11px;color:rgba(255,255,255,.8);font-weight:600">Chidinma Okafor</div>
-              <span class="rtype family">Drop Off</span>
-              <span style="font-size:10px;color:rgba(255,255,255,.4)">07:52</span>
+            <div style="display:flex;align-items:center;gap:9px;padding:10px 13px;border-radius:10px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);margin-bottom:5px">
+              <div style="width:30px;height:30px;border-radius:8px;background:rgba(255,255,255,.15);color:white;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:var(--fh)">CO</div>
+              <div style="flex:1;font-size:12px;color:rgba(255,255,255,.85);font-weight:600">Chidinma Okafor</div>
+              <span style="padding:2px 9px;border-radius:20px;font-size:10px;font-weight:700;background:#84e05b;color:#1d3314">Drop Off</span>
+              <span style="font-size:10px;color:rgba(255,255,255,.4);margin-left:4px">07:52</span>
             </div>
           </div>
         </div>
+
       </div>
     </div>
-    <div style="padding:12px 28px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;align-items:center">
-      <button class="btn" onclick="showPg('pg-login')" style="background:rgba(255,255,255,.1);color:rgba(255,255,255,.75);border:none;font-size:12px"><span class="mi" style="font-size:15px">arrow_back</span>Sign Out</button>
-      <button class="btn" onclick="openModal('modal-fam-reg')" style="background:rgba(255,255,255,.15);color:white;border:none;font-size:12px"><span class="mi" style="font-size:15px">person_add</span>Register New Family Member</button>
+    <div style="padding:12px 28px;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;align-items:center">
+      <button onclick="showPg('pg-app')" style="padding:9px 16px;border-radius:10px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:rgba(255,255,255,.8);font-family:var(--fb);font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;min-height:40px"><span class="mi" style="font-size:15px">arrow_back</span>Dashboard</button>
+      <div style="font-size:11px;color:rgba(255,255,255,.3);display:flex;align-items:center;gap:5px"><span class="mi" style="font-size:13px">admin_panel_settings</span>School staff view</div>
     </div>
   </div>
 </div>
@@ -891,8 +1157,8 @@ button:not(:disabled):active,[onclick]:active{filter:brightness(.88)}
     <div class="fg">
       <label class="fl">Type</label>
       <div style="display:flex;gap:8px">
-        <button type="button" id="bt-positive" onclick="setBehType('positive')" style="flex:1;padding:11px;border-radius:10px;border:none;font-weight:700;font-size:13px;cursor:pointer;background:var(--sec);color:white"><span class="mi" style="font-size:16px;vertical-align:middle">thumb_up</span> Positive</button>
-        <button type="button" id="bt-negative" onclick="setBehType('negative')" style="flex:1;padding:11px;border-radius:10px;border:none;font-weight:700;font-size:13px;cursor:pointer;background:var(--surf-2);color:var(--txt2)"><span class="mi" style="font-size:16px;vertical-align:middle">thumb_down</span> Negative</button>
+        <button type="button" id="bt-positive" onclick="setBehType('positive')" class="btn btn-ok" style="flex:1"><span class="mi" style="font-size:16px;vertical-align:middle">thumb_up</span> Positive</button>
+        <button type="button" id="bt-negative" onclick="setBehType('negative')" class="btn btn-sec" style="flex:1"><span class="mi" style="font-size:16px;vertical-align:middle">thumb_down</span> Negative</button>
       </div>
     </div>
     <div class="fg"><label class="fl">Points</label><input class="fi" id="bm-points" type="number" value="5"></div>
@@ -918,8 +1184,49 @@ button:not(:disabled):active,[onclick]:active{filter:brightness(.88)}
     <div style="font-size:12px;color:var(--out);margin-bottom:14px">Confirm which equipment the student has brought today</div>
     <div id="eqck-list" style="margin-bottom:14px"></div>
     <div style="display:flex;gap:8px">
-      <button onclick="confirmEquipment()" style="flex:1;padding:11px;border-radius:10px;background:var(--sec);color:white;border:none;font-size:13px;font-weight:600;cursor:pointer">Confirm & Continue</button>
-      <button onclick="document.getElementById('equip-overlay').style.display='none'" style="padding:11px 14px;border-radius:10px;background:var(--surf-2);color:var(--out);border:none;font-size:13px;cursor:pointer">Skip</button>
+      <button onclick="confirmEquipment()" class="btn btn-ok" style="flex:1">Confirm &amp; Continue</button>
+      <button onclick="document.getElementById('equip-overlay').style.display='none'" class="btn btn-sec">Skip</button>
+    </div>
+  </div>
+</div>
+
+<!-- Message view modal -->
+<div class="modal-bg" id="modal-message-view">
+  <div class="modal" style="max-width:520px">
+    <div class="sh mb-12">
+      <div>
+        <div class="modal-title" id="mv-subject">Message</div>
+        <div style="font-size:12px;color:var(--out);margin-top:2px"><span id="mv-from"></span> · <span id="mv-time"></span></div>
+      </div>
+      <button class="btn btn-icon" onclick="closeModal('modal-message-view')"><span class="mi">close</span></button>
+    </div>
+    <div id="mv-body" style="font-size:13px;color:var(--txt);white-space:pre-wrap;line-height:1.7;padding:14px;background:var(--surf-1);border-radius:10px;min-height:80px"></div>
+    <div style="display:flex;gap:8px;margin-top:16px">
+      <input class="fi" id="mv-reply" placeholder="Reply…" style="flex:1">
+      <button class="btn btn-pri" onclick="toast('Reply sent ✓');document.getElementById(\'mv-reply\').value=\'\';closeModal(\'modal-message-view\')"><span class="mi" style="font-size:15px">send</span>Reply</button>
+    </div>
+  </div>
+</div>
+
+<!-- Message compose modal -->
+<div class="modal-bg" id="modal-message-compose">
+  <div class="modal" style="max-width:520px">
+    <div class="modal-title">New Message</div>
+    <div class="modal-sub">Send a message to a parent, teacher, or post a school-wide notice</div>
+    <div class="fg"><label class="fl">To</label>
+      <select class="fs" id="msg-to">
+        <option value="">— Select recipient —</option>
+        <optgroup label="Parents">${(()=>S.students.map(s=>`<option value="${s.parent}">${s.parent} (${s.name})</option>`).join(''))()}</optgroup>
+        <optgroup label="Teachers">${(()=>S.teachers.map(t=>`<option value="${t.name}">${t.name}</option>`).join(''))()}</optgroup>
+        <option value="all_parents">📢 All parents (broadcast)</option>
+        <option value="all_staff">📢 All teaching staff</option>
+      </select>
+    </div>
+    <div class="fg"><label class="fl">Subject</label><input class="fi" id="msg-subject" placeholder="e.g. School closed early Friday"></div>
+    <div class="fg"><label class="fl">Message</label><textarea class="fi" id="msg-body" rows="4" placeholder="Type your message…" style="resize:none;min-height:100px"></textarea></div>
+    <div class="modal-foot">
+      <button class="btn btn-sec" onclick="closeModal('modal-message-compose')">Cancel</button>
+      <button class="btn btn-pri" onclick="sendMessage()"><span class="mi" style="font-size:15px">send</span>Send Message</button>
     </div>
   </div>
 </div>
@@ -1406,7 +1713,7 @@ const NAV_ADMIN=[
   {id:'dashboard',icon:'dashboard',label:'Dashboard'},
   {id:'timetable',icon:'calendar_month',label:'Subject Timetable'},
   {id:'academics',icon:'menu_book',label:'Academic Management'},
-  {id:'biometric',icon:'fingerprint',label:'Biometric Attendance'},
+  {id:'biometric',icon:'fingerprint',label:'Class Attendance'},
   {id:'students',icon:'groups',label:'Students',b:()=>S.students.length},
   {id:'teachers',icon:'school',label:'Teachers',b:()=>S.teachers.length},
   {id:'enrolment',icon:'person_check',label:'Biometric Enrolment'},
@@ -1414,6 +1721,7 @@ const NAV_ADMIN=[
   {id:'behaviour',icon:'military_tech',label:'Behaviour & Merit'},
   {id:'reports',icon:'bar_chart',label:'Reports & Analytics'},
   {id:'alerts',icon:'notifications',label:'Parent Alerts',b:()=>S.alerts.filter(a=>a.status==='pending').length||null},
+  {id:'messages',icon:'forum',label:'Messages',b:()=>(S.messages||[]).filter(m=>!m.read&&m.from!=='admin').length||null,bClass:'amber'},
   {id:'migration',icon:'upload_file',label:'Data Migration'},
   {id:'jobs',icon:'history',label:'Bulk Upload Jobs',b:()=>S.importJobs.length||null},
   {id:'settings',icon:'settings',label:'Settings'},
@@ -1423,6 +1731,7 @@ const NAV_TEACHER=[
   {id:'biometric',icon:'fingerprint',label:'Class Attendance'},
   {id:'behaviour',icon:'military_tech',label:'Behaviour & Merit'},
   {id:'timetable',icon:'calendar_month',label:'My Timetable'},
+  {id:'messages',icon:'forum',label:'Messages',b:()=>(S.messages||[]).filter(m=>!m.read&&m.from!=='admin').length||null,bClass:'amber'},
   {id:'reports',icon:'bar_chart',label:'Reports'},
 ];
 
@@ -1449,7 +1758,7 @@ function navTo(v){
   S.view=v;
   document.querySelectorAll('.nav-btn').forEach(n=>n.classList.remove('active'));
   const el=document.getElementById('nav-'+v);if(el)el.classList.add('active');
-  const map={dashboard:renderDashboard,timetable:renderTimetable,academics:renderAcademics,biometric:renderBiometric,students:renderStudents,teachers:renderTeachers,enrolment:renderEnrolment,family:renderFamilyAdmin,behaviour:renderBehaviour,reports:renderReports,alerts:renderAlerts,migration:renderMigration,jobs:renderJobs,settings:renderSettings};
+  const map={dashboard:renderDashboard,timetable:renderTimetable,academics:renderAcademics,biometric:renderBiometric,students:renderStudents,teachers:renderTeachers,enrolment:renderEnrolment,family:renderFamilyAdmin,behaviour:renderBehaviour,reports:renderReports,alerts:renderAlerts,messages:renderMessagePortal,migration:renderMigration,jobs:renderJobs,settings:renderSettings};
   if(map[v])map[v]();
   document.getElementById('main-area').scrollTop=0;
   toggleSidebar(false); // auto-close on mobile after navigating
@@ -1474,15 +1783,27 @@ function setC(html){
 //  GETTING STARTED CHECKLIST
 // ════════════════════════════════════════════
 let _gsCollapsed=false;
+// _gsManual: manually overridden step states. null=use auto-check, true/false=manual override
+const _gsManual={};
+function gsIsChecked(step){
+  if(_gsManual[step.id]===true)return true;
+  if(_gsManual[step.id]===false)return false;
+  return step.check();
+}
+function gsToggle(i,e){
+  e.stopPropagation();
+  const step=ONBOARDING_STEPS[i];
+  _gsManual[step.id]=!gsIsChecked(step);
+  navTo('dashboard');
+}
 function renderGettingStarted(){
-  const done=ONBOARDING_STEPS.filter(s=>s.check()).length;
+  const done=ONBOARDING_STEPS.filter(s=>gsIsChecked(s)).length;
   const total=ONBOARDING_STEPS.length;
   const pct=Math.round((done/total)*100);
-  if(done===total&&_gsCollapsed===false&&!_gsDismissed){
-    // All done — show a slim success banner, dismissible
-    return `<div class="card mb-20" style="background:linear-gradient(135deg,#f0fdf4,#ecfdf5);border:1px solid #bbf7d0;display:flex;align-items:center;gap:12px">
+  if(done===total&&!_gsCollapsed&&!_gsDismissed){
+    return `<div class="card mb-20" style="background:linear-gradient(135deg,var(--brand-50),var(--brand-100));border:1px solid var(--brand-200);display:flex;align-items:center;gap:12px">
       <span class="mi" style="font-size:24px;color:var(--sec)">check_circle</span>
-      <div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--on-sec-cont)">Setup complete — EduCall is fully configured!</div><div style="font-size:11px;color:var(--out)">All 8 onboarding steps done. You're ready to run your school on EduCall.</div></div>
+      <div style="flex:1"><div style="font-size:13px;font-weight:700;color:var(--on-sec-cont)">Setup complete — EduCall is ready!</div><div style="font-size:11px;color:var(--out)">All ${total} steps done. Your school is fully configured on EduCall.</div></div>
       <button class="btn btn-sec btn-sm" onclick="_gsDismissed=true;navTo('dashboard')">Dismiss</button>
     </div>`;
   }
@@ -1495,15 +1816,25 @@ function renderGettingStarted(){
       <span class="mi" style="font-size:20px;color:var(--out)">${_gsCollapsed?'expand_more':'expand_less'}</span>
     </div>
     <div class="pb" style="height:6px;border-radius:3px;margin-top:${_gsCollapsed?'0':'10px'}"><div class="pbf" style="width:${pct}%;background:${pct===100?'var(--sec)':'var(--pri)'}"></div></div>
-    ${_gsCollapsed?'':`<div style="margin-top:14px;display:grid;gap:6px">
+    ${_gsCollapsed?'':`<div style="margin-top:14px;display:grid;gap:5px">
+      <div style="font-size:10px;color:var(--out);padding:0 4px;margin-bottom:4px;font-style:italic">The system auto-checks each step. You can also tick or untick any step manually.</div>
       ${ONBOARDING_STEPS.map((step,i)=>{
-        const isDone=step.check();
-        return `<div onclick="onboardingGo(${i})" style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;background:${isDone?'var(--surf-1)':'white'};border:1px solid ${isDone?'transparent':'var(--out-var)'};cursor:pointer;transition:background .12s" onmouseover="this.style.background='var(--surf-2)'" onmouseout="this.style.background='${isDone?'var(--surf-1)':'white'}'">
-          <div style="width:30px;height:30px;border-radius:50%;background:${isDone?'var(--sec-cont)':'var(--surf-hi)'};color:${isDone?'var(--on-sec-cont)':'var(--out)'};display:flex;align-items:center;justify-content:center;flex-shrink:0">
-            <span class="mi" style="font-size:17px">${isDone?'check':step.icon}</span>
+        const isDone=gsIsChecked(step);
+        const isAuto=step.check();
+        return `<div style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;background:${isDone?'var(--surf-1)':'var(--surf-0)'};border:1px solid ${isDone?'var(--brand-200)':'var(--out-var)'};transition:background .12s">
+          <label style="display:flex;align-items:center;flex-shrink:0;cursor:pointer;position:relative" title="${isDone?'Mark as not done':'Mark as done'}">
+            <input type="checkbox" ${isDone?'checked':''} onclick="gsToggle(${i},event)" style="width:20px;height:20px;accent-color:var(--sec);cursor:pointer;margin:0;border-radius:4px">
+            ${isAuto&&_gsManual[step.id]!==false?'<span class="mi" title="Auto-detected" style="font-size:9px;color:var(--sec);position:absolute;right:-5px;top:-5px;background:white;border-radius:50%;line-height:1">auto_awesome</span>':''}</label>
+          <div onclick="onboardingGo(${i})" style="display:flex;align-items:center;gap:10px;flex:1;cursor:pointer">
+            <div style="width:28px;height:28px;border-radius:50%;background:${isDone?'var(--sec-cont)':'var(--surf-hi)'};color:${isDone?'var(--on-sec-cont)':'var(--out)'};display:flex;align-items:center;justify-content:center;flex-shrink:0">
+              <span class="mi" style="font-size:16px">${isDone?'check':step.icon}</span>
+            </div>
+            <div style="flex:1">
+              <div style="font-size:13px;font-weight:600;color:${isDone?'var(--out)':'var(--txt)'}">${step.label}</div>
+              <div style="font-size:11px;color:var(--out);margin-top:1px">${step.desc}</div>
+            </div>
+            ${isDone?'':`<span class="mi" style="font-size:18px;color:var(--out-var)">chevron_right</span>`}
           </div>
-          <div style="flex:1"><div style="font-size:13px;font-weight:600;${isDone?'color:var(--out);text-decoration:line-through':''}">${step.label}</div><div style="font-size:11px;color:var(--out);margin-top:1px">${step.desc}</div></div>
-          ${isDone?'':`<span class="mi" style="font-size:18px;color:var(--out-var)">chevron_right</span>`}
         </div>`;
       }).join('')}
     </div>`}
@@ -1759,6 +2090,12 @@ function renderSeatingTab(){
   const order=S.seatingPlans[cls];
   const cols=Math.min(5,Math.max(3,Math.ceil(Math.sqrt(students.length))));
 
+  // Build swap-status banner (shown when a seat is selected)
+  const swapBanner=`<div id="swap-banner" style="display:none;align-items:center;gap:10px;padding:10px 14px;background:var(--brand-200);border-radius:10px;margin-bottom:12px;font-size:12px;font-weight:600;color:var(--pri)">
+    <span class="mi" style="font-size:18px;animation:pulse 1s ease-in-out infinite">swap_horiz</span>
+    <span id="swap-banner-txt">Seat selected — click another seat to swap, or click the same seat to cancel</span>
+    <button class="btn btn-sec btn-sm" style="margin-left:auto" onclick="_seatSelect=null;document.getElementById('swap-banner').style.display='none';document.getElementById('seating-grid').innerHTML=renderSeatingGrid(S.selectedAcadClass||S.classesSecondary[0])">Cancel</button>
+  </div>`;
   document.getElementById('content').innerHTML=`
     <div class="card mb-16">
       <div class="sh"><div class="card-title" style="margin-bottom:0">Seating Plan — Select Class</div></div>
@@ -1767,19 +2104,26 @@ function renderSeatingTab(){
       </div>
     </div>
     <div class="card">
-      <div class="sh">
-        <div><div class="card-title" style="margin-bottom:2px">${cls} — ${students.length} students</div><div class="text-xs text-muted">Click two seats to swap students. SEN students are highlighted purple.</div></div>
+      <div class="sh mb-12">
+        <div>
+          <div class="card-title" style="margin-bottom:2px">${cls} — ${students.length} students</div>
+          <div class="text-xs text-muted"><span class="mi" style="font-size:13px;vertical-align:middle">touch_app</span> Tap a seat to select it, then tap another seat to swap the two students.</div>
+        </div>
         <div style="display:flex;gap:8px">
           <button class="btn btn-sec btn-sm" onclick="shuffleSeating('${cls}')"><span class="mi" style="font-size:14px">shuffle</span>Shuffle</button>
-          <button class="btn btn-sec btn-sm" onclick="alphaSeating('${cls}')"><span class="mi" style="font-size:14px">sort_by_alpha</span>A–Z order</button>
-          <button class="btn btn-pri btn-sm" onclick="printSeating('${cls}')"><span class="mi" style="font-size:14px">print</span>Print plan</button>
+          <button class="btn btn-sec btn-sm" onclick="alphaSeating('${cls}')"><span class="mi" style="font-size:14px">sort_by_alpha</span>A–Z</button>
+          <button class="btn btn-pri btn-sm" onclick="printSeating('${cls}')"><span class="mi" style="font-size:14px">print</span>Print</button>
         </div>
       </div>
-      ${students.length===0?`<div style="text-align:center;padding:32px;color:var(--out)">No students in ${cls} yet</div>`:`
-      <div id="seating-grid" style="display:grid;grid-template-columns:repeat(${cols},1fr);gap:10px;margin-top:14px;padding:16px;background:var(--surf-1);border-radius:12px">
+      ${swapBanner}
+      ${students.length===0?`<div style="text-align:center;padding:32px;color:var(--out)">No students in ${cls} yet — add students first.</div>`:`
+      <div id="seating-grid" style="display:grid;grid-template-columns:repeat(${cols},1fr);gap:10px;padding:16px;background:var(--surf-1);border-radius:12px">
         ${renderSeatingGrid(cls)}
       </div>
-      <div style="text-align:center;margin-top:12px;padding:8px;background:var(--surf-2);border-radius:8px;font-size:11px;color:var(--out)">🧑‍🏫 Front of classroom</div>`}
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding:8px 12px;background:var(--surf-2);border-radius:8px;font-size:11px;color:var(--out)">
+        <span>🧑‍🏫 Front of classroom</span>
+        <span><span class="mi" style="font-size:13px;vertical-align:middle;color:#c4b5fd">circle</span> SEN student &nbsp; <span class="mi" style="font-size:13px;vertical-align:middle;color:var(--sec)">circle</span> Selected</span>
+      </div>`}
     </div>`;
 }
 function renderSeatingGrid(cls){
@@ -1788,21 +2132,44 @@ function renderSeatingGrid(cls){
     const s=S.students.find(st=>st.id===sid);
     if(!s)return'';
     const selected=_seatSelect===seatIdx;
-    return `<div onclick="seatClick('${cls}',${seatIdx})" style="padding:12px 8px;border-radius:10px;text-align:center;cursor:pointer;background:${selected?'var(--pri)':s.sen?'#ede9fe':'white'};border:2px solid ${selected?'var(--pri)':s.sen?'#c4b5fd':'var(--out-var)'};transition:all .12s">
-      <div class="s-av" style="margin:0 auto 6px;background:${selected?'rgba(255,255,255,.2)':s.sen?'#c4b5fd':'var(--surf-3)'};color:${selected?'white':s.sen?'#5b21b6':'var(--txt2)'}">${s.name.split(' ').map(n=>n[0]).join('').slice(0,2)}</div>
+    const bg=selected?'var(--sec)':s.sen?'#ede9fe':'white';
+    const bdcol=selected?'var(--sec)':s.sen?'#c4b5fd':'var(--out-var)';
+    const ring=selected?';box-shadow:0 0 0 4px rgba(94,159,65,.3)':'';
+    return `<div onclick="seatClick('${cls}',${seatIdx})" title="${selected?'Click to cancel':'Click to select for swap'}" style="padding:12px 8px;border-radius:10px;text-align:center;cursor:pointer;background:${bg};border:2px solid ${bdcol};transition:all .15s${ring}">
+      ${selected?'<div style="font-size:9px;font-weight:700;color:white;letter-spacing:.06em;margin-bottom:3px">SELECTED ✓</div>':''}
+      <div class="s-av" style="margin:0 auto 6px;background:${selected?'rgba(255,255,255,.25)':s.sen?'#c4b5fd':'var(--surf-3)'};color:${selected?'white':s.sen?'#5b21b6':'var(--txt2)'}">${s.name.split(' ').map(n=>n[0]).join('').slice(0,2)}</div>
       <div style="font-size:11px;font-weight:600;color:${selected?'white':'var(--txt)'}">${s.name.split(' ')[0]}</div>
-      <div style="font-size:10px;color:${selected?'rgba(255,255,255,.7)':'var(--out)'}">Seat ${seatIdx+1}</div>
+      <div style="font-size:10px;color:${selected?'rgba(255,255,255,.8)':'var(--out)'}">Seat ${seatIdx+1}</div>
     </div>`;
   }).join('');
 }
 let _seatSelect=null;
 function seatClick(cls,idx){
-  if(_seatSelect===null){_seatSelect=idx;document.getElementById('seating-grid').innerHTML=renderSeatingGrid(cls);return}
-  if(_seatSelect===idx){_seatSelect=null;document.getElementById('seating-grid').innerHTML=renderSeatingGrid(cls);return}
+  const banner=document.getElementById('swap-banner');
   const order=S.seatingPlans[cls];
+  if(_seatSelect===null){
+    // First seat selected — highlight and show banner
+    _seatSelect=idx;
+    const stuName=(S.students.find(st=>st.id===order[idx])||{name:'Seat '+(idx+1)}).name.split(' ')[0];
+    document.getElementById('seating-grid').innerHTML=renderSeatingGrid(cls);
+    if(banner){banner.style.display='flex';document.getElementById('swap-banner-txt').textContent=stuName+' selected (Seat '+(idx+1)+') — tap another seat to swap, or tap again to cancel';}
+    return;
+  }
+  if(_seatSelect===idx){
+    // Same seat tapped — cancel selection
+    _seatSelect=null;
+    document.getElementById('seating-grid').innerHTML=renderSeatingGrid(cls);
+    if(banner)banner.style.display='none';
+    return;
+  }
+  // Swap the two seats
+  const nameA=(S.students.find(st=>st.id===order[_seatSelect])||{name:'Student'}).name.split(' ')[0];
+  const nameB=(S.students.find(st=>st.id===order[idx])||{name:'Student'}).name.split(' ')[0];
   [order[_seatSelect],order[idx]]=[order[idx],order[_seatSelect]];
   _seatSelect=null;
   document.getElementById('seating-grid').innerHTML=renderSeatingGrid(cls);
+  if(banner)banner.style.display='none';
+  toast(nameA+' and '+nameB+' swapped seats ✓');
 }
 function shuffleSeating(cls){
   const order=S.seatingPlans[cls];
@@ -1822,19 +2189,27 @@ function printSeating(cls){
 //  BIOMETRIC ATTENDANCE
 // ════════════════════════════════════════════
 function renderBiometric(){
-  setH('Biometric Attendance','Per-subject check-in & check-out');
+  const mode=S.attendanceMode||'biometric';
+  setH('Class Attendance','Biometric or manual register — per subject',
+    `<div style="display:flex;align-items:center;gap:4px;background:var(--surf-1);border-radius:8px;padding:3px;border:1px solid var(--out-var)">
+      <button onclick="S.attendanceMode='biometric';renderBiometric()" class="btn btn-sm" style="${mode==='biometric'?'background:var(--pri);color:white':'background:transparent;color:var(--txt2)'};border:none;border-radius:6px;min-height:32px;font-size:12px"><span class="mi" style="font-size:14px">fingerprint</span>Biometric</button>
+      <button onclick="S.attendanceMode='manual';renderBiometric()" class="btn btn-sm" style="${mode==='manual'?'background:var(--pri);color:white':'background:transparent;color:var(--txt2)'};border:none;border-radius:6px;min-height:32px;font-size:12px"><span class="mi" style="font-size:14px">edit_note</span>Manual Register</button>
+    </div>`);
   const cs=S.students.filter(s=>s.class===S.selectedClass);
   const getR=s=>S.scans[`${TODAY}-${S.selectedClass}-${S.selectedSubject}-${s.id}`]||{};
   const inCount=cs.filter(s=>getR(s).in).length;
   const outCount=cs.filter(s=>getR(s).out).length;
   const rate=cs.length>0?Math.round((inCount/cs.length)*100):0;
+  const modeNotice=mode==='manual'
+    ?`<div style="padding:9px 12px;background:#fef3c7;border:1px solid #fde68a;border-radius:9px;font-size:11px;color:#78350f;margin-bottom:14px;display:flex;align-items:center;gap:8px"><span class="mi" style="font-size:16px">edit_note</span><b>Manual Register mode</b> — no scanner required. Teacher marks attendance manually below.</div>`
+    :`<div style="padding:9px 12px;background:var(--brand-50);border:1px solid var(--brand-200);border-radius:9px;font-size:11px;color:var(--pri);margin-bottom:14px;display:flex;align-items:center;gap:8px"><span class="mi" style="font-size:16px">fingerprint</span><b>Biometric mode</b> — students scan at the kiosk or mark manually if scanner unavailable.</div>`;
   setC(`
     <div class="g2 mb-20">
       <div class="card">
         <div class="card-title">Select Class & Subject</div>
-        <div class="fg"><label class="fl">Class</label><select class="fs" onchange="S.selectedClass=this.value;renderBiometric()">${[...S.classesSecondary,...S.classesPrimary].map(c=>`<option ${c===S.selectedClass?'selected':''}>${c}</option>`).join('')}</select></div>
-        <div class="fg"><label class="fl">Subject</label><select class="fs" onchange="S.selectedSubject=this.value;renderBiometric()">${SUBJECTS.map(s=>`<option ${s===S.selectedSubject?'selected':''}>${s}</option>`).join('')}</select></div>
-        <button class="btn btn-pri btn-full" onclick="showPg('pg-kiosk');startKioskClock()"><span class="mi" style="font-size:15px">fingerprint</span>Open Biometric Kiosk</button>
+        <div class="fg"><label class="fl">Class</label><select class="fs" onchange="S.selectedClass=this.value;renderBiometric()">${[...S.classesSecondary,...S.classesPrimary].map(c=>`<option ${c===S.selectedClass?'selected':''}}>${c}</option>`).join('')}</select></div>
+        <div class="fg"><label class="fl">Subject</label><select class="fs" onchange="S.selectedSubject=this.value;renderBiometric()">${SUBJECTS.map(s=>`<option ${s===S.selectedSubject?'selected':''}}>${s}</option>`).join('')}</select></div>
+        ${mode==='biometric'?`<button class="btn btn-pri btn-full" onclick="showPg('pg-kiosk');startKioskClock()"><span class="mi" style="font-size:15px">fingerprint</span>Open Biometric Kiosk</button>`:`<button class="btn btn-ok btn-full" onclick="markAll()"><span class="mi" style="font-size:15px">checklist</span>Mark All Present</button>`}
       </div>
       <div>
         <div class="g2 mb-12" style="gap:10px">
@@ -1847,18 +2222,38 @@ function renderBiometric(){
       </div>
     </div>
     <div class="card">
-      <div class="sh"><div class="card-title" style="margin-bottom:0">${S.selectedClass} · ${S.selectedSubject} — Today</div><div class="flex-c gap-8"><button class="btn btn-sec btn-sm" onclick="markAll()">Mark All In</button><button class="btn btn-sec btn-sm" onclick="exportCSV()"><span class="mi" style="font-size:14px">download</span>CSV</button></div></div>
+      ${modeNotice}
+      <div class="sh mb-12"><div class="card-title" style="margin-bottom:0">${S.selectedClass} · ${S.selectedSubject} — Today</div>
+        <div class="flex-c gap-8">
+          <button class="btn btn-sec btn-sm" onclick="markAll()"><span class="mi" style="font-size:13px">checklist</span>All In</button>
+          <button class="btn btn-sec btn-sm" onclick="exportCSV()"><span class="mi" style="font-size:14px">download</span>CSV</button>
+        </div>
+      </div>
       ${cs.map((s,i)=>{
         const r=getR(s);
         const isPrimary=s.isPrimary||CLASSES_PRI.includes(s.class);
         const needsGuardian=isPrimary&&(s.age<8||s.guardianRequired);
+        const toiletKey=`toilet-${TODAY}-${S.selectedClass}-${S.selectedSubject}-${s.id}`;
+        const onToilet=S.scans[toiletKey];
         return`<div class="s-row" id="ar-${s.id}">
           <span style="font-size:11px;color:var(--out);width:18px">${i+1}</span>
-          <div class="s-av" style="background:${s.fp?'var(--surf-3)':'var(--err-cont)'};color:${s.fp?'var(--txt2)':'var(--ter)'}">${s.name.split(' ').map(n=>n[0]).join('').slice(0,2)}</div>
-          <div style="flex:1"><div style="font-size:12px;font-weight:600">${s.name}${s.sen?`<span class="chip chip-purple" style="font-size:10px;margin-left:4px">SEN</span>`:''}${needsGuardian?`<span class="chip chip-family" style="font-size:10px;margin-left:4px">Guardian req'd</span>`:''}</div><div style="font-size:10px;color:var(--out)">${s.admno} · ${s.fp?'<span style="color:var(--sec);font-weight:600">Enrolled</span>':'<span style="color:var(--ter)">No fingerprint</span>'}</div></div>
-          <div style="display:flex;gap:5px;align-items:center">
-            ${!r.in?`<span class="badge badge-absent">Absent</span><button class="btn btn-ok btn-sm" onclick="manualMark(${s.id},'in')"><span class="mi" style="font-size:13px">login</span>In</button>`:!r.out?`<span class="badge badge-in">In — ${r.in}</span><button class="btn btn-sec btn-sm" onclick="manualMark(${s.id},'out')"><span class="mi" style="font-size:13px">logout</span>Out</button>`:`<span class="badge badge-out">Out — ${r.out}</span>`}
-            <button class="btn btn-sec btn-sm btn-icon" onclick="openBehaviourModal(${s.id})" title="Award behaviour points"><span class="mi" style="font-size:14px;color:#7C3AED">military_tech</span></button>
+          <div class="s-av" style="background:var(--surf-hi);color:var(--txt2)">${s.name.split(' ').map(n=>n[0]).join('').slice(0,2)}</div>
+          <div style="flex:1">
+            <div style="font-size:12px;font-weight:600">${s.name}${s.sen?`<span class="chip chip-purple" style="font-size:10px;margin-left:4px">SEN</span>`:''}</div>
+            <div style="font-size:10px;color:var(--out)">${s.admno}</div>
+            ${onToilet?`<div style="font-size:10px;color:#b45309;margin-top:2px;display:flex;align-items:center;gap:3px"><span class="mi" style="font-size:11px">wc</span>Toilet break since ${onToilet.time}</div>`:''}
+          </div>
+          <div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap;justify-content:flex-end">
+            ${!r.in
+              ?`<span class="badge badge-absent">Absent</span><button class="btn btn-ok btn-sm" onclick="manualMark(${s.id},'in')"><span class="mi" style="font-size:13px">login</span>In</button>`
+              :!r.out
+                ?`<span class="badge badge-in">In — ${r.in}</span>
+                  ${!onToilet
+                    ?`<button class="btn btn-sec btn-sm" onclick="markToilet(${s.id})" title="5-min toilet break"><span class="mi" style="font-size:13px">wc</span></button>`
+                    :`<button class="btn btn-sec btn-sm" onclick="returnToilet(${s.id})" title="Return from toilet" style="background:#fef3c7;color:#78350f"><span class="mi" style="font-size:13px">undo</span>Return</button>`}
+                  <button class="btn btn-sec btn-sm" onclick="manualMark(${s.id},'out')"><span class="mi" style="font-size:13px">logout</span>Out</button>`
+                :`<span class="badge badge-out">Out — ${r.out}</span>`}
+            <button class="btn btn-sec btn-sm btn-icon" onclick="openBehaviourModal(${s.id})" title="Award points"><span class="mi" style="font-size:14px;color:#7C3AED">military_tech</span></button>
           </div>
         </div>`;
       }).join('')}
@@ -1874,6 +2269,229 @@ function manualMark(sid,type){
   renderBiometric();toast(`${type==='in'?'Checked in':'Checked out'}: ${st?.name}`);
 }
 function markAll(){S.students.filter(s=>s.class===S.selectedClass).forEach(s=>manualMark(s.id,'in'));toast('All students marked in')}
+
+// ── Fix 4: Toilet & Medical pass break tracking ──────────────
+// When a student goes to the toilet: record start time, start 5-min countdown.
+// After 5 min: auto-alert parent + teacher.
+// Medical pass: same but 15-min threshold and labelled differently.
+const _toiletTimers={};
+function markToilet(sid,isMedical){
+  const t=new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+  const key=`toilet-${TODAY}-${S.selectedClass}-${S.selectedSubject}-${sid}`;
+  if(S.scans[key])return; // already out
+  S.scans[key]={time:t,medical:!!isMedical,sid};
+  const st=S.students.find(s=>s.id===sid);
+  const limit=isMedical?15:5;
+  toast(`${st?.name||'Student'} — ${isMedical?'Medical pass':'Toilet break'} started (${limit} min)`);
+  renderBiometric();
+  // Start countdown — alert at limit
+  if(_toiletTimers[sid])clearTimeout(_toiletTimers[sid]);
+  _toiletTimers[sid]=setTimeout(()=>{
+    const still=S.scans[key]&&!S.scans[key].returned;
+    if(!still)return;
+    const name=st?.name||'A student';
+    const parent=st?.parent||'Parent';
+    toast(`⚠️ ${name} — ${isMedical?'medical':'toilet'} break exceeded ${limit} min. Parent alerted.`,'err');
+    S.alerts.unshift({id:Date.now(),student:name,class:S.selectedClass,subject:S.selectedSubject,type:isMedical?'medical_overstay':'toilet_overstay',date:TODAY,parent,status:'sent',msg:`${name} has been away on a ${isMedical?'medical':'toilet'} break for over ${limit} minutes.`});
+    renderNav();
+  },limit*60*1000); // real: limit mins — for demo runs after 8s
+  // Demo: trigger after 8 seconds for testing
+  if(_toiletTimers[sid+'_demo'])clearTimeout(_toiletTimers[sid+'_demo']);
+  _toiletTimers[sid+'_demo']=setTimeout(()=>{
+    const still=S.scans[key]&&!S.scans[key].returned;
+    if(!still)return;
+    const name=st?.name||'A student';
+    toast(`⚠️ ${name} exceeded ${limit}-min break — parent notified`,'err');
+  },8000);
+}
+function returnToilet(sid){
+  const key=`toilet-${TODAY}-${S.selectedClass}-${S.selectedSubject}-${sid}`;
+  if(S.scans[key])S.scans[key].returned=true;
+  if(_toiletTimers[sid])clearTimeout(_toiletTimers[sid]);
+  if(_toiletTimers[sid+'_demo'])clearTimeout(_toiletTimers[sid+'_demo']);
+  const st=S.students.find(s=>s.id===sid);
+  toast(`${st?.name||'Student'} returned from break`);
+  renderBiometric();
+}
+
+// ── Fix 5: Lesson-end teacher alert ───────────────────────────
+// School sets period end time; teacher gets a notification 20 min before, and at end time.
+const _lessonAlertTimers=[];
+function scheduleLessonEndAlert(periodEndTime,subject,cls){
+  // periodEndTime = 'HH:MM' string e.g. '11:40'
+  _lessonAlertTimers.forEach(t=>clearTimeout(t));
+  _lessonAlertTimers.length=0;
+  const [h,m]=periodEndTime.split(':').map(Number);
+  const endMs=h*60*60*1000+m*60*1000;
+  const nowMs=Date.now()%(24*60*60*1000); // ms since midnight
+  const diff=endMs-nowMs;
+  const warn=diff-20*60*1000; // 20 min warning
+  if(warn>0){
+    const t1=setTimeout(()=>{
+      toast(`📢 ${subject} · ${cls} — 20 minutes until end of period (${periodEndTime})`)
+    },warn);
+    _lessonAlertTimers.push(t1);
+  }
+  if(diff>0){
+    const t2=setTimeout(()=>{
+      toast(`🔔 ${subject} · ${cls} — Period has ended (${periodEndTime}). Please close attendance and check out remaining students.`);
+    },diff);
+    _lessonAlertTimers.push(t2);
+  }
+}
+
+// ── Fix 6: Message Portal (parent ↔ teacher/admin) + School Bus ────────────
+function renderMsgRow(msg){
+  const isBus=msg.tag==='bus';
+  const bg=msg.read?'white':'var(--brand-50)';
+  const bd=msg.read?'var(--out-var)':'var(--brand-300)';
+  const avBg=isBus?'var(--pri)':'var(--surf-3)';
+  const avCol=isBus?'white':'var(--txt2)';
+  const avFz=isBus?'18':'11';
+  const nameFw=msg.read?'600':'700';
+  const busTag=isBus?'<span class="chip chip-amber" style="font-size:10px;margin-top:6px">Bus Alert</span>':'';
+  return '<div onclick="viewMessage('+msg.id+')" class="msg-row'+(msg.read?'':' msg-unread')+'" style="padding:11px 13px;border-radius:10px;background:'+bg+';border:1px solid '+bd+';cursor:pointer;transition:background .12s">'
+    +'<div style="display:flex;align-items:center;gap:9px">'
+    +'<div style="width:34px;height:34px;border-radius:9px;background:'+avBg+';color:'+avCol+';font-size:'+avFz+'px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0">'+msg.avatar+'</div>'
+    +'<div style="flex:1;min-width:0">'
+    +'<div style="display:flex;align-items:center;justify-content:space-between;gap:4px">'
+    +'<div style="font-size:12px;font-weight:'+nameFw+';white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+msg.name+'</div>'
+    +'<div style="font-size:10px;color:var(--out);flex-shrink:0">'+msg.time+'</div>'
+    +'</div>'
+    +'<div style="font-size:12px;font-weight:600;color:var(--txt);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+msg.subject+'</div>'
+    +'<div style="font-size:11px;color:var(--out);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+msg.body+'</div>'
+    +'</div></div>'
+    +busTag+'</div>';
+}
+
+function renderMessagePortal(){
+  setH('Messages','Parent & staff communication · School bus alerts');
+  if(!S.messages)S.messages=[];
+  if(!S.busStatus)S.busStatus={online:false,lastLocation:'',eta:'',delayed:false,reason:''};
+  const unread=S.messages.filter(m=>!m.read&&m.from!=='admin').length;
+  setC(`
+    <div class="g2 mb-20">
+      <!-- Inbox -->
+      <div class="card" style="max-height:600px;display:flex;flex-direction:column">
+        <div class="sh mb-12">
+          <div class="card-title" style="margin-bottom:0">Messages ${unread?`<span class="nb">${unread}</span>`:''}</div>
+          <button class="btn btn-pri btn-sm" onclick="openNewMessage()"><span class="mi" style="font-size:14px">edit</span>New</button>
+        </div>
+        <div style="flex:1;overflow-y:auto;display:grid;gap:6px">
+          ${[
+            {id:1,from:'parent',name:'Mrs Okonkwo',avatar:'MO',subject:'Adaeze will be late today',body:'Good morning, Adaeze has a dentist appointment and will arrive around 9:15am.',time:'08:07',read:true,tag:'parent'},
+            {id:2,from:'driver',name:'School Bus (Bus A)',avatar:'🚌',subject:'Bus A — delayed 15 mins',body:'Traffic on Ozumba Mbadiwe Ave. Estimated arrival now 7:52am. All students on board and safe.',time:'07:38',read:false,tag:'bus'},
+            {id:3,from:'parent',name:'Mr Hassan',avatar:'MH',subject:'Ibrahim medical note attached',body:'Please note Ibrahim has a medical pass today — he may need to leave class for up to 20 minutes.',time:'Yesterday',read:true,tag:'parent'},
+          ].concat(S.messages).sort((a,b)=>b.id-a.id).map(renderMsgRow).join('')}
+        </div>
+      </div>
+
+      <div style="display:grid;gap:14px;align-content:start">
+        <!-- School Bus Status Panel -->
+        <div class="card" style="border:2px solid ${S.busStatus.delayed?'#f59e0b':'var(--brand-200)'}">
+          <div class="sh mb-12">
+            <div style="display:flex;align-items:center;gap:8px">
+              <span style="font-size:24px">🚌</span>
+              <div><div class="card-title" style="margin-bottom:0">School Bus Status</div><div style="font-size:11px;color:var(--out)">Bus A — Morning route</div></div>
+            </div>
+            <span class="chip ${S.busStatus.delayed?'chip-amber':'chip-green'}">${S.busStatus.delayed?'Delayed':'On Schedule'}</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px">
+            <div style="padding:10px;background:var(--surf-1);border-radius:8px;text-align:center">
+              <div style="font-size:10px;color:var(--out);text-transform:uppercase;letter-spacing:.05em">ETA</div>
+              <div style="font-size:18px;font-weight:800;color:var(--txt);font-family:var(--fh)">${S.busStatus.eta||'07:45'}</div>
+            </div>
+            <div style="padding:10px;background:var(--surf-1);border-radius:8px;text-align:center">
+              <div style="font-size:10px;color:var(--out);text-transform:uppercase;letter-spacing:.05em">Students</div>
+              <div style="font-size:18px;font-weight:800;color:var(--txt);font-family:var(--fh)">12</div>
+            </div>
+          </div>
+          <div style="display:grid;gap:6px">
+            <button class="btn btn-sec btn-sm btn-full" onclick="reportBusDelay()"><span class="mi" style="font-size:14px">warning</span>Report Delay / Incident</button>
+            <button class="btn btn-ok btn-sm btn-full" onclick="confirmBusArrival()"><span class="mi" style="font-size:14px">directions_bus</span>Confirm Bus Arrival & Check-In Students</button>
+          </div>
+        </div>
+
+        <!-- Quick send -->
+        <div class="card">
+          <div class="card-title">Send Alert to All Parents</div>
+          <div class="fg"><label class="fl">Message Type</label>
+            <select class="fs" id="broadcast-type">
+              <option value="bus_delay">🚌 Bus delayed — include new ETA</option>
+              <option value="early_close">🏫 School closing early today</option>
+              <option value="emergency">🚨 Emergency — all parents</option>
+              <option value="custom">✏️ Custom message</option>
+            </select>
+          </div>
+          <div class="fg"><label class="fl">Message</label><textarea class="fi" rows="3" id="broadcast-msg" placeholder="Type your message to all parents..." style="resize:none;min-height:80px"></textarea></div>
+          <button class="btn btn-pri btn-full" onclick="sendBroadcast()"><span class="mi" style="font-size:15px">campaign</span>Send to All Parents via WhatsApp</button>
+        </div>
+      </div>
+    </div>`);
+}
+
+function viewMessage(id){
+  const preset=[
+    {id:1,from:'parent',name:'Mrs Okonkwo',subject:'Adaeze will be late today',body:'Good morning,\n\nAdaeze has a dentist appointment this morning and will arrive around 9:15am. Please excuse any lateness.\n\nKind regards,\nMrs Okonkwo',time:'08:07'},
+    {id:2,from:'driver',name:'School Bus Driver (Bus A)',subject:'Bus A — delayed 15 mins',body:'Good morning,\n\nWe are stuck in traffic on Ozumba Mbadiwe Avenue due to an accident. All 12 students on board and safe. Estimated arrival revised to 7:52am.\n\nWill update again if further delayed.',time:'07:38'},
+    {id:3,from:'parent',name:'Mr Hassan',subject:'Ibrahim medical note',body:'Good morning,\n\nPlease note Ibrahim has a medical pass today issued by Lagos Island Hospital. He may need to leave class for up to 20 minutes for medication. He will have a note with him.\n\nThank you,\nMr Hassan',time:'Yesterday'},
+  ];
+  const msg=preset.find(m=>m.id===id)||S.messages.find(m=>m.id===id);
+  if(!msg)return;
+  // Mark read
+  S.messages.forEach(m=>{if(m.id===id)m.read=true});
+  openModal('modal-message-view');
+  document.getElementById('mv-from').textContent=msg.name;
+  document.getElementById('mv-subject').textContent=msg.subject;
+  document.getElementById('mv-time').textContent=msg.time;
+  document.getElementById('mv-body').textContent=msg.body;
+}
+
+function openNewMessage(){
+  openModal('modal-message-compose');
+}
+
+function sendMessage(){
+  const to=document.getElementById('msg-to')?.value.trim();
+  const subject=document.getElementById('msg-subject')?.value.trim();
+  const body=document.getElementById('msg-body')?.value.trim();
+  if(!to||!body){toast('Fill in recipient and message','err');return}
+  S.messages.unshift({id:Date.now(),from:'admin',name:'You',avatar:'AD',subject:subject||'(no subject)',body,time:'Just now',read:true,tag:'admin'});
+  closeModal('modal-message-compose');
+  renderMessagePortal();
+  toast('Message sent ✓');
+}
+
+function reportBusDelay(){
+  const reason=prompt('Reason for delay (e.g. traffic, accident, breakdown):');
+  const eta=prompt('New estimated arrival time (e.g. 08:10):');
+  if(!reason||!eta)return;
+  S.busStatus.delayed=true;S.busStatus.eta=eta;S.busStatus.reason=reason;
+  S.alerts.unshift({id:Date.now(),student:'Bus A',class:'All',subject:'Transport',type:'bus_delay',date:TODAY,parent:'All parents',status:'sent',msg:`Bus A delayed — ${reason}. New ETA: ${eta}. All students safe.`});
+  renderNav();
+  renderMessagePortal();
+  toast('Bus delay reported — all parents notified via WhatsApp ✓');
+}
+
+function confirmBusArrival(){
+  const t=new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+  S.busStatus.delayed=false;S.busStatus.eta=t;
+  S.famHandovers.unshift({child:'Bus A (12 students)',collector:'School Bus Driver',type:'bus',mode:'drop',time:t});
+  S.alerts.unshift({id:Date.now(),student:'Bus A',class:'All',subject:'Transport',type:'bus_arrived',date:TODAY,parent:'All parents',status:'sent',msg:`Bus A arrived at school at ${t}. All students checked in.`});
+  renderNav();
+  renderMessagePortal();
+  toast(`Bus A arrived at ${t} — all parents notified ✓`);
+}
+
+function sendBroadcast(){
+  const type=document.getElementById('broadcast-type')?.value;
+  const msg=document.getElementById('broadcast-msg')?.value.trim();
+  if(!msg){toast('Please enter a message','err');return}
+  S.alerts.unshift({id:Date.now(),student:'All students',class:'All',subject:'Broadcast',type,date:TODAY,parent:'All parents',status:'sent',msg});
+  renderNav();
+  toast('Broadcast sent to all parents via WhatsApp ✓');
+  document.getElementById('broadcast-msg').value='';
+}
 function exportCSV(){
   const rows=[['Name','Adm No','Class','Subject','Date','In','Out','Status']];
   S.students.filter(s=>s.class===S.selectedClass).forEach(s=>{
@@ -2095,7 +2713,7 @@ function renderFamilyAdmin(){
         ${S.famMembers.map(fm=>{
           const emoji={parent:'👨',driver:'🚗',maid:'👩‍🍳',guardian:'🤝'}[fm.rel]||'👤';
           return`<div class="family-member-card mb-12">
-            <div class="fam-av" style="background:${fm.rel==='driver'?'#1e3a5f':fm.rel==='maid'?'#1b6d24':'var(--pri)'};">${emoji}</div>
+            <div class="fam-av" style="background:${fm.rel==='driver'?'#203816':fm.rel==='maid'?'#4d6045':'var(--pri)'};">${emoji}</div>
             <div style="flex:1"><div style="font-size:13px;font-weight:700">${fm.name}</div><div style="font-size:11px;color:var(--out);margin-top:2px;text-transform:capitalize">${fm.rel} · ${fm.phone}</div>${fm.carReg?`<div style="font-size:11px;color:var(--out)">Vehicle: ${fm.carReg}</div>`:''}</div>
             <div style="text-align:right"><div style="font-size:10px;color:var(--out)">Authorised for</div>${(fm.children||[]).map(c=>`<div style="font-size:11px;font-weight:600">${c}</div>`).join('')}</div>
           </div>`;
@@ -2289,8 +2907,8 @@ function renderReports(){
       <div class="card"><div class="card-title">Primary Classes</div>${CLASSES_PRI.map(c=>{const r=75+Math.floor(Math.abs(Math.sin(c.charCodeAt(0)*11))*22);return`<div class="rbar"><span class="rbar-lbl">${c}</span><div class="rbar-wrap"><div class="rbar-fill" style="width:${r}%;background:${r>=85?'var(--sec)':'#f59e0b'}"></div></div><span class="rbar-pct">${r}%</span></div>`}).join('')}</div>
     </div>`);
   setTimeout(()=>{
-    new Chart(document.getElementById('trend-chart'),{type:'line',data:{labels:['Mon','Tue','Wed','Thu','Fri','Mon','Tue'],datasets:[{label:'Check-ins',data:[88,92,85,79,91,87,93],borderColor:'#003461',backgroundColor:'rgba(0,52,97,.06)',tension:.4,fill:true,pointRadius:4,pointBackgroundColor:'#003461'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{min:60,max:100,ticks:{callback:v=>v+'%',font:{size:10}},grid:{color:'#f0f4fd'}},x:{ticks:{font:{size:10}},grid:{display:false}}}}});
-    new Chart(document.getElementById('sub-chart'),{type:'bar',data:{labels:['Maths','English','Physics','Chemistry','Biology','Comp Sci'],datasets:[{data:[91,88,82,79,85,77],backgroundColor:'rgba(0,52,97,.8)',borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{min:0,max:100,ticks:{callback:v=>v+'%',font:{size:10}},grid:{color:'#f0f4fd'}},x:{ticks:{font:{size:10}},grid:{display:false}}}}});
+    new Chart(document.getElementById('trend-chart'),{type:'line',data:{labels:['Mon','Tue','Wed','Thu','Fri','Mon','Tue'],datasets:[{label:'Check-ins',data:[88,92,85,79,91,87,93],borderColor:'#1d3314',backgroundColor:'rgba(29,51,20,.06)',tension:.4,fill:true,pointRadius:4,pointBackgroundColor:'#1d3314'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{min:60,max:100,ticks:{callback:v=>v+'%',font:{size:10}},grid:{color:'#edf9e8'}},x:{ticks:{font:{size:10}},grid:{display:false}}}}});
+    new Chart(document.getElementById('sub-chart'),{type:'bar',data:{labels:['Maths','English','Physics','Chemistry','Biology','Comp Sci'],datasets:[{data:[91,88,82,79,85,77],backgroundColor:'rgba(29,51,20,.8)',borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{min:0,max:100,ticks:{callback:v=>v+'%',font:{size:10}},grid:{color:'#edf9e8'}},x:{ticks:{font:{size:10}},grid:{display:false}}}}});
   },100);
 }
 
@@ -2373,7 +2991,7 @@ function renderAlerts(){
     <div class="card mb-20" style="background:var(--surf-1)">
       <div style="font-size:13px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:7px"><span class="mi" style="font-size:16px;color:#25D366">chat</span>WhatsApp message examples</div>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
-        ${[['Absence','#C0392B','person_off','Good afternoon Mrs Okonkwo,\n\nYour child Adaeze Okonkwo (SS2A) was not present for Mathematics — Period 3 today.\n\nEduCall – Sunshine Secondary School'],['SEN Equipment','#7C3AED','accessibility','Dear Mr Adeyemi,\n\nBabatunde Adeyemi (SS2A) arrived without:\n• Communication board\n\nEduCall – Sunshine Secondary School'],['Family Handover','#1b6d24','family_restroom','Hello Mrs Okafor,\n\nChidinma Okafor has been collected by Mr Emmanuel (Driver) at 15:22.\n\nVehicle: LAG 234 KT\n\nEduCall – Sunshine Secondary School']].map(([title,bg,icon,msg])=>`
+        ${[['Absence','#C0392B','person_off','Good afternoon Mrs Okonkwo,\n\nYour child Adaeze Okonkwo (SS2A) was not present for Mathematics — Period 3 today.\n\nEduCall – Sunshine Secondary School'],['SEN Equipment','#7C3AED','accessibility','Dear Mr Adeyemi,\n\nBabatunde Adeyemi (SS2A) arrived without:\n• Communication board\n\nEduCall – Sunshine Secondary School'],['Family Handover','#4d6045','family_restroom','Hello Mrs Okafor,\n\nChidinma Okafor has been collected by Mr Emmanuel (Driver) at 15:22.\n\nVehicle: LAG 234 KT\n\nEduCall – Sunshine Secondary School']].map(([title,bg,icon,msg])=>`
           <div style="border-radius:12px;overflow:hidden;border:1px solid var(--out-var)">
             <div style="padding:8px 12px;background:${bg};font-size:11px;font-weight:700;color:white;display:flex;align-items:center;gap:6px"><span class="mi" style="font-size:14px">${icon}</span>${title}</div>
             <div style="padding:9px;background:#ECE5DD"><div style="background:white;border-radius:8px;padding:9px 11px;font-size:10px;color:#111;line-height:1.65;white-space:pre-line">${msg}</div><div style="text-align:right;margin-top:3px;font-size:10px;color:#667781">✓✓ Delivered</div></div>
@@ -2427,9 +3045,23 @@ function renderSettings(activeTab){
             <div class="card-title">School Details</div>
             <div class="fg"><label class="fl">School Name</label><input class="fi" value="${S.user.school.split(',')[0]}"></div>
             <div class="fg"><label class="fl">Admin Email</label><input class="fi" type="email" value="${S.user.email}"></div>
-            <div class="g2" style="gap:10px">
-              <div class="fg"><label class="fl">Country</label><select class="fs" id="settings-country">${COUNTRIES.map(c=>`<option ${c===(S.schoolCountry||'Nigeria')?'selected':''}>${c}</option>`).join('')}</select></div>
-              <div class="fg"><label class="fl">Timezone</label><select class="fs"><option>Africa/Lagos (WAT UTC+1)</option><option>Europe/London (GMT/BST)</option><option>Africa/Accra (GMT)</option><option>Africa/Nairobi (EAT UTC+3)</option></select></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
+              <div>
+                <label class="fl">Country</label>
+                <div style="padding:9px 13px;background:var(--surf-1);border-radius:8px;font-size:13px;color:var(--txt2);border:1px solid var(--out-var);display:flex;align-items:center;gap:7px">
+                  <span class="mi" style="font-size:15px;color:var(--out)">lock</span>${S.schoolCountry||'Nigeria'}
+                </div>
+              </div>
+              <div>
+                <label class="fl">Timezone</label>
+                <div style="padding:9px 13px;background:var(--surf-1);border-radius:8px;font-size:13px;color:var(--txt2);border:1px solid var(--out-var);display:flex;align-items:center;gap:7px">
+                  <span class="mi" style="font-size:15px;color:var(--out)">lock</span>${(S.schoolCountry||'Nigeria')==='United Kingdom'?'Europe/London (GMT/BST)':(S.schoolCountry||'Nigeria')==='United States'?'America/New_York (EST)':'Africa/Lagos (WAT UTC+1)'}
+                </div>
+              </div>
+            </div>
+            <div style="padding:9px 12px;background:var(--brand-50);border:1px solid var(--brand-200);border-radius:9px;font-size:11px;color:var(--txt2);margin-bottom:14px;display:flex;align-items:flex-start;gap:8px">
+              <span class="mi" style="font-size:16px;color:var(--sec);flex-shrink:0;margin-top:1px">admin_panel_settings</span>
+              <span>Country and timezone are managed by the <b>EduCall system configuration team</b>. To request a change, contact <b>support@mythrosltd.co.uk</b>.</span>
             </div>
             <button class="btn btn-pri btn-sm" onclick="toast('School details saved')"><span class="mi" style="font-size:14px">save</span>Save Details</button>
           </div>
@@ -2471,7 +3103,7 @@ function renderSettings(activeTab){
               <span style="flex:1;font-size:12px;font-weight:500">${label}</span>
               <button onclick="this.classList.toggle('on');this.querySelector('.notif-knob').style.left=this.classList.contains('on')?'18px':'2px';this.style.background=this.classList.contains('on')?'var(--pri)':'var(--surf-hi)'" class="notif-toggle${on?' on':''}" type="button"><div class="notif-knob" style="left:${on?'18px':'2px'}"></div></button>
             </div>`).join('')}
-          <div style="margin-top:16px;padding:11px 13px;background:rgba(0,52,97,.06);border-radius:9px;border-left:3px solid var(--pri)">
+          <div style="margin-top:16px;padding:11px 13px;background:rgba(29,51,20,.06);border-radius:9px;border-left:3px solid var(--pri)">
             <div style="font-size:11px;font-weight:700;color:var(--pri);margin-bottom:4px">Channel priority order</div>
             <div style="font-size:11px;color:var(--txt2)">WhatsApp → SMS (fallback) → Email (CC) → Telegram → Work Call (critical only)</div>
           </div>
@@ -2493,7 +3125,7 @@ function renderSettings(activeTab){
               ['us','US (Grade 6–12)','Secondary: Grade 6–12\nElementary: Grade K–5','🇺🇸'],
               ['custom','Custom / Other','Define your own class names\nbelow','✏️'],
             ].map(([id,name,desc,flag])=>`
-              <div onclick="selectCurriculum('${id}')" id="curr-${id}" style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;border:1.5px solid ${S.curriculum===id?'var(--pri)':'var(--out-var)'};background:${S.curriculum===id?'rgba(0,52,97,.05)':'white'};cursor:pointer;margin-bottom:8px;transition:all .15s">
+              <div onclick="selectCurriculum('${id}')" id="curr-${id}" style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;border:1.5px solid ${S.curriculum===id?'var(--pri)':'var(--out-var)'};background:${S.curriculum===id?'rgba(29,51,20,.05)':'white'};cursor:pointer;margin-bottom:8px;transition:all .15s">
                 <div style="font-size:24px;flex-shrink:0">${flag}</div>
                 <div style="flex:1"><div style="font-size:13px;font-weight:700">${name}</div><div style="font-size:10px;color:var(--out);white-space:pre-line;margin-top:2px">${desc}</div></div>
                 ${S.curriculum===id?`<span class="mi" style="font-size:18px;color:var(--pri);flex-shrink:0">radio_button_checked</span>`:`<span class="mi" style="font-size:18px;color:var(--out-var);flex-shrink:0">radio_button_unchecked</span>`}
@@ -2521,9 +3153,9 @@ function renderSettings(activeTab){
             <div style="font-size:12px;color:var(--out);margin-bottom:12px">Click any class label to rename it. Changes apply instantly across the whole system.</div>
             <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px" id="ss-class-editor">
               ${S.classesSecondary.map((cls,i)=>`
-                <div class="cls-badge-edit" onclick="startEditCls(this,'ss',${i})" title="Click to rename">
-                  <input value="${cls}" onblur="saveCls(this,'ss',${i})" onkeydown="if(event.key==='Enter')this.blur()" onclick="event.stopPropagation()" style="background:none;border:none;outline:none;font-size:11px;font-weight:600;font-family:var(--fb);color:inherit;width:${Math.max(32,cls.length*8)}px">
-                  <span class="mi" style="font-size:12px;color:var(--out)">edit</span>
+                <div class="cls-badge-edit" title="Click label to rename · × to delete">
+                  <input value="${cls}" onblur="saveCls(this,'ss',${i})" onkeydown="if(event.key==='Enter')this.blur()" onclick="this.select()" style="background:none;border:none;outline:none;font-size:11px;font-weight:600;font-family:var(--fb);color:inherit;width:${Math.max(32,cls.length*8)}px">
+                  <span onclick="deleteCls('ss',${i})" class="mi" title="Remove this class" style="font-size:13px;color:var(--out);cursor:pointer;flex-shrink:0" onmouseover="this.style.color='var(--ter)'" onmouseout="this.style.color='var(--out)'">close</span>
                 </div>`).join('')}
             </div>
             <div style="display:flex;gap:8px;flex-wrap:wrap">
@@ -2537,9 +3169,9 @@ function renderSettings(activeTab){
             <div style="font-size:12px;color:var(--out);margin-bottom:12px">Click any class label to rename it.</div>
             <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px" id="pri-class-editor">
               ${S.classesPrimary.map((cls,i)=>`
-                <div class="cls-badge-edit" onclick="startEditCls(this,'pri',${i})" title="Click to rename">
-                  <input value="${cls}" onblur="saveCls(this,'pri',${i})" onkeydown="if(event.key==='Enter')this.blur()" onclick="event.stopPropagation()" style="background:none;border:none;outline:none;font-size:11px;font-weight:600;font-family:var(--fb);color:inherit;width:${Math.max(32,cls.length*8)}px">
-                  <span class="mi" style="font-size:12px;color:var(--out)">edit</span>
+                <div class="cls-badge-edit" title="Click label to rename · × to delete">
+                  <input value="${cls}" onblur="saveCls(this,'pri',${i})" onkeydown="if(event.key==='Enter')this.blur()" onclick="this.select()" style="background:none;border:none;outline:none;font-size:11px;font-weight:600;font-family:var(--fb);color:inherit;width:${Math.max(32,cls.length*8)}px">
+                  <span onclick="deleteCls('pri',${i})" class="mi" title="Remove this class" style="font-size:13px;color:var(--out);cursor:pointer;flex-shrink:0" onmouseover="this.style.color='var(--ter)'" onmouseout="this.style.color='var(--out)'">close</span>
                 </div>`).join('')}
             </div>
             <div style="display:flex;gap:8px;flex-wrap:wrap">
@@ -2672,21 +3304,57 @@ function saveCls(input,type,idx){
   if(!val){input.value=type==='ss'?S.classesSecondary[idx]:S.classesPrimary[idx];return}
   if(type==='ss'){S.classesSecondary[idx]=val}
   else{S.classesPrimary[idx]=val}
-  // Resize input to content
   input.style.width=Math.max(32,val.length*8)+'px';
   toast('Class renamed to '+val);
 }
 
-function addCls(type){
-  const name=prompt(type==='ss'?'New secondary class name (e.g. SS4A or Year 12B):':'New primary class name (e.g. P7 or Year 7):');
-  if(!name||!name.trim())return;
-  if(type==='ss')S.classesSecondary.push(name.trim());
-  else S.classesPrimary.push(name.trim());
+function deleteCls(type,idx){
+  const list=type==='ss'?S.classesSecondary:S.classesPrimary;
+  // Prevent deleting last class
+  if(list.length<=1){toast('Cannot remove the last class','err');return}
+  const name=list[idx];
+  if(!confirm('Remove class "'+name+'"? Students in this class will need to be reassigned.'))return;
+  list.splice(idx,1);
   renderSettings('curriculum');
+  toast('Class "'+name+'" removed');
+}
+
+function addCls(type){
+  // Build a tiny inline input panel below the existing badges
+  const editorId=type==='ss'?'ss-class-editor':'pri-class-editor';
+  const editor=document.getElementById(editorId);
+  if(!editor)return;
+  // Avoid double-adding the input
+  if(editor.querySelector('.new-cls-input'))return;
+  const wrap=document.createElement('div');
+  wrap.className='new-cls-input';
+  wrap.style.cssText='display:flex;align-items:center;gap:8px;margin-top:10px;width:100%';
+  wrap.innerHTML=`<input class="fi" id="new-cls-val" placeholder="${type==='ss'?'e.g. SS4A or Year 12B':'e.g. P7 or Year 7'}" style="flex:1;max-width:260px;min-height:40px" autofocus>
+    <button class="btn btn-pri btn-sm" onclick="confirmAddCls('${type}')"><span class="mi" style="font-size:14px">check</span>Add</button>
+    <button class="btn btn-sec btn-sm" onclick="cancelAddCls('${editorId}')"><span class="mi" style="font-size:14px">close</span>Cancel</button>`;
+  editor.appendChild(wrap);
+  editor.querySelector('#new-cls-val').focus();
+}
+
+function confirmAddCls(type){
+  const input=document.getElementById('new-cls-val');
+  if(!input)return;
+  const val=input.value.trim();
+  if(!val){toast('Please enter a class name','err');return}
+  if(type==='ss')S.classesSecondary.push(val);
+  else S.classesPrimary.push(val);
+  renderSettings('curriculum');
+  toast('Class "'+val+'" added');
+}
+
+function cancelAddCls(editorId){
+  const editor=document.getElementById(editorId);
+  const existing=editor&&editor.querySelector('.new-cls-input');
+  if(existing)existing.remove();
 }
 
 function resetCls(type){
-  if(!confirm('Reset to default class names for '+S.curriculum+' system?'))return;
+  if(!confirm('Reset to default class names? Any custom names will be lost.'))return;
   const preset=CURRICULUM_PRESETS[S.curriculum]||CURRICULUM_PRESETS.nigerian;
   if(type==='ss')S.classesSecondary=[...preset.ss];
   else S.classesPrimary=[...preset.pri];
@@ -2734,7 +3402,7 @@ function simulateScan(){
       const i=Math.floor(Math.random()*_kioskStudents.length);
       const name=_kioskStudents[i],init=_kioskInits[i],cls=_kioskCls[i];
       const t=new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
-      fp.className='fp-bg success';icon.style.color='#a0f399';
+      fp.className='fp-bg success';icon.style.color='#84e05b';
       status.textContent=`✓ Welcome, ${name.split(' ')[0]}!`;hint.textContent=S.kioskMode==='in'?'Check-in recorded':'Check-out recorded';
       document.getElementById('kr-av').textContent=init;document.getElementById('kr-name').textContent=name;
       document.getElementById('kr-meta').textContent=`${cls} · Mathematics`;document.getElementById('kr-time').textContent=t;document.getElementById('kr-type').textContent=S.kioskMode==='in'?'Checked In':'Checked Out';
@@ -2775,8 +3443,8 @@ function updateKioskClock(){
 }
 function setOnline(on){
   const p=document.getElementById('k-online');if(!p)return;
-  p.style.background=on?'rgba(160,243,153,.2)':'rgba(255,193,0,.2)';p.style.color=on?'#a0f399':'#FFC000';
-  p.innerHTML=`<span class="online-dot" style="background:${on?'#a0f399':'#FFC000'}"></span>${on?'Online':'Offline'}`;
+  p.style.background=on?'rgba(132,224,91,.2)':'rgba(255,193,0,.2)';p.style.color=on?'#84e05b':'#FFC000';
+  p.innerHTML=`<span class="online-dot" style="background:${on?'#84e05b':'#FFC000'}"></span>${on?'Online':'Offline'}`;
 }
 
 // SEN equipment check on check-in
@@ -2895,7 +3563,7 @@ function renderStudentPortal(){
         <div class="card-title" style="display:flex;align-items:center;gap:7px"><span class="mi" style="font-size:17px;color:var(--sec)">family_restroom</span>Who can collect me</div>
         ${collectors.length===0?`<div style="font-size:12px;color:var(--out)">No family members registered yet — ask a parent to register on the Family Portal.</div>`:collectors.map(c=>{
           const emoji={parent:'👨',driver:'🚗',maid:'👩‍🍳',guardian:'🤝'}[c.rel]||'👤';
-          return `<div class="s-row"><div class="fam-av" style="background:${c.rel==='driver'?'#1e3a5f':c.rel==='maid'?'#1b6d24':'var(--pri)'};width:34px;height:34px;font-size:14px">${emoji}</div><div style="flex:1"><div style="font-size:12px;font-weight:600">${c.name}</div><div style="font-size:10px;color:var(--out);text-transform:capitalize">${c.rel}${c.carReg?' · '+c.carReg:''}</div></div></div>`;
+          return `<div class="s-row"><div class="fam-av" style="background:${c.rel==='driver'?'#203816':c.rel==='maid'?'#4d6045':'var(--pri)'};width:34px;height:34px;font-size:14px">${emoji}</div><div style="flex:1"><div style="font-size:12px;font-weight:600">${c.name}</div><div style="font-size:10px;color:var(--out);text-transform:capitalize">${c.rel}${c.carReg?' · '+c.carReg:''}</div></div></div>`;
         }).join('')}`:''}
         ${!stu.sen&&!isPrimary?`<div class="card-title">My Details</div>
         <div style="font-size:12px;line-height:2"><b>Parent/Guardian:</b> ${stu.parent}<br><b>Class:</b> ${stu.class}<br><b>Admission No.:</b> ${stu.admno}<br><b>Fingerprint:</b> ${stu.fp?'<span style="color:var(--sec)">Enrolled ✓</span>':'<span style="color:var(--ter)">Not yet enrolled</span>'}</div>`:''}
@@ -2920,71 +3588,79 @@ function updateFamClock(){
 }
 function resetFamSelections(){
   S.famChild=null;S.famMember='parent';
-  // Reset member-select tiles back to the default "Parent" selection
-  document.querySelectorAll('#fam-member-select > div').forEach(d=>{
-    const isParent=d.dataset.type==='parent';
-    d.style.background=isParent?'rgba(255,255,255,.2)':'rgba(255,255,255,.08)';
-    d.style.border=isParent?'2px solid rgba(255,255,255,.8)':'2px solid rgba(255,255,255,.2)';
+  document.querySelectorAll('#fam-child-list > div').forEach(d=>{
+    d.style.background='var(--surf-0)';d.style.border='2px solid var(--out-var)';
   });
-  // Clear child selection highlight
-  document.querySelectorAll('#fam-child-list > div').forEach(d=>{d.style.background='rgba(255,255,255,.08)';d.style.border='2px solid rgba(255,255,255,.15)'});
+  document.querySelectorAll('#fam-member-select > div').forEach(d=>{
+    const isPar=d.dataset.type==='parent';
+    d.style.background=isPar?'#1d3314':'var(--surf-1)';
+    d.style.border=isPar?'2px solid #1d3314':'2px solid var(--out-var)';
+    const lbl=d.querySelector('div:last-child');
+    if(lbl)lbl.style.color=isPar?'white':'var(--txt2)';
+  });
 }
 function setFamMode(m){
   S.famMode=m;
-  document.getElementById('fam-mode-drop').style.background=m==='drop'?'rgba(255,255,255,.22)':'rgba(255,255,255,.08)';
-  document.getElementById('fam-mode-drop').style.color=m==='drop'?'white':'rgba(255,255,255,.5)';
-  document.getElementById('fam-mode-pick').style.background=m==='pick'?'rgba(255,255,255,.22)':'rgba(255,255,255,.08)';
-  document.getElementById('fam-mode-pick').style.color=m==='pick'?'white':'rgba(255,255,255,.5)';
-  document.getElementById('fam-title').textContent=m==='drop'?'Drop Off Child':'Collect Child';
-  document.getElementById('fam-sub').textContent=m==='drop'?'Select your child and confirm handover':'Select which child you are collecting';
-  document.getElementById('fam-btn-txt').textContent=m==='drop'?'Confirm Drop Off':'Confirm Collection';
-  document.getElementById('fam-action-lbl').textContent=m==='drop'?'Dropping off':'Collecting';
-  document.getElementById('fam-confirm-wrap').style.display='none';
-  document.getElementById('fam-success').style.display='none';
+  const db=document.getElementById('fam-mode-drop'),pb=document.getElementById('fam-mode-pick');
+  if(db){db.style.background=m==='drop'?'white':'transparent';db.style.color=m==='drop'?'#1d3314':'rgba(255,255,255,.6)';db.style.border=m==='drop'?'none':'2px solid rgba(255,255,255,.3)';db.style.boxShadow=m==='drop'?'0 4px 12px rgba(0,0,0,.25)':'none';db.style.fontWeight=m==='drop'?'700':'600';}
+  if(pb){pb.style.background=m==='pick'?'white':'transparent';pb.style.color=m==='pick'?'#1d3314':'rgba(255,255,255,.6)';pb.style.border=m==='pick'?'none':'2px solid rgba(255,255,255,.3)';pb.style.boxShadow=m==='pick'?'0 4px 12px rgba(0,0,0,.25)':'none';pb.style.fontWeight=m==='pick'?'700':'600';}
+  const t=document.getElementById('fam-title'),s=document.getElementById('fam-sub'),btn=document.getElementById('fam-btn-txt'),lbl=document.getElementById('fam-action-lbl');
+  if(t)t.textContent=m==='drop'?'Record Drop Off':'Confirm Collection';
+  if(s)s.textContent=m==='drop'?'School staff record this — parent notified automatically':'School staff confirm collection — parent notified automatically';
+  if(btn)btn.textContent=m==='drop'?'Confirm Drop Off — Notify Parent':'Confirm Collection — Notify Parent';
+  if(lbl)lbl.textContent=m==='drop'?'Drop-off':'Collection';
+  const cw=document.getElementById('fam-confirm-wrap'),sw=document.getElementById('fam-success');
+  if(cw)cw.style.display='none';if(sw)sw.style.display='none';
   resetFamSelections();
 }
 function selectFamMember(el,type){
   S.famMember=type;
-  document.querySelectorAll('#fam-member-select > div').forEach(d=>{d.style.background='rgba(255,255,255,.08)';d.style.border='2px solid rgba(255,255,255,.2)'});
-  el.style.background='rgba(255,255,255,.2)';el.style.border='2px solid rgba(255,255,255,.8)';
+  document.querySelectorAll('#fam-member-select > div').forEach(d=>{
+    d.style.background='var(--surf-1)';d.style.border='2px solid var(--out-var)';
+    const lb=d.querySelector('div:last-child');if(lb)lb.style.color='var(--txt2)';
+  });
+  el.style.background='#1d3314';el.style.border='2px solid #1d3314';
+  const lb=el.querySelector('div:last-child');if(lb)lb.style.color='white';
   updateFamConfirm();
 }
 function selectFamChild(el,name,cls,initials){
   S.famChild={name,cls,initials};
-  document.querySelectorAll('#fam-child-list > div').forEach(d=>{d.style.background='rgba(255,255,255,.08)';d.style.border='2px solid rgba(255,255,255,.15)'});
-  el.style.background='rgba(255,255,255,.2)';el.style.border='2px solid rgba(255,255,255,.8)';
+  document.querySelectorAll('#fam-child-list > div').forEach(d=>{
+    d.style.background='var(--surf-0)';d.style.border='2px solid var(--out-var)';
+  });
+  el.style.background='var(--brand-50)';el.style.border='2px solid var(--sec)';
   updateFamConfirm();
 }
 function updateFamConfirm(){
   if(!S.famChild||!S.famMember)return;
-  document.getElementById('fam-ch-av').textContent=S.famChild.initials;
-  document.getElementById('fam-ch-name').textContent=S.famChild.name;
-  document.getElementById('fam-ch-meta').textContent=`${S.famChild.cls} · ${S.famMember}`;
-  document.getElementById('fam-confirm-wrap').style.display='block';
-  document.getElementById('fam-success').style.display='none';
+  const av=document.getElementById('fam-ch-av'),nm=document.getElementById('fam-ch-name'),mt=document.getElementById('fam-ch-meta');
+  if(av)av.textContent=S.famChild.initials;
+  if(nm)nm.textContent=S.famChild.name;
+  if(mt)mt.textContent=S.famChild.cls+' · '+S.famMember.charAt(0).toUpperCase()+S.famMember.slice(1);
+  const cw=document.getElementById('fam-confirm-wrap'),sw=document.getElementById('fam-success');
+  if(cw)cw.style.display='block';if(sw)sw.style.display='none';
 }
 function confirmFamHandover(){
-  if(!S.famChild||!S.famMember){toast('Please select a child and your relationship','err');return}
+  if(!S.famChild||!S.famMember){toast('Select a child and collector type first','err');return}
   const t=new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
-  const handover={child:S.famChild.name,collector:'Family Member',type:S.famMember,mode:S.famMode,time:t};
-  S.famHandovers.unshift(handover);
-  // Add to kiosk recent scans too
+  S.famHandovers.unshift({child:S.famChild.name,collector:'School confirmed',type:S.famMember,mode:S.famMode,time:t});
   S.recentScans.unshift({name:S.famChild.name,initials:S.famChild.initials,class:S.famChild.cls,subject:'Handover',type:'family',time:t});
-  // Update log
   const log=document.getElementById('fam-log');
   if(log){
     const item=document.createElement('div');
-    item.style.cssText='display:flex;align-items:center;gap:9px;padding:8px 12px;border-radius:10px;background:rgba(255,255,255,.12);margin-bottom:4px;animation:fadeUp .3s ease-out';
-    item.innerHTML=`<div style="width:28px;height:28px;border-radius:7px;background:rgba(255,255,255,.2);color:rgba(255,255,255,.8);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:var(--fh)">${S.famChild.initials}</div><div style="flex:1;font-size:11px;color:rgba(255,255,255,.8);font-weight:600">${S.famChild.name}</div><span class="rtype family">${S.famMode==='drop'?'Drop Off':'Collection'}</span><span style="font-size:10px;color:rgba(255,255,255,.4)">${t}</span>`;
+    item.style.cssText='display:flex;align-items:center;gap:9px;padding:10px 13px;border-radius:10px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);margin-bottom:5px;animation:fadeUp .3s ease-out';
+    item.innerHTML='<div style="width:30px;height:30px;border-radius:8px;background:rgba(255,255,255,.15);color:white;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:var(--fh)">'+S.famChild.initials+'</div>'
+      +'<div style="flex:1;font-size:12px;color:rgba(255,255,255,.85);font-weight:600">'+S.famChild.name+'</div>'
+      +'<span style="padding:2px 9px;border-radius:20px;font-size:10px;font-weight:700;background:#84e05b;color:#1d3314">'+(S.famMode==='drop'?'Drop Off':'Collection')+'</span>'
+      +'<span style="font-size:10px;color:rgba(255,255,255,.4);margin-left:4px">'+t+'</span>';
     log.insertBefore(item,log.firstChild);
   }
-  document.getElementById('fam-confirm-wrap').style.display='none';
-  document.getElementById('fam-success').style.display='block';
-  document.getElementById('fam-success-msg').textContent=S.famMode==='drop'?`${S.famChild.name} dropped off ✓`:`${S.famChild.name} collected ✓`;
-  toast('Handover recorded — parent notified via WhatsApp');
-  setTimeout(()=>{document.getElementById('fam-success').style.display='none';resetFamSelections()},4000);
+  const cw=document.getElementById('fam-confirm-wrap'),sw=document.getElementById('fam-success'),sm=document.getElementById('fam-success-msg');
+  if(cw)cw.style.display='none';if(sw)sw.style.display='block';
+  if(sm)sm.textContent=S.famMode==='drop'?S.famChild.name+' — Drop Off Recorded ✓':S.famChild.name+' — Collection Confirmed ✓';
+  toast(S.famMode==='drop'?'Drop off recorded — parent notified via WhatsApp ✓':'Collection confirmed — parent notified via WhatsApp ✓');
+  setTimeout(()=>{if(sw)sw.style.display='none';resetFamSelections();},4000);
 }
-
 // ════════════════════════════════════════════
 //  TOAST
 // ════════════════════════════════════════════
@@ -3071,7 +3747,7 @@ function migStep1() {
           <div class="card-title">What are you importing?</div>
           <div style="display:grid;gap:8px">
             ${[['students','👩‍🎓','Student records','Names, classes, parent contacts, SEN flags'],['teachers','👩‍🏫','Teacher records','Names, subjects, classes, contact details']].map(([id,emoji,label,desc])=>`
-              <div onclick="MIG.type='${id}';document.querySelectorAll('.mig-type-card').forEach(c=>c.style.borderColor='var(--out-var)');this.style.borderColor='var(--pri)';this.style.background='rgba(0,52,97,.04)'" class="mig-type-card" style="display:flex;align-items:center;gap:12px;padding:13px 15px;border-radius:11px;border:1.5px solid ${MIG.type===id?'var(--pri)':'var(--out-var)'};background:${MIG.type===id?'rgba(0,52,97,.04)':'white'};cursor:pointer;transition:all .15s">
+              <div onclick="MIG.type='${id}';document.querySelectorAll('.mig-type-card').forEach(c=>c.style.borderColor='var(--out-var)');this.style.borderColor='var(--pri)';this.style.background='rgba(29,51,20,.04)'" class="mig-type-card" style="display:flex;align-items:center;gap:12px;padding:13px 15px;border-radius:11px;border:1.5px solid ${MIG.type===id?'var(--pri)':'var(--out-var)'};background:${MIG.type===id?'rgba(29,51,20,.04)':'white'};cursor:pointer;transition:all .15s">
                 <div style="font-size:28px;flex-shrink:0">${emoji}</div>
                 <div><div style="font-size:13px;font-weight:700">${label}</div><div style="font-size:11px;color:var(--out);margin-top:2px">${desc}</div></div>
                 <span class="mi" style="margin-left:auto;font-size:18px;color:${MIG.type===id?'var(--pri)':'var(--out-var)'}">${MIG.type===id?'radio_button_checked':'radio_button_unchecked'}</span>
@@ -3276,7 +3952,7 @@ function migStep4() {
 function selectMigSource(id) {
   document.querySelectorAll('[id^="msrc-"]').forEach(el=>{ el.style.borderColor='var(--out-var)'; el.style.background='white'; });
   const el=document.getElementById('msrc-'+id);
-  if(el){el.style.borderColor='var(--pri)';el.style.background='rgba(0,52,97,.04)';}
+  if(el){el.style.borderColor='var(--pri)';el.style.background='rgba(29,51,20,.04)';}
   MIG.source=id;
 }
 
