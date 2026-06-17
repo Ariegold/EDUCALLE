@@ -54,24 +54,24 @@
   --ter:#6e0009;--ter-cont:#ffa098;
   --err:#ba1a1a;--err-cont:#ffdad6;
 
-  /* Surfaces — green-tinted white palette */
-  --surf:   #f3fcef;     /* page bg */
+  /* Surfaces — neutral warm white (brand green reserved for CTAs/accents only) */
+  --surf:   #f5f6f7;     /* page background */
   --surf-0: #ffffff;     /* card bg */
-  --surf-1: #edf9e8;     /* sidebar, lo-card */
-  --surf-2: #d9f5cc;     /* hover bg */
-  --surf-3: #c6f1b4;     /* active selected */
-  --surf-4: #adea91;     /* stronger selected */
-  --surf-hi:#c6f1b4;     /* highlight */
-  --surf-lo:#f3fcef;
-  --out-var:#98a394;     /* border colour */
+  --surf-1: #f0f2f4;     /* sidebar, lo-card */
+  --surf-2: #e4e8ec;     /* hover bg */
+  --surf-3: #d8dde3;     /* active selected */
+  --surf-4: #ccd3da;     /* stronger selected */
+  --surf-hi:#e4e8ec;
+  --surf-lo:#f5f6f7;
+  --out-var:#c5cbd2;     /* borders */
 
-  /* Text */
-  --txt:  #1d3314;       /* primary body text */
-  --txt2: #4d6045;       /* secondary text */
-  --out:  #6a7a63;       /* muted / placeholder */
-  --inv:  #1d3314;       /* toast background */
+  /* Text — keeping forest green for depth, not for backgrounds */
+  --txt:  #1a2520;       /* primary — near black with green warmth */
+  --txt2: #3d4f44;       /* secondary */
+  --out:  #6b7a72;       /* muted */
+  --inv:  #1a2520;
 
-  /* Tint — links, focus rings */
+  /* Tint — links, focus rings, nav active */
   --tint: #5e9f41;
 
   /* Gradients */
@@ -504,15 +504,28 @@ tr:hover td{background:var(--surf-hi)}
 /* Nav buttons already have their own hover — reinforce active */
 .nav-btn:active{transform:scale(.98)}
 @media(max-width:768px){
-  .sidebar{position:fixed;top:0;left:0;height:100vh;z-index:50;transform:translateX(-100%);box-shadow:2px 0 16px rgba(0,0,0,.15)}
+  .sidebar{position:fixed;top:0;left:0;height:100vh;z-index:50;transform:translateX(-100%);box-shadow:2px 0 24px rgba(0,0,0,.18)}
   .sidebar.open{transform:translateX(0)}
   .sb-backdrop.open{display:block}
-  .sb-close{display:block}
-  .sb-hamburger{display:flex}
-  .stat-grid{grid-template-columns:repeat(2,1fr)}
+  .sb-close{display:flex!important}
+  .sb-hamburger{display:flex!important}
+  .stat-grid{grid-template-columns:repeat(2,1fr);gap:10px}
   .g2{grid-template-columns:1fr}
-  .content{padding:14px}
-  .topbar{padding:14px 14px 0}
+  .g3{grid-template-columns:1fr 1fr}
+  .content{padding:12px 14px 40px}
+  .topbar{padding:12px 14px 0}
+  .tb-title{font-size:20px}
+  .card{padding:14px}
+  .modal{padding:20px;border-radius:16px}
+  table{font-size:11px}
+  th,td{padding:8px 10px}
+  .btn{font-size:14px}
+  .btn-sm{font-size:12px}
+  .family-card{padding:20px 16px}
+  /* Stack mode toggle vertically on very small screens */
+  @media(max-width:380px){
+    #fam-mode-drop,#fam-mode-pick{flex:1;font-size:12px;padding:10px 12px}
+  }
 }
 @media print{
   .sidebar,.sb-hamburger,.sb-backdrop,#export-menu,#export-btn,.tb-actions,.btn{display:none!important}
@@ -702,6 +715,13 @@ tr:hover td{background:var(--surf-hi)}
     </div>
     <nav class="sb-nav" id="sidebar-nav"></nav>
     <div class="sb-foot">
+      <!-- Legal quick links -->
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid var(--surf-2)">
+        <button onclick="navTo('legal');openLegal('privacy')" style="padding:3px 9px;border-radius:20px;font-size:10px;font-weight:600;border:1px solid var(--out-var);background:transparent;color:var(--out);cursor:pointer;font-family:var(--fb);transition:all .12s" onmouseover="this.style.background='var(--surf-2)'" onmouseout="this.style.background='transparent'">Privacy</button>
+        <button onclick="navTo('legal');openLegal('terms')" style="padding:3px 9px;border-radius:20px;font-size:10px;font-weight:600;border:1px solid var(--out-var);background:transparent;color:var(--out);cursor:pointer;font-family:var(--fb);transition:all .12s" onmouseover="this.style.background='var(--surf-2)'" onmouseout="this.style.background='transparent'">Terms</button>
+        <button onclick="navTo('legal');openLegal('dpa')" style="padding:3px 9px;border-radius:20px;font-size:10px;font-weight:600;border:1px solid var(--out-var);background:transparent;color:var(--out);cursor:pointer;font-family:var(--fb);transition:all .12s" onmouseover="this.style.background='var(--surf-2)'" onmouseout="this.style.background='transparent'">DPA</button>
+      </div>
+      <div style="font-size:10px;color:var(--out);line-height:1.7;margin-bottom:10px">Mythros Support Services Ltd · Co. No. 16384279</div>
       <div class="user-pill">
         <div class="u-av" id="sb-av">AD</div>
         <div><div class="u-name" id="sb-name">Admin</div><div class="u-role" id="sb-role">admin</div></div>
@@ -1190,6 +1210,59 @@ tr:hover td{background:var(--surf-hi)}
   </div>
 </div>
 
+<!-- Incident log modal -->
+<div class="modal-bg" id="modal-incident">
+  <div class="modal" style="max-width:520px">
+    <div class="modal-title" id="modal-incident-title">Log New Incident</div>
+    <div class="modal-sub">Recorded confidentially · auto-alerts parent if selected</div>
+    <div class="g2">
+      <div class="fg g-full">
+        <label class="fl">Student Name *</label>
+        <input class="fi" id="inc-student" placeholder="Start typing student name…" list="student-list-inc">
+        <datalist id="student-list-inc">${S.students.map(s=>`<option value="${s.name}">`).join('')}</datalist>
+      </div>
+      <div class="fg">
+        <label class="fl">Incident Type *</label>
+        <select class="fs" id="inc-type">
+          <option value="medical">🏥 Medical / Sick</option>
+          <option value="truancy">🚶 Truancy / Unauthorised Absence</option>
+          <option value="safeguarding">🛡️ Safeguarding Concern</option>
+          <option value="uniform">👔 Uniform</option>
+          <option value="behaviour">⚠️ Behaviour / Fighting</option>
+          <option value="other">📋 Other</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label class="fl">Priority</label>
+        <select class="fs" id="inc-priority">
+          <option value="low">Low — for record only</option>
+          <option value="medium" selected>Medium — monitor</option>
+          <option value="high">High — urgent action needed</option>
+        </select>
+      </div>
+      <div class="fg g-full">
+        <label class="fl">Description *</label>
+        <textarea class="fi" id="inc-desc" rows="3" placeholder="Describe what happened, where, and who was involved…" style="resize:none;min-height:88px"></textarea>
+      </div>
+      <div class="fg g-full">
+        <label class="fl">Follow-up action taken</label>
+        <input class="fi" id="inc-followup" placeholder="e.g. Parent called, Student sent to sick bay, Headteacher informed…">
+      </div>
+    </div>
+    <label style="display:flex;align-items:center;gap:10px;padding:11px 13px;background:var(--surf-1);border-radius:9px;cursor:pointer;margin-bottom:4px">
+      <input type="checkbox" id="inc-notify" checked style="width:18px;height:18px;accent-color:var(--sec);cursor:pointer;margin:0">
+      <div>
+        <div style="font-size:13px;font-weight:600">Notify parent via WhatsApp</div>
+        <div style="font-size:11px;color:var(--out)">An automated message will be sent to the parent immediately</div>
+      </div>
+    </label>
+    <div class="modal-foot">
+      <button class="btn btn-sec" onclick="closeModal('modal-incident')">Cancel</button>
+      <button class="btn btn-pri" onclick="saveIncident()"><span class="mi" style="font-size:15px">report_problem</span>Log Incident</button>
+    </div>
+  </div>
+</div>
+
 <!-- Message view modal -->
 <div class="modal-bg" id="modal-message-view">
   <div class="modal" style="max-width:520px">
@@ -1448,6 +1521,12 @@ const S = {
     {id:3,student:'Ngozi Obi',class:'SS3A',type:'positive',points:3,reason:'Helped a classmate with homework',subject:'Chemistry',date:TODAY,time:'11:20',by:'Mrs Aliyu'},
   ],
   nextBehaviourId:4,
+  incidents:[
+    {id:1,type:'medical',student:'Chidinma Okafor',class:'P3',desc:'Complained of stomach pain during Period 2. Taken to sick bay by Mrs Okafor.',reportedBy:'Mrs Okonkwo',date:TODAY,time:'10:15',status:'open',priority:'medium',parentNotified:true,followUp:'Parent collecting at 11:00'},
+    {id:2,type:'uniform',student:'Chukwuemeka Eze',class:'SS2A',desc:'Wearing trainers instead of school shoes. First offence.',reportedBy:'Mr Adeyemi',date:TODAY,time:'08:35',status:'resolved',priority:'low',parentNotified:false,followUp:'Student warned. Letter sent home.'},
+    {id:3,type:'behaviour',student:'Babatunde Adeyemi',class:'SS2A',desc:'Physical altercation with another student in the corridor between Period 3 and 4. Both students separated and brought to admin.',reportedBy:'Mr Nwosu',date:TODAY,time:'11:42',status:'open',priority:'high',parentNotified:true,followUp:'Both parents called. Headteacher meeting arranged for 3pm.'},
+  ],
+  nextIncidentId:4,
   importJobs:[], // history of bulk migration imports
   seatingPlans:{}, // { className: [studentId,...] } seat order, index = seat position
 };
@@ -1719,17 +1798,21 @@ const NAV_ADMIN=[
   {id:'enrolment',icon:'person_check',label:'Biometric Enrolment'},
   {id:'family',icon:'family_restroom',label:'Family Portal',b:()=>S.famMembers.length,bClass:'amber'},
   {id:'behaviour',icon:'military_tech',label:'Behaviour & Merit'},
+  {id:'incidents',icon:'report_problem',label:'Incidents',b:()=>(S.incidents||[]).filter(i=>i.status==='open').length||null,bClass:'amber'},
   {id:'reports',icon:'bar_chart',label:'Reports & Analytics'},
   {id:'alerts',icon:'notifications',label:'Parent Alerts',b:()=>S.alerts.filter(a=>a.status==='pending').length||null},
   {id:'messages',icon:'forum',label:'Messages',b:()=>(S.messages||[]).filter(m=>!m.read&&m.from!=='admin').length||null,bClass:'amber'},
   {id:'migration',icon:'upload_file',label:'Data Migration'},
   {id:'jobs',icon:'history',label:'Bulk Upload Jobs',b:()=>S.importJobs.length||null},
+  {id:'pricing',icon:'sell',label:'Pricing Plans'},
   {id:'settings',icon:'settings',label:'Settings'},
+  {id:'legal',icon:'gavel',label:'Legal & Privacy'},
 ];
 const NAV_TEACHER=[
   {id:'dashboard',icon:'dashboard',label:'Dashboard'},
   {id:'biometric',icon:'fingerprint',label:'Class Attendance'},
   {id:'behaviour',icon:'military_tech',label:'Behaviour & Merit'},
+  {id:'incidents',icon:'report_problem',label:'Incidents',b:()=>(S.incidents||[]).filter(i=>i.status==='open').length||null,bClass:'amber'},
   {id:'timetable',icon:'calendar_month',label:'My Timetable'},
   {id:'messages',icon:'forum',label:'Messages',b:()=>(S.messages||[]).filter(m=>!m.read&&m.from!=='admin').length||null,bClass:'amber'},
   {id:'reports',icon:'bar_chart',label:'Reports'},
@@ -1758,7 +1841,7 @@ function navTo(v){
   S.view=v;
   document.querySelectorAll('.nav-btn').forEach(n=>n.classList.remove('active'));
   const el=document.getElementById('nav-'+v);if(el)el.classList.add('active');
-  const map={dashboard:renderDashboard,timetable:renderTimetable,academics:renderAcademics,biometric:renderBiometric,students:renderStudents,teachers:renderTeachers,enrolment:renderEnrolment,family:renderFamilyAdmin,behaviour:renderBehaviour,reports:renderReports,alerts:renderAlerts,messages:renderMessagePortal,migration:renderMigration,jobs:renderJobs,settings:renderSettings};
+  const map={dashboard:renderDashboard,timetable:renderTimetable,academics:renderAcademics,biometric:renderBiometric,students:renderStudents,teachers:renderTeachers,enrolment:renderEnrolment,family:renderFamilyAdmin,behaviour:renderBehaviour,incidents:renderIncidents,reports:renderReports,alerts:renderAlerts,messages:renderMessagePortal,pricing:renderPricing,migration:renderMigration,jobs:renderJobs,settings:renderSettings,legal:renderLegal};
   if(map[v])map[v]();
   document.getElementById('main-area').scrollTop=0;
   toggleSidebar(false); // auto-close on mobile after navigating
@@ -1850,6 +1933,100 @@ function onboardingGo(i){
 //  DASHBOARD
 // ════════════════════════════════════════════
 function renderDashboard(){
+  // ── TEACHER DASHBOARD — class-focused ──
+  if(S.role==='teacher'){
+    const teacher=S.teachers.find(t=>t.email===S.user.email)||S.teachers[0];
+    const myClasses=teacher?.classes||S.classesSecondary.slice(0,2);
+    const mySubjects=teacher?.subjects||['Mathematics'];
+    const todayPeriods=S.timetable.filter(tt=>mySubjects.includes(tt.subject)&&myClasses.includes(tt.class));
+    const inCount=S.students.filter(s=>myClasses.includes(s.class)&&S.scans[`${TODAY}-${s.class}-${S.selectedSubject||mySubjects[0]}-${s.id}`]?.in).length;
+    const myStudents=S.students.filter(s=>myClasses.includes(s.class));
+    const openIncidents=(S.incidents||[]).filter(i=>myClasses.includes(i.class)&&i.status==='open');
+    const myMessages=(S.messages||[]).filter(m=>!m.read&&m.from!=='admin');
+    setH('My Dashboard',TODAY_DISP);
+    setC(`
+      <!-- Teacher quick-action bar -->
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px">
+        <button class="btn btn-pri" onclick="navTo('biometric')"><span class="mi" style="font-size:16px">fingerprint</span>Take Attendance</button>
+        <button class="btn btn-sec" onclick="navTo('behaviour')"><span class="mi" style="font-size:16px">military_tech</span>Award Points</button>
+        <button class="btn btn-sec" onclick="navTo('incidents')"><span class="mi" style="font-size:16px">report_problem</span>Log Incident</button>
+        <button class="btn btn-sec" onclick="navTo('messages')"><span class="mi" style="font-size:16px">forum</span>Messages ${myMessages.length?`<span class="nb amber">${myMessages.length}</span>`:''}
+        </button>
+      </div>
+
+      <!-- Today's timetable for this teacher -->
+      <div class="card mb-20">
+        <div class="sh mb-12">
+          <div class="card-title" style="margin-bottom:0">My Timetable Today</div>
+          <span style="font-size:11px;color:var(--out)">${new Date().toLocaleDateString('en-GB',{weekday:'long'})}</span>
+        </div>
+        ${todayPeriods.length===0
+          ?`<div style="text-align:center;padding:20px;color:var(--out);font-size:13px">No periods configured for today — set up the timetable in Settings.</div>`
+          :`<div style="display:grid;gap:6px">
+            ${todayPeriods.map((p,i)=>{
+              const now=new Date();
+              const [ph,pm]=p.time.split('–')[0].split(':').map(Number);
+              const [eh,em]=((p.time.split('–')[1])||'').split(':').map(Number)||[];
+              const isNow=now.getHours()===ph||(now.getHours()>ph&&(!eh||now.getHours()<eh));
+              return`<div style="display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:10px;background:${isNow?'var(--brand-50)':'var(--surf-1)'};border:${isNow?'2px solid var(--sec)':'1px solid var(--out-var)'}">
+                <div style="width:8px;height:8px;border-radius:50%;background:${isNow?'var(--sec)':'var(--out-var)'};flex-shrink:0"></div>
+                <div style="flex:1">
+                  <div style="font-size:13px;font-weight:700;color:var(--txt)">${p.subject} <span style="font-weight:500;color:var(--out)">· ${p.class}</span></div>
+                  <div style="font-size:11px;color:var(--out)">${p.period} · ${p.time}</div>
+                </div>
+                ${isNow?`<button class="btn btn-ok btn-sm" onclick="S.selectedClass='${p.class}';S.selectedSubject='${p.subject}';navTo('biometric')"><span class="mi" style="font-size:13px">play_circle</span>Start</button>`:''}
+              </div>`;
+            }).join('')}
+          </div>`}
+      </div>
+
+      <div class="g2 mb-20">
+        <!-- My classes quick stats -->
+        <div class="card">
+          <div class="card-title mb-12">My Classes</div>
+          ${myClasses.map(cls=>{
+            const count=S.students.filter(s=>s.class===cls).length;
+            const checked=S.students.filter(s=>s.class===cls&&S.scans[`${TODAY}-${cls}-${mySubjects[0]}-${s.id}`]?.in).length;
+            const rate=count>0?Math.round((checked/count)*100):0;
+            return`<div style="padding:10px 0;border-bottom:1px solid var(--surf-2);display:flex;align-items:center;gap:10px" onclick="S.selectedClass='${cls}';navTo('biometric')" style="cursor:pointer">
+              <div style="width:36px;height:36px;border-radius:9px;background:var(--brand-200);color:var(--pri);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--fh)">${cls}</div>
+              <div style="flex:1"><div style="font-size:13px;font-weight:600">${cls} <span style="font-size:11px;font-weight:400;color:var(--out)">${count} students</span></div>
+                <div style="height:4px;background:var(--surf-3);border-radius:2px;margin-top:4px"><div style="width:${rate}%;height:100%;background:${rate>=80?'var(--sec)':rate>=60?'#f59e0b':'var(--ter)'};border-radius:2px;transition:width .5s"></div></div>
+              </div>
+              <span style="font-size:12px;font-weight:700;color:${rate>=80?'var(--sec)':rate>=60?'#d97706':'var(--ter)'}">${rate}%</span>
+            </div>`;
+          }).join('')}
+          <button class="btn btn-sec btn-full btn-sm mt-12" onclick="navTo('biometric')"><span class="mi" style="font-size:14px">fingerprint</span>Open Attendance</button>
+        </div>
+
+        <!-- Recent alerts + open incidents for my classes -->
+        <div>
+          <div class="card mb-12">
+            <div class="sh mb-8"><div class="card-title" style="margin-bottom:0">Open Incidents</div><span class="chip ${openIncidents.length>0?'chip-amber':'chip-green'}">${openIncidents.length}</span></div>
+            ${openIncidents.length===0
+              ?`<div style="font-size:12px;color:var(--out);padding:8px 0">No open incidents for your classes ✓</div>`
+              :openIncidents.slice(0,3).map(i=>`<div style="padding:8px 0;border-bottom:1px solid var(--surf-2);font-size:12px">
+                <span class="chip ${i.priority==='high'?'chip-red':i.priority==='medium'?'chip-amber':'chip-out'}" style="font-size:10px">${i.type}</span>
+                <span style="font-weight:600;margin-left:6px">${i.student}</span>
+                <div style="font-size:11px;color:var(--out);margin-top:2px">${i.desc.slice(0,60)}…</div>
+              </div>`).join('')}
+            <button class="btn btn-sec btn-full btn-sm mt-8" onclick="navTo('incidents')">View all incidents →</button>
+          </div>
+          <div class="card">
+            <div class="card-title mb-8">Recent Behaviour Activity</div>
+            ${(S.behaviourLog||[]).filter(b=>myClasses.includes(b.class)).slice(0,4).map(b=>`
+              <div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--surf-2);font-size:12px">
+                <span class="mi" style="font-size:15px;color:${b.type==='positive'?'var(--sec)':'var(--ter)'}">${b.type==='positive'?'thumb_up':'thumb_down'}</span>
+                <div style="flex:1"><div style="font-weight:600">${b.student}</div><div style="font-size:11px;color:var(--out)">${b.reason}</div></div>
+                <span style="font-weight:700;color:${b.points>0?'var(--sec)':'var(--ter)'}">${b.points>0?'+':''}${b.points}pts</span>
+              </div>`).join('')||`<div style="font-size:12px;color:var(--out)">No behaviour log yet</div>`}
+          </div>
+        </div>
+      </div>`);
+    return;
+  }
+
+  // ── ADMIN DASHBOARD ──
   setH('Dashboard',TODAY_DISP,
     `<div style="position:relative">
       <button class="btn btn-pri btn-sm" onclick="toggleExportMenu()" id="export-btn"><span class="mi" style="font-size:15px">file_download</span>Export Report</button>
@@ -1955,69 +2132,71 @@ function delTT(id){S.timetable=S.timetable.filter(t=>t.id!==id);renderTimetable(
 //  ACADEMIC MANAGEMENT — Subject Catalogue
 // ════════════════════════════════════════════
 function renderAcademics(activeTab){
-  activeTab=activeTab||'classes';
+  activeTab=activeTab||'table';
   const totalAssigned=Object.values(S.classSubjects).reduce((a,arr)=>a+arr.length,0);
-  setH('Academic Management',`${ALL_SUBJECTS.length} subjects in catalogue · ${totalAssigned} class assignments`);
-  const tabs=[['classes','Class Subjects'],['catalogue','Subject Catalogue'],['seating','Seating Plans']];
+  setH('Academic Management',totalAssigned+' subject assignments across all classes');
+  const tabs=[['table','Subject × Class Table'],['catalogue','Subject Catalogue'],['seating','Seating Plans']];
   const tabHtml=`<div style="display:flex;border-bottom:1px solid var(--out-var);margin-bottom:20px">
     ${tabs.map(([id,lbl])=>`<button class="settings-tab${activeTab===id?' active':''}" onclick="renderAcademics('${id}')">${lbl}</button>`).join('')}
   </div>`;
 
-  // ── TAB 1: CLASS SUBJECTS ──
-  if(activeTab==='classes'){
-    const cls=S.selectedAcadClass||S.classesSecondary[0];
-    const assigned=S.classSubjects[cls]||[];
+  // ── TAB 1: SUBJECT × CLASS TABLE (Fix 2 — table format with checkboxes) ──
+  if(activeTab==='table'){
+    const allClasses=[...S.classesSecondary,...S.classesPrimary];
     const stages=CURRICULUM_STAGES[S.curriculum]||CURRICULUM_STAGES.nigerian;
+    // Build a flat subject list from stages (unique, ordered)
+    const allSubjectsOrdered=[...new Set(Object.values(stages).flat())];
     setC(tabHtml+`
-      <div class="g2">
-        <div>
-          <div class="card mb-16">
-            <div class="card-title">Select Class</div>
-            <div style="display:flex;flex-wrap:wrap;gap:6px">
-              ${[...S.classesSecondary,...S.classesPrimary].map(c=>`<span class="cls-badge-edit" style="cursor:pointer;${c===cls?'background:var(--pri);color:white':''}" onclick="S.selectedAcadClass='${c}';renderAcademics('classes')">${c}<span style="font-size:10px;opacity:.7">(${(S.classSubjects[c]||[]).length})</span></span>`).join('')}
-            </div>
+      <div class="card mb-16">
+        <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap">
+          <div>
+            <div class="card-title" style="margin-bottom:2px">Subject × Class Assignment</div>
+            <div style="font-size:12px;color:var(--out)">Tick a subject for a class to assign it. Untick to remove. Use the row buttons to assign a subject to all classes at once.</div>
           </div>
-          <div class="card">
-            <div class="sh"><div class="card-title" style="margin-bottom:0">Subjects assigned to ${cls}</div><span class="chip chip-blue">${assigned.length} subjects</span></div>
-            ${assigned.length===0?`<div style="text-align:center;padding:28px;color:var(--out)"><span class="mi" style="font-size:36px;opacity:.4;display:block;margin-bottom:8px">menu_book</span><div style="font-size:13px">No subjects assigned yet — pick from the catalogue on the right</div></div>`:
-            `<div style="display:flex;flex-wrap:wrap;gap:7px">
-              ${assigned.map(sub=>{
-                const cat=Object.entries(SUBJECT_CATALOGUE).find(([,list])=>list.includes(sub))?.[0]||'Other';
-                const teacher=S.teachers.find(t=>(t.subjects||[]).includes(sub)&&(t.classes||[]).includes(cls));
-                return `<div style="display:flex;align-items:center;gap:7px;padding:8px 12px;border-radius:10px;background:var(--surf-1);border:1px solid var(--out-var)">
-                  <span class="mi" style="font-size:15px;color:var(--pri)">${subjectIcon(cat)}</span>
-                  <div><div style="font-size:12px;font-weight:600">${sub}</div>${teacher?`<div style="font-size:10px;color:var(--out)">${teacher.name}</div>`:`<div style="font-size:10px;color:var(--ter)">No teacher assigned</div>`}</div>
-                  <span class="mi" style="font-size:15px;color:var(--out);cursor:pointer;margin-left:4px" onclick="removeClassSubject('${cls}','${sub}')" title="Remove">close</span>
-                </div>`;
-              }).join('')}
-            </div>`}
+          <div style="display:flex;gap:8px;flex-shrink:0">
+            <button class="btn btn-sec btn-sm" onclick="clearAllSubjects()"><span class="mi" style="font-size:13px">clear_all</span>Clear all</button>
+            <button class="btn btn-pri btn-sm" onclick="saveSubjectTable()"><span class="mi" style="font-size:13px">save</span>Save</button>
           </div>
         </div>
-        <div>
-          <div class="card mb-16" style="background:var(--surf-1)">
-            <div style="font-size:13px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:7px"><span class="mi" style="font-size:16px;color:var(--pri)">auto_awesome</span>Suggested for ${S.curriculum.charAt(0).toUpperCase()+S.curriculum.slice(1)} curriculum</div>
-            <div style="font-size:11px;color:var(--out);margin-bottom:10px">Click a stage to add all its subjects to ${cls} at once</div>
-            ${Object.entries(stages).map(([stage,subs])=>`
-              <div style="margin-bottom:10px">
-                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-                  <span style="font-size:11px;font-weight:700;color:var(--txt2)">${stage}</span>
-                  <button class="btn btn-sec btn-sm" style="padding:3px 9px;font-size:10px" onclick="addStageSubjects('${cls}','${stage}')">+ Add all (${subs.length})</button>
-                </div>
-                <div style="display:flex;flex-wrap:wrap;gap:4px">
-                  ${subs.slice(0,8).map(s=>`<span class="chip ${assigned.includes(s)?'chip-green':'chip-out'}" style="font-size:10px">${s}</span>`).join('')}
-                  ${subs.length>8?`<span class="chip chip-out" style="font-size:10px">+${subs.length-8} more</span>`:''}
-                </div>
-              </div>`).join('')}
-          </div>
-          <div class="card">
-            <div class="card-title">Add individual subject</div>
-            <div class="fg"><label class="fl">Search catalogue</label><input class="fi" id="acad-search" placeholder="e.g. Further Mathematics" oninput="filterAcadSearch(this.value)"></div>
-            <div id="acad-search-results" style="display:flex;flex-wrap:wrap;gap:5px;max-height:220px;overflow-y:auto"></div>
-          </div>
-        </div>
-      </div>`);
+      </div>
+      <div style="overflow-x:auto;border-radius:14px;box-shadow:var(--sh-sm)">
+        <table style="width:100%;border-collapse:collapse;min-width:640px;font-size:12px">
+          <thead>
+            <tr style="background:var(--pri)">
+              <th style="padding:11px 14px;text-align:left;color:white;font-size:11px;font-weight:700;letter-spacing:.04em;min-width:180px;border-right:1px solid rgba(255,255,255,.15)">Subject</th>
+              ${allClasses.map(c=>`<th style="padding:8px 6px;text-align:center;color:white;font-size:10px;font-weight:700;min-width:52px;letter-spacing:.03em;border-right:1px solid rgba(255,255,255,.1)">${c}</th>`).join('')}
+              <th style="padding:8px 10px;text-align:center;color:rgba(255,255,255,.7);font-size:10px;font-weight:700;min-width:80px">All</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${allSubjectsOrdered.map((sub,rowIdx)=>{
+              const cat=Object.entries(SUBJECT_CATALOGUE).find(([,list])=>list.includes(sub))?.[0]||'Other';
+              const allTicked=allClasses.every(c=>(S.classSubjects[c]||[]).includes(sub));
+              const anyTicked=allClasses.some(c=>(S.classSubjects[c]||[]).includes(sub));
+              return `<tr style="background:${rowIdx%2?'var(--surf-1)':'white'};border-bottom:1px solid var(--surf-2)">
+                <td style="padding:9px 14px;font-weight:600;color:var(--txt);border-right:1px solid var(--surf-2);white-space:nowrap">
+                  <span class="mi" style="font-size:13px;vertical-align:middle;color:var(--tint);margin-right:5px">${subjectIcon(cat)}</span>${sub}
+                </td>
+                ${allClasses.map(c=>{
+                  const checked=(S.classSubjects[c]||[]).includes(sub);
+                  return `<td style="text-align:center;padding:6px;border-right:1px solid var(--surf-2)">
+                    <input type="checkbox" ${checked?'checked':''} onchange="toggleSubjectCell('${c}','${sub.replace(/'/g,"\\'")}',this.checked)"
+                      style="width:18px;height:18px;accent-color:var(--sec);cursor:pointer;margin:0">
+                  </td>`;
+                }).join('')}
+                <td style="text-align:center;padding:6px">
+                  <button onclick="toggleSubjectAllClasses('${sub.replace(/'/g,"\\'")}',${!allTicked})"
+                    style="padding:4px 10px;border-radius:20px;border:none;cursor:pointer;font-size:10px;font-weight:700;background:${allTicked?'var(--sec-cont)':anyTicked?'#fef3c7':'var(--surf-2)'};color:${allTicked?'var(--on-sec-cont)':anyTicked?'#78350f':'var(--txt2)'};min-height:28px">
+                    ${allTicked?'Remove all':'Add all'}
+                  </button>
+                </td>
+              </tr>`;
+            }).join('')}
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:12px;font-size:11px;color:var(--out);padding:8px 12px;background:var(--surf-1);border-radius:8px;display:flex;align-items:center;gap:7px"><span class="mi" style="font-size:14px;color:var(--tint)">info</span>Changes save instantly as you tick/untick. Use "Save" to confirm all at once. Visit the Subject Catalogue tab to browse all 150+ available subjects.</div>`);
   }
-
   // ── TAB 2: SUBJECT CATALOGUE BROWSER ──
   else if(activeTab==='catalogue'){
     setC(tabHtml+`
@@ -2063,18 +2242,41 @@ function filterAcadSearch(q){
 function addClassSubject(cls,sub){
   if(!S.classSubjects[cls])S.classSubjects[cls]=[];
   if(!S.classSubjects[cls].includes(sub))S.classSubjects[cls].push(sub);
-  renderAcademics('classes');toast(sub+' added to '+cls);
 }
 function removeClassSubject(cls,sub){
   S.classSubjects[cls]=(S.classSubjects[cls]||[]).filter(s=>s!==sub);
-  renderAcademics('classes');
 }
 function addStageSubjects(cls,stage){
   const stages=CURRICULUM_STAGES[S.curriculum]||CURRICULUM_STAGES.nigerian;
   const subs=stages[stage]||[];
   if(!S.classSubjects[cls])S.classSubjects[cls]=[];
   subs.forEach(s=>{if(!S.classSubjects[cls].includes(s))S.classSubjects[cls].push(s)});
-  renderAcademics('classes');toast(`Added ${subs.length} subjects from ${stage} to ${cls}`);
+  renderAcademics('table');toast('Added '+subs.length+' subjects from stage to '+cls);
+}
+function toggleSubjectCell(cls,sub,checked){
+  if(!S.classSubjects[cls])S.classSubjects[cls]=[];
+  if(checked&&!S.classSubjects[cls].includes(sub))S.classSubjects[cls].push(sub);
+  else if(!checked)S.classSubjects[cls]=S.classSubjects[cls].filter(s=>s!==sub);
+}
+function toggleSubjectAllClasses(sub,addIt){
+  const all=[...S.classesSecondary,...S.classesPrimary];
+  all.forEach(cls=>{
+    if(!S.classSubjects[cls])S.classSubjects[cls]=[];
+    if(addIt&&!S.classSubjects[cls].includes(sub))S.classSubjects[cls].push(sub);
+    else if(!addIt)S.classSubjects[cls]=S.classSubjects[cls].filter(s=>s!==sub);
+  });
+  renderAcademics('table');
+  toast(addIt?sub+' added to all classes':sub+' removed from all classes');
+}
+function clearAllSubjects(){
+  if(!confirm('Remove all subject assignments from all classes?'))return;
+  Object.keys(S.classSubjects).forEach(k=>S.classSubjects[k]=[]);
+  renderAcademics('table');
+  toast('All subject assignments cleared');
+}
+function saveSubjectTable(){
+  const total=Object.values(S.classSubjects).reduce((a,arr)=>a+arr.length,0);
+  toast(total+' subject assignments saved ✓');
 }
 
 // ════════════════════════════════════════════
@@ -2190,6 +2392,12 @@ function printSeating(cls){
 // ════════════════════════════════════════════
 function renderBiometric(){
   const mode=S.attendanceMode||'biometric';
+  // ── Auto-schedule lesson-end alert from timetable ──
+  const currentPeriod=S.timetable.find(tt=>tt.class===S.selectedClass&&tt.subject===S.selectedSubject);
+  if(currentPeriod&&currentPeriod.time){
+    const endStr=(currentPeriod.time.split('–')[1]||'').trim(); // e.g. '11:40'
+    if(endStr&&endStr.includes(':'))scheduleLessonEndAlert(endStr,S.selectedSubject,S.selectedClass);
+  }
   setH('Class Attendance','Biometric or manual register — per subject',
     `<div style="display:flex;align-items:center;gap:4px;background:var(--surf-1);border-radius:8px;padding:3px;border:1px solid var(--out-var)">
       <button onclick="S.attendanceMode='biometric';renderBiometric()" class="btn btn-sm" style="${mode==='biometric'?'background:var(--pri);color:white':'background:transparent;color:var(--txt2)'};border:none;border-radius:6px;min-height:32px;font-size:12px"><span class="mi" style="font-size:14px">fingerprint</span>Biometric</button>
@@ -2223,6 +2431,16 @@ function renderBiometric(){
     </div>
     <div class="card">
       ${modeNotice}
+      <!-- Lesson-end countdown banner — auto-populated by scheduleLessonEndAlert -->
+      <div id="lesson-end-banner" style="display:flex;align-items:center;gap:10px;padding:10px 13px;background:var(--surf-1);border:1px solid var(--out-var);border-radius:10px;font-size:12px;font-weight:600;color:var(--txt);margin-bottom:12px">
+        <span class="mi" style="font-size:16px;color:var(--out)">schedule</span>
+        <span style="flex:1;color:var(--out)">Lesson timer will appear here once a period is matched from the timetable.</span>
+      </div>
+      <!-- Toilet/Medical break legend -->
+      <div style="display:flex;align-items:center;gap:12px;padding:7px 10px;background:var(--surf-1);border-radius:8px;font-size:11px;color:var(--out);margin-bottom:10px;flex-wrap:wrap">
+        <span><span class="mi" style="font-size:13px;vertical-align:middle;color:var(--tint)">wc</span> Toilet break — 5 min max. Tap 🚻 on a checked-in student to start.</span>
+        <span><span class="mi" style="font-size:13px;vertical-align:middle;color:#7c3aed">local_hospital</span> Medical — 15 min max. <button class="btn btn-sec btn-sm" style="font-size:10px;padding:2px 8px;min-height:24px" onclick="markToilet(S.students[0]?.id,true)">Demo medical pass</button></span>
+      </div>
       <div class="sh mb-12"><div class="card-title" style="margin-bottom:0">${S.selectedClass} · ${S.selectedSubject} — Today</div>
         <div class="flex-c gap-8">
           <button class="btn btn-sec btn-sm" onclick="markAll()"><span class="mi" style="font-size:13px">checklist</span>All In</button>
@@ -2235,13 +2453,13 @@ function renderBiometric(){
         const needsGuardian=isPrimary&&(s.age<8||s.guardianRequired);
         const toiletKey=`toilet-${TODAY}-${S.selectedClass}-${S.selectedSubject}-${s.id}`;
         const onToilet=S.scans[toiletKey];
-        return`<div class="s-row" id="ar-${s.id}">
+        return`<div class="s-row" id="ar-${s.id}" style="${onToilet?'background:#fef3c7;border:1px solid #fde68a;border-radius:10px;margin-bottom:3px;':''}">
           <span style="font-size:11px;color:var(--out);width:18px">${i+1}</span>
-          <div class="s-av" style="background:var(--surf-hi);color:var(--txt2)">${s.name.split(' ').map(n=>n[0]).join('').slice(0,2)}</div>
+          <div class="s-av" style="background:${onToilet?'#fde68a':'var(--surf-hi)'};color:${onToilet?'#78350f':'var(--txt2)'}">${s.name.split(' ').map(n=>n[0]).join('').slice(0,2)}</div>
           <div style="flex:1">
             <div style="font-size:12px;font-weight:600">${s.name}${s.sen?`<span class="chip chip-purple" style="font-size:10px;margin-left:4px">SEN</span>`:''}</div>
             <div style="font-size:10px;color:var(--out)">${s.admno}</div>
-            ${onToilet?`<div style="font-size:10px;color:#b45309;margin-top:2px;display:flex;align-items:center;gap:3px"><span class="mi" style="font-size:11px">wc</span>Toilet break since ${onToilet.time}</div>`:''}
+            ${onToilet?`<div style="font-size:11px;color:#b45309;margin-top:4px;display:flex;align-items:center;gap:5px;font-weight:700;padding:3px 7px;background:#fde68a;border-radius:6px;display:inline-flex"><span class="mi" style="font-size:14px">${onToilet.medical?'local_hospital':'wc'}</span>${onToilet.medical?'Medical break':'Toilet break'} · started ${onToilet.time} · max ${onToilet.medical?15:5} min</div>`:''}
           </div>
           <div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap;justify-content:flex-end">
             ${!r.in
@@ -2314,30 +2532,46 @@ function returnToilet(sid){
   renderBiometric();
 }
 
-// ── Fix 5: Lesson-end teacher alert ───────────────────────────
-// School sets period end time; teacher gets a notification 20 min before, and at end time.
+// ── Fix 5: Lesson-end alerts with live countdown ─────────────────
 const _lessonAlertTimers=[];
+let _lessonCountdownInterval=null;
 function scheduleLessonEndAlert(periodEndTime,subject,cls){
-  // periodEndTime = 'HH:MM' string e.g. '11:40'
   _lessonAlertTimers.forEach(t=>clearTimeout(t));
   _lessonAlertTimers.length=0;
+  if(_lessonCountdownInterval)clearInterval(_lessonCountdownInterval);
   const [h,m]=periodEndTime.split(':').map(Number);
-  const endMs=h*60*60*1000+m*60*1000;
-  const nowMs=Date.now()%(24*60*60*1000); // ms since midnight
-  const diff=endMs-nowMs;
-  const warn=diff-20*60*1000; // 20 min warning
-  if(warn>0){
-    const t1=setTimeout(()=>{
-      toast(`📢 ${subject} · ${cls} — 20 minutes until end of period (${periodEndTime})`)
-    },warn);
-    _lessonAlertTimers.push(t1);
-  }
-  if(diff>0){
-    const t2=setTimeout(()=>{
-      toast(`🔔 ${subject} · ${cls} — Period has ended (${periodEndTime}). Please close attendance and check out remaining students.`);
-    },diff);
-    _lessonAlertTimers.push(t2);
-  }
+  const endDate=new Date();endDate.setHours(h,m,0,0);
+  const diffMs=endDate-new Date();
+  if(diffMs<=0)return;
+
+  const updateCountdown=()=>{
+    const banner=document.getElementById('lesson-end-banner');
+    if(!banner)return;
+    const remaining=endDate-new Date();
+    if(remaining<=0){
+      banner.innerHTML='<span class="mi" style="font-size:16px;color:var(--ter)">alarm_off</span><b>Period ended — '+periodEndTime+'</b>&nbsp;Please check out all remaining students.';
+      banner.style.cssText=banner.style.cssText.replace(/background:[^;]+/,'background:var(--err-cont)');
+      banner.style.color='var(--ter)';
+      if(_lessonCountdownInterval)clearInterval(_lessonCountdownInterval);
+      return;
+    }
+    const mins=Math.floor(remaining/60000);
+    const secs=Math.floor((remaining%60000)/1000);
+    const isWarning=mins<20;
+    banner.innerHTML='<span class="mi" style="font-size:16px;color:'+( isWarning?'#b45309':'var(--tint)')+'">schedule</span>'+
+      '<span style="flex:1"><b>'+subject+' · '+cls+'</b> — ends at '+periodEndTime+'</span>'+
+      '<span style="font-family:var(--fh);font-size:15px;font-weight:800;color:'+(isWarning?'#b45309':'var(--pri)')+';font-variant-numeric:tabular-nums">'+mins+':'+String(secs).padStart(2,'0')+' left</span>';
+    if(isWarning){banner.style.background='#fef3c7';banner.style.color='#78350f';}
+  };
+  setTimeout(updateCountdown,100); // initial render after DOM settles
+  _lessonCountdownInterval=setInterval(updateCountdown,10000);
+
+  // 20-min warning
+  const warn=diffMs-20*60*1000;
+  if(warn>0){const t1=setTimeout(()=>{toast('⏰ '+subject+' · '+cls+' — 20 minutes until end of period ('+periodEndTime+')');updateCountdown();},warn);_lessonAlertTimers.push(t1);}
+  // End-of-period
+  const t2=setTimeout(()=>{toast('🔔 '+subject+' · '+cls+' — Period ended ('+periodEndTime+'). Check out remaining students.');updateCountdown();},diffMs);
+  _lessonAlertTimers.push(t2);
 }
 
 // ── Fix 6: Message Portal (parent ↔ teacher/admin) + School Bus ────────────
@@ -3368,12 +3602,245 @@ function runPhase0(){
   [0,1,2,3].forEach((i)=>setTimeout(()=>{const r=document.getElementById('p0-'+i);if(r){const ic=r.querySelector('.mi');ic.textContent='check_box';ic.style.color='var(--sec)'}},i*700));
   setTimeout(()=>{_p0Done=true;toast('Phase 0 hardware validation complete')},2400);
 }
-function saveCfg(){toast('Webhooks saved')}
-function saveWebhooks(){closeModal('modal-webhook');toast('Webhooks saved')}
+// ════════════════════════════════════════════
+//  INCIDENTS PORTAL (Fix 5)
+//  Types: medical · truancy · safeguarding · uniform · behaviour
+// ════════════════════════════════════════════
+const INCIDENT_TYPES={
+  medical:   {icon:'local_hospital',label:'Medical / Sick',    color:'#ef4444',bg:'#fee2e2'},
+  truancy:   {icon:'person_off',   label:'Truancy / Absence',  color:'#f59e0b',bg:'#fef3c7'},
+  safeguarding:{icon:'shield',    label:'Safeguarding',        color:'#7c3aed',bg:'#ede9fe'},
+  uniform:   {icon:'checkroom',   label:'Uniform',             color:'#0ea5e9',bg:'#e0f2fe'},
+  behaviour: {icon:'warning',     label:'Behaviour / Fighting',color:'#dc2626',bg:'#fee2e2'},
+  other:     {icon:'report',      label:'Other',               color:'#6b7a72',bg:'#f0f2f4'},
+};
+function renderIncidents(){
+  if(!S.incidents)S.incidents=[];
+  if(!S.nextIncidentId)S.nextIncidentId=1;
+  const open=S.incidents.filter(i=>i.status==='open');
+  const resolved=S.incidents.filter(i=>i.status==='resolved');
+  setH('Incidents Portal','Pupil welfare, safeguarding & discipline log',
+    `<button class="btn btn-pri btn-sm" onclick="openNewIncident()"><span class="mi" style="font-size:15px">add_circle</span>Log Incident</button>`);
+  const incidentRow=i=>{
+    const t=INCIDENT_TYPES[i.type]||INCIDENT_TYPES.other;
+    return `<div style="padding:14px 16px;border-radius:12px;background:white;border:1px solid var(--out-var);margin-bottom:8px;display:flex;gap:12px;align-items:flex-start;box-shadow:var(--sh-sm)">
+      <div style="width:38px;height:38px;border-radius:10px;background:${t.bg};display:flex;align-items:center;justify-content:center;flex-shrink:0">
+        <span class="mi" style="font-size:20px;color:${t.color}">${t.icon}</span>
+      </div>
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:3px">
+          <span style="font-size:13px;font-weight:700;color:var(--txt)">${i.student}</span>
+          <span style="padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700;background:${t.bg};color:${t.color}">${t.label}</span>
+          <span class="chip ${i.priority==='high'?'chip-red':i.priority==='medium'?'chip-amber':'chip-out'}" style="font-size:10px">${i.priority} priority</span>
+          <span class="chip ${i.status==='open'?'chip-amber':'chip-green'}" style="font-size:10px">${i.status}</span>
+        </div>
+        <div style="font-size:12px;color:var(--txt2);margin-bottom:4px">${i.class} · ${i.time} · Reported by ${i.reportedBy}</div>
+        <div style="font-size:12px;color:var(--txt);margin-bottom:6px">${i.desc}</div>
+        ${i.followUp?`<div style="font-size:11px;color:var(--tint);display:flex;align-items:center;gap:5px"><span class="mi" style="font-size:13px">arrow_forward</span>${i.followUp}</div>`:''}
+        ${i.parentNotified?`<div style="font-size:11px;color:var(--out);margin-top:4px;display:flex;align-items:center;gap:4px"><span class="mi" style="font-size:12px;color:#84e05b">check_circle</span>Parent notified</div>`:''}
+      </div>
+      <div style="display:flex;gap:5px;flex-shrink:0">
+        ${i.status==='open'?`<button class="btn btn-ok btn-sm btn-icon" onclick="resolveIncident(${i.id})" title="Mark resolved"><span class="mi" style="font-size:15px">check_circle</span></button>`:''}
+        <button class="btn btn-sec btn-sm btn-icon" onclick="editIncident(${i.id})" title="Edit"><span class="mi" style="font-size:15px">edit</span></button>
+      </div>
+    </div>`;
+  };
+  setC(`
+    <div class="stat-grid mb-20">
+      ${Object.entries(INCIDENT_TYPES).slice(0,4).map(([k,t])=>{
+        const count=S.incidents.filter(i=>i.type===k&&i.status==='open').length;
+        return `<div class="stat-card" style="padding:14px;border-top:3px solid ${t.color}"><div style="font-size:10px;font-weight:700;color:var(--out);text-transform:uppercase;margin-bottom:4px">${t.label}</div><div style="font-family:var(--fh);font-size:2rem;font-weight:800;color:${count>0?t.color:'var(--txt)'}">${count}</div><div style="font-size:10px;color:var(--out)">open</div></div>`;
+      }).join('')}
+    </div>
+    ${open.length?`<div class="card-title mb-12" style="color:var(--ter)"><span class="mi" style="font-size:16px;vertical-align:middle">error</span> Open Incidents (${open.length})</div>`:''}
+    ${open.map(incidentRow).join('')}
+    ${resolved.length?`<div class="card-title mb-12 mt-20" style="color:var(--out)"><span class="mi" style="font-size:16px;vertical-align:middle">check_circle</span> Resolved (${resolved.length})</div>`:''}
+    ${resolved.map(incidentRow).join('')}
+    ${!S.incidents.length?`<div class="card" style="text-align:center;padding:48px"><span class="mi" style="font-size:48px;color:var(--sec);opacity:.4;display:block;margin-bottom:12px">shield</span><div style="font-size:15px;font-weight:700;color:var(--txt)">No incidents logged</div><div style="font-size:13px;color:var(--out);margin-top:4px">All clear — log any pupil welfare, discipline or safeguarding concern using the button above.</div></div>`:''}
+  `);
+}
+function openNewIncident(){
+  document.getElementById('inc-student').value='';
+  document.getElementById('inc-type').value='medical';
+  document.getElementById('inc-priority').value='medium';
+  document.getElementById('inc-desc').value='';
+  document.getElementById('inc-followup').value='';
+  document.getElementById('inc-notify').checked=true;
+  document.getElementById('modal-incident-title').textContent='Log New Incident';
+  S._editIncidentId=null;
+  openModal('modal-incident');
+}
+function editIncident(id){
+  const inc=S.incidents.find(i=>i.id===id);
+  if(!inc)return;
+  document.getElementById('inc-student').value=inc.student;
+  document.getElementById('inc-type').value=inc.type;
+  document.getElementById('inc-priority').value=inc.priority;
+  document.getElementById('inc-desc').value=inc.desc;
+  document.getElementById('inc-followup').value=inc.followUp||'';
+  document.getElementById('inc-notify').checked=inc.parentNotified;
+  document.getElementById('modal-incident-title').textContent='Edit Incident';
+  S._editIncidentId=id;
+  openModal('modal-incident');
+}
+function saveIncident(){
+  const student=document.getElementById('inc-student').value.trim();
+  const desc=document.getElementById('inc-desc').value.trim();
+  if(!student||!desc){toast('Student name and description are required','err');return}
+  const stu=S.students.find(s=>s.name.toLowerCase().includes(student.toLowerCase()));
+  const t=new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+  const inc={
+    id:S._editIncidentId||S.nextIncidentId++,
+    student:stu?stu.name:student,
+    class:stu?stu.class:'—',
+    type:document.getElementById('inc-type').value,
+    priority:document.getElementById('inc-priority').value,
+    desc,
+    followUp:document.getElementById('inc-followup').value.trim(),
+    parentNotified:document.getElementById('inc-notify').checked,
+    reportedBy:S.user.name,
+    date:TODAY,time:t,
+    status:'open',
+  };
+  if(S._editIncidentId){
+    const idx=S.incidents.findIndex(i=>i.id===S._editIncidentId);
+    if(idx>=0)S.incidents[idx]=inc;
+  }else{
+    S.incidents.unshift(inc);
+    if(inc.parentNotified){
+      S.alerts.unshift({id:Date.now(),student:inc.student,class:inc.class,subject:'Incident',type:inc.type,date:TODAY,parent:stu?.parent||'Parent',status:'sent',msg:INCIDENT_TYPES[inc.type].label+' incident reported for '+inc.student+'. '+desc});
+      renderNav();
+    }
+  }
+  closeModal('modal-incident');
+  renderIncidents();
+  toast('Incident logged — '+(inc.parentNotified?'parent notified ✓':'no parent alert'));
+}
+function resolveIncident(id){
+  const inc=S.incidents.find(i=>i.id===id);
+  if(inc){inc.status='resolved';renderIncidents();renderNav();toast('Incident marked as resolved');}
+}
 
 // ════════════════════════════════════════════
-//  KIOSK
+//  PRICING PLANS (Fix 4) — 3-tier strategy
 // ════════════════════════════════════════════
+function renderPricing(){
+  setH('Pricing Plans','Transparent school subscription tiers — monthly or annual');
+  const plans=[
+    {
+      name:'Starter',
+      subtitle:'Small independent schools',
+      price_monthly:15000,
+      price_annual:12000,
+      currency:'₦',
+      color:'var(--tint)',
+      features:[
+        {inc:true,text:'Up to 200 students'},
+        {inc:true,text:'Class attendance (manual register)'},
+        {inc:true,text:'Student & teacher records'},
+        {inc:true,text:'Parent WhatsApp alerts'},
+        {inc:true,text:'Behaviour & merit log'},
+        {inc:true,text:'Basic reports & CSV export'},
+        {inc:true,text:'Data migration import'},
+        {inc:false,text:'Biometric attendance'},
+        {inc:false,text:'Family portal (primary/SEN)'},
+        {inc:false,text:'Incidents portal'},
+        {inc:false,text:'Message portal'},
+        {inc:false,text:'Seating plans'},
+      ],
+      cta:'Get Started',ctaStyle:'background:var(--surf-2);color:var(--txt);border:2px solid var(--out-var)',
+    },
+    {
+      name:'Professional',
+      subtitle:'Growing multi-class schools',
+      price_monthly:50000,
+      price_annual:40000,
+      currency:'₦',
+      color:'var(--sec)',
+      badge:'Most Popular',
+      features:[
+        {inc:true,text:'Up to 800 students'},
+        {inc:true,text:'Biometric attendance + manual'},
+        {inc:true,text:'Student & teacher records'},
+        {inc:true,text:'Parent WhatsApp, SMS & Email'},
+        {inc:true,text:'Behaviour & merit log'},
+        {inc:true,text:'Advanced reports & analytics'},
+        {inc:true,text:'Family portal (primary/SEN)'},
+        {inc:true,text:'Incidents & safeguarding portal'},
+        {inc:true,text:'Message portal (staff ↔ parents)'},
+        {inc:true,text:'Seating plans'},
+        {inc:true,text:'School bus notifications'},
+        {inc:false,text:'Custom curriculum config'},
+      ],
+      cta:'Start Free Trial',ctaStyle:'background:#84e05b;color:#1d3314;border:none;box-shadow:0 4px 14px rgba(0,0,0,.15)',
+    },
+    {
+      name:'Enterprise',
+      subtitle:'Large schools & multi-branch groups',
+      price_monthly:200000,
+      price_annual:160000,
+      currency:'₦',
+      color:'var(--pri)',
+      features:[
+        {inc:true,text:'Unlimited students'},
+        {inc:true,text:'All Professional features'},
+        {inc:true,text:'Custom curriculum & class naming'},
+        {inc:true,text:'Multi-branch / multi-campus support'},
+        {inc:true,text:'API integration with existing systems'},
+        {inc:true,text:'Dedicated onboarding & training'},
+        {inc:true,text:'SLA & priority support'},
+        {inc:true,text:'Custom data exports & reports'},
+        {inc:true,text:'White-label option available'},
+        {inc:true,text:'GDPR / UK DPA 2018 compliance pack'},
+        {inc:true,text:'Offline mode for kiosk devices'},
+        {inc:true,text:'Custom biometric device sourcing'},
+      ],
+      cta:'Contact Sales',ctaStyle:'background:var(--pri);color:white;border:none;box-shadow:0 4px 14px rgba(0,0,0,.15)',
+    },
+  ];
+  const [billingAnnual,setBilling]=[S._pricingAnnual||false,v=>{S._pricingAnnual=v;renderPricing()}];
+  setC(`
+    <!-- Billing toggle -->
+    <div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:28px">
+      <span style="font-size:13px;font-weight:600;color:${!billingAnnual?'var(--txt)':'var(--out)'}">Monthly</span>
+      <div onclick="S._pricingAnnual=!S._pricingAnnual;renderPricing()" style="width:48px;height:26px;border-radius:13px;background:${billingAnnual?'var(--sec)':'var(--surf-3)'};cursor:pointer;position:relative;transition:background .2s">
+        <div style="width:22px;height:22px;border-radius:11px;background:white;position:absolute;top:2px;left:${billingAnnual?'24':'2'}px;transition:left .18s;box-shadow:0 1px 4px rgba(0,0,0,.2)"></div>
+      </div>
+      <span style="font-size:13px;font-weight:600;color:${billingAnnual?'var(--txt)':'var(--out)'}">Annual <span style="padding:2px 7px;border-radius:20px;background:var(--sec-cont);color:var(--on-sec-cont);font-size:10px;font-weight:700">Save 20%</span></span>
+    </div>
+
+    <!-- Plan cards -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:start">
+      ${plans.map(p=>`
+        <div style="border-radius:20px;background:white;border:2px solid ${p.badge?'var(--sec)':'var(--out-var)'};box-shadow:${p.badge?'0 8px 32px rgba(0,0,0,.12)':'var(--sh-sm)'};overflow:hidden;position:relative">
+          ${p.badge?`<div style="position:absolute;top:0;left:0;right:0;background:var(--sec);color:var(--on-sec-cont);text-align:center;font-size:10px;font-weight:800;padding:5px;letter-spacing:.06em;text-transform:uppercase">${p.badge}</div>`:''}
+          <div style="padding:24px 22px ${p.badge?'':'0'};padding-top:${p.badge?'36px':'24px'}">
+            <div style="font-size:11px;font-weight:700;color:${p.color};text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px">${p.name}</div>
+            <div style="font-size:12px;color:var(--out);margin-bottom:16px">${p.subtitle}</div>
+            <div style="font-family:var(--fh);font-size:2.4rem;font-weight:800;color:var(--txt);letter-spacing:-.03em;line-height:1">${p.currency}${(billingAnnual?p.price_annual:p.price_monthly).toLocaleString()}<span style="font-size:13px;font-weight:500;color:var(--out)">/mo</span></div>
+            ${billingAnnual?`<div style="font-size:11px;color:var(--sec);font-weight:600;margin-top:3px">Billed annually (${p.currency}${(p.price_annual*12).toLocaleString()}/yr)</div>`:'<div style="height:16px"></div>'}
+            <button style="width:100%;padding:12px;border-radius:10px;cursor:pointer;font-family:var(--fh);font-size:14px;font-weight:700;min-height:44px;margin-top:16px;margin-bottom:20px;${p.ctaStyle};transition:all .15s" onclick="toast('${p.cta} — ${p.name} plan selected')">${p.cta}</button>
+          </div>
+          <div style="padding:0 22px 22px;border-top:1px solid var(--surf-2)">
+            <div style="font-size:10px;font-weight:700;color:var(--out);text-transform:uppercase;letter-spacing:.06em;padding-top:16px;margin-bottom:10px">What's included</div>
+            ${p.features.map(f=>`<div style="display:flex;align-items:center;gap:8px;padding:4px 0;font-size:12px;color:${f.inc?'var(--txt)':'var(--out)'}">
+              <span class="mi" style="font-size:16px;flex-shrink:0;color:${f.inc?'var(--sec)':'var(--out-var)'}">${f.inc?'check_circle':'radio_button_unchecked'}</span>${f.text}
+            </div>`).join('')}
+          </div>
+        </div>`).join('')}
+    </div>
+
+    <!-- Note -->
+    <div style="margin-top:20px;padding:14px 16px;background:var(--surf-1);border-radius:12px;font-size:12px;color:var(--out);display:flex;gap:10px">
+      <span class="mi" style="font-size:16px;color:var(--tint);flex-shrink:0">info</span>
+      <span>All prices in Nigerian Naira (₦) + VAT. UK/international pricing available in GBP — contact <b>sales@mythrosltd.co.uk</b>. Hardware (biometric scanners) charged separately. Free 30-day trial on all plans, no card required.</span>
+    </div>
+  `);
+}
+
+
+function saveCfg(){toast('Webhooks saved')}
+function saveWebhooks(){closeModal('modal-webhook');toast('Webhooks saved')}// ════════════════════════════════════════════
 let _kioskScanning=false;
 const _kioskStudents=['Adaeze Okonkwo','Chukwuemeka Eze','Fatima Aliyu','Ngozi Obi','Emeka Nwosu','Babatunde Adeyemi'];
 const _kioskInits=['AO','CE','FA','NO','EN','BA'];
@@ -4338,6 +4805,174 @@ function renderJobs(){
 // ════════════════════════════════════════════
 //  INIT
 // ════════════════════════════════════════════
+// ════════════════════════════════════════════
+//  LEGAL & PRIVACY
+// ════════════════════════════════════════════
+let _legalTab='privacy';
+function openLegal(tab){_legalTab=tab||'privacy';renderLegal();}
+
+function renderLegal(){
+  setH('Legal & Privacy','Privacy Policy · Terms of Use · Data Processing Agreement');
+  const TABS=[['privacy','privacy_tip','Privacy Policy'],['terms','gavel','Terms of Use'],['dpa','handshake','Data Processing']];
+  const tab=_legalTab||'privacy';
+
+  // ── TAB CONTENT ──────────────────────────────────────────────
+  const sections={
+
+// ────── PRIVACY POLICY ──────────────────────────────────────────
+privacy:`
+<div style="padding-bottom:28px;margin-bottom:28px;border-bottom:2px solid var(--brand-200)">
+  <div style="font-size:11px;font-weight:700;color:var(--sec);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;display:flex;align-items:center;gap:6px"><span class="mi" style="font-size:13px">privacy_tip</span>Legal Document</div>
+  <h2 style="font-family:var(--fh);font-size:26px;font-weight:800;color:var(--pri);letter-spacing:-.03em;margin-bottom:10px">Privacy Policy</h2>
+  <p style="font-size:13px;color:var(--txt2);line-height:1.7;margin-bottom:14px">This policy explains how Mythros Support Services Ltd collects, uses, stores and protects personal data through EduCall — the Digital Operating System for Schools.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:8px">
+    <span style="display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:600;background:var(--surf-1);color:var(--txt2);border:1px solid var(--out-var)"><span class="mi" style="font-size:13px">calendar_today</span>Effective [Insert Date]</span>
+    <span style="display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:600;background:var(--surf-1);color:var(--txt2);border:1px solid var(--out-var)"><span class="mi" style="font-size:13px">business</span>Mythros Support Services Ltd · Co. No. 16384279</span>
+  </div>
+</div>
+
+${lsec(1,'business','Who We Are','',`
+<div style="background:var(--brand-50);border:1px solid var(--brand-200);border-radius:12px;padding:16px 18px">
+  <div style="font-size:13px;font-weight:700;color:var(--pri);margin-bottom:8px">Data Controller and Processor</div>
+  <p style="font-size:13px;color:var(--txt2);line-height:1.7"><strong>For student, parent and staff records:</strong> the School is the <strong>Data Controller</strong>. Mythros Support Services Ltd is the <strong>Data Processor</strong>.<br><br>
+  <strong>For school registration and prospective customers:</strong> Mythros Support Services Ltd is the <strong>Data Controller</strong>.<br><br>
+  <strong>Training accounts:</strong> the pre-seeded training environment (training@mythrosltd.co.uk) is operated by Mythros as Data Controller for onboarding purposes only. No real student or parent data should be entered into training accounts.</p>
+</div>`)}
+
+${lsec(2,'database','Information We Collect','',`
+${lcard('school','Student Information',`Full name, admission number, age, gender, class · Attendance records (check-in/out per subject and period) · Medical and welfare records (sick bay, toilet and medical break logs, overstay alerts) · Behaviour and merit records · Incident records (medical, truancy, safeguarding, uniform, behavioural) · SEN type and required equipment list (special category data) · Biometric fingerprint templates — where enabled (special category data) · Student portal login: admission number`)}
+${lcard('family_restroom','Parent, Guardian & Family Collector Information','Full name and relationship to student · Primary mobile (WhatsApp/SMS) · Work/secondary mobile · Email address · Telegram username (where enabled) · Vehicle registration (family drivers) · Government-issued ID number (optional) · Notification channel preferences per student')}
+${lcard('manage_accounts','Staff Information','Full name, job title and role · School email address and mobile number · Subjects taught and classes assigned · Login account information')}
+${lcard('settings','Technical & Operational Information','IP address, browser and device information, login records, audit logs · School registration data · School bus status and transport event logs · Family handover and collection records · Broadcast message logs · Webhook and automation configuration')}`)}
+
+${lsec(3,'balance','Lawful Basis for Processing','',`
+<div style="border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(29,51,20,.07)">
+<table style="width:100%;border-collapse:collapse;font-size:13px">
+<thead><tr style="background:var(--pri)"><th style="padding:9px 12px;text-align:left;color:white;font-size:10px;font-weight:700;letter-spacing:.06em">Data Category</th><th style="padding:9px 12px;text-align:left;color:white;font-size:10px;font-weight:700;letter-spacing:.06em">Lawful Basis</th></tr></thead>
+<tbody>
+${[['Student records, attendance','Performance of a contract (school subscription)'],['SEN information','Explicit consent + legal obligation (SEND duties)'],['Biometric data','Explicit consent'],['Safeguarding records','Legal obligation + public task'],['Parent communications','Legitimate interests of the school'],['Medical / welfare records','Explicit consent + legal obligation'],['Staff records','Performance of a contract (employment)'],['School registration data','Performance of a contract']].map(([c,b],i)=>`<tr style="background:${i%2?'var(--surf-1)':'white'};border-bottom:1px solid var(--surf-2)"><td style="padding:9px 12px;font-weight:600;color:var(--txt)">${c}</td><td style="padding:9px 12px;color:var(--txt2)">${b}</td></tr>`).join('')}
+</tbody></table></div>`)}
+
+${lsec(4,'settings_suggest','How We Use Information','',`
+<p style="font-size:13px;color:var(--txt2);line-height:1.7;margin-bottom:12px">Personal data processed through EduCall may be used to:</p>
+${['Record and manage student attendance (biometric and manual register)','Track subject-level and period-level check-in and check-out','Manage toilet, medical and welfare breaks and alert parents where a student exceeds the permitted duration','Support safeguarding and child protection obligations','Record and communicate behaviour and merit to parents','Log and manage pastoral and disciplinary incidents','Facilitate parent communications via WhatsApp, SMS, email, Telegram and telephone','Manage family drop-off and collection records','Track school bus and transport events and communicate delays to parents','Administer the student read-only portal','Generate attendance and behaviour reports and data exports','Support data migration from existing school record systems','Maintain platform security and improve system performance'].map(t=>`<div style="display:flex;align-items:flex-start;gap:9px;padding:5px 0;font-size:13px;color:var(--txt2)"><span class="mi" style="font-size:16px;color:var(--sec);flex-shrink:0;margin-top:1px">check_circle</span>${t}</div>`).join('')}
+<div style="background:var(--brand-50);border:1px solid var(--brand-200);border-radius:12px;padding:14px 16px;margin-top:16px"><div style="font-size:12px;font-weight:700;color:var(--pri);margin-bottom:6px;display:flex;align-items:center;gap:6px"><span class="mi" style="font-size:14px">notifications_active</span>Notification Channels</div><div style="font-size:13px;color:var(--txt2);line-height:1.7">EduCall supports: <strong>WhatsApp</strong> (primary), <strong>SMS</strong> (automatic fallback), <strong>Email</strong>, <strong>Telegram</strong>, and <strong>Work telephone</strong> (critical alerts only).</div></div>`)}
+
+${lsec(5,'share','Data Sharing & International Transfers','',`
+<div style="background:white;border-radius:10px;padding:16px 18px;border-left:3px solid var(--sec);box-shadow:0 2px 8px rgba(29,51,20,.07);margin-bottom:14px">
+  <div style="font-size:13px;font-weight:700;color:var(--sec);margin-bottom:6px">We do not sell personal data.</div>
+  <p style="font-size:13px;color:var(--txt2);line-height:1.7">Information may be shared with authorised school staff, trusted providers supporting secure hosting, communications and system operations, and with regulatory or law enforcement authorities where required by law.</p>
+</div>
+<p style="font-size:13px;color:var(--txt2);line-height:1.7">Where personal data is transferred internationally, Mythros ensures appropriate safeguards are in place in accordance with UK GDPR and applicable law. A list of trusted providers is available on request from <strong>privacy@mythrosltd.co.uk</strong>.</p>`)}
+
+${lsec(6,'security','Security Measures','',
+['Encryption in transit (HTTPS/TLS) for all data transmission','Encryption at rest for database records including biometric templates','Role-based access controls (Admin, Teacher, Student, Kiosk, Family roles)','Audit logging of all login and data access events','Secure webhook endpoints with authentication tokens','Backup and recovery procedures'].map(t=>`<div style="display:flex;align-items:flex-start;gap:9px;padding:5px 0;font-size:13px;color:var(--txt2)"><span class="mi" style="font-size:16px;color:var(--sec);flex-shrink:0;margin-top:1px">check_circle</span>${t}</div>`).join(''))}
+
+${lsec(7,'timer','Data Retention','',`
+<div style="border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(29,51,20,.07)"><table style="width:100%;border-collapse:collapse;font-size:13px">
+<thead><tr style="background:var(--pri)"><th style="padding:9px 12px;text-align:left;color:white;font-size:10px;font-weight:700;letter-spacing:.06em">Data Category</th><th style="padding:9px 12px;text-align:left;color:white;font-size:10px;font-weight:700;letter-spacing:.06em">Retention Period</th></tr></thead>
+<tbody>${[['Student records','Duration of enrolment + 7 years'],['Attendance records','7 years minimum'],['Behaviour and merit records','Duration of enrolment, or per institution policy'],['Incident and safeguarding records','As required by law (minimum 25 years for child protection)'],['Medical and welfare break records','Academic year + 1 year'],['Biometric templates','Until consent withdrawal or student departure'],['Family and collector records','Duration of child\'s enrolment'],['Audit logs','24 months'],['Message and SMS logs','12 months'],['Parent contact details','Duration of enrolment + 1 year'],['School registration data','Duration of subscription + 2 years']].map(([c,r],i)=>`<tr style="background:${i%2?'var(--surf-1)':'white'};border-bottom:1px solid var(--surf-2)"><td style="padding:9px 12px;font-weight:600;color:var(--txt)">${c}</td><td style="padding:9px 12px;color:var(--txt2)">${r}</td></tr>`).join('')}</tbody></table></div>`)}
+
+${lsec(8,'how_to_reg','Your Rights','',`
+<p style="font-size:13px;color:var(--txt2);line-height:1.7;margin-bottom:14px">Individuals may exercise the following rights under UK GDPR and the Nigeria Data Protection Act 2023:</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+${['Access — request a copy of data held about you','Rectification — correct inaccurate information','Erasure — request deletion where no legitimate reason exists','Restriction — request that processing be limited','Objection — object to processing based on legitimate interests','Portability — receive data in a machine-readable format','Withdraw consent — including for biometric data','Complaint — raise concerns with the ICO or NDPC'].map(t=>`<div style="display:flex;align-items:flex-start;gap:9px;padding:12px 14px;background:var(--surf-1);border-radius:10px;font-size:12px;color:var(--txt2)"><span class="mi" style="font-size:16px;color:var(--sec);flex-shrink:0;margin-top:1px">verified_user</span>${t}</div>`).join('')}
+</div>`)}
+
+${lsec(9,'contact_mail','Contact Us','',`
+${lcontact('d1fae5','065f46','privacy_tip','Data Protection Enquiries','<a href="mailto:privacy@mythrosltd.co.uk" style="color:var(--tint);text-decoration:none">privacy@mythrosltd.co.uk</a>')}
+${lcontact('ede9fe','5b21b6','gavel','Legal & Compliance','<a href="mailto:legal@mythrosltd.co.uk" style="color:var(--tint);text-decoration:none">legal@mythrosltd.co.uk</a>')}
+${lcontact('c6f1b4','1d3314','support_agent','General Support','<a href="mailto:support@mythrosltd.co.uk" style="color:var(--tint);text-decoration:none">support@mythrosltd.co.uk</a>')}
+<div style="background:var(--brand-50);border:1px solid var(--brand-200);border-radius:12px;padding:14px 16px;font-size:12px;color:var(--txt2);margin-top:4px"><span class="mi" style="font-size:14px;vertical-align:middle;color:var(--sec)">info</span> This Privacy Policy may be updated periodically. The latest version is always available at <strong>www.mythrosltd.co.uk/privacy</strong>.</div>`)}`,
+
+// ────── TERMS OF USE ──────────────────────────────────────────
+terms:`
+<div style="padding-bottom:28px;margin-bottom:28px;border-bottom:2px solid var(--brand-200)">
+  <div style="font-size:11px;font-weight:700;color:var(--sec);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;display:flex;align-items:center;gap:6px"><span class="mi" style="font-size:13px">gavel</span>Legal Document</div>
+  <h2 style="font-family:var(--fh);font-size:26px;font-weight:800;color:var(--pri);letter-spacing:-.03em;margin-bottom:10px">Terms of Use</h2>
+  <p style="font-size:13px;color:var(--txt2);line-height:1.7;margin-bottom:14px">These Terms govern all access to and use of the EduCall Platform by schools, their staff, students and family portal users.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:8px"><span style="display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:600;background:var(--surf-1);color:var(--txt2);border:1px solid var(--out-var)"><span class="mi" style="font-size:13px">calendar_today</span>Effective [Insert Date]</span><span style="display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:600;background:var(--surf-1);color:var(--txt2);border:1px solid var(--out-var)"><span class="mi" style="font-size:13px">business</span>Mythros Support Services Ltd · Co. No. 16384279</span></div>
+</div>
+
+${lsec(1,'dictionary','Key Definitions','',`
+<div style="background:white;border-radius:10px;box-shadow:0 2px 8px rgba(29,51,20,.07);overflow:hidden">
+${[['Platform','The EduCall web application, biometric kiosk interface, student portal, family portal, APIs and associated services operated by Mythros Support Services Ltd.'],['Customer','The educational institution subscribing to EduCall — the Data Controller for student and staff records.'],['Authorised User','Any individual authorised by a Customer to access EduCall, including admins, teachers, kiosk operators, family portal staff and students (read-only portal).'],['Content','All data, records, messages, files and materials uploaded, stored or transmitted through EduCall, including student records, attendance data, incident logs, biometric templates and parent contact details.'],['Training Account','The pre-seeded demonstration environment (training@mythrosltd.co.uk / Sunshine Secondary School) for staff onboarding only. No real data should be entered.']].map(([t,d],i)=>`<div style="padding:12px 14px;border-bottom:1px solid var(--surf-2);background:${i%2?'var(--surf-1)':'white'}"><div style="font-size:13px;font-weight:700;color:var(--txt);margin-bottom:3px">${t}</div><div style="font-size:13px;color:var(--txt2);line-height:1.6">${d}</div></div>`).join('')}
+</div>`)}
+
+${lsec(2,'check_circle','Permitted Use','',
+['Student administration and record management','Attendance management — biometric and manual register','Subject timetabling and academic management','Behaviour and merit tracking and parent notification','Incident recording and safeguarding case management','Parent and guardian communication (WhatsApp, SMS, email, Telegram, telephone)','Family portal management — drop-off, collection and handover records','School transport and bus status management','Data migration from existing school record systems','Report generation and data export','Staff and teacher management','Biometric device configuration and enrolment'].map(t=>`<div style="display:flex;align-items:flex-start;gap:9px;padding:5px 0;font-size:13px;color:var(--txt2)"><span class="mi" style="font-size:16px;color:var(--sec);flex-shrink:0;margin-top:1px">check_circle</span>${t}</div>`).join(''))}
+
+${lsec(3,'block','Prohibited Activities','',`
+${['Share login credentials or student admission numbers with unauthorised persons','Enter real personal data into the Training Account','Upload or introduce malicious software or scripts','Attempt to reverse-engineer, copy or reproduce any part of EduCall','Use EduCall for unlawful processing of personal data','Process biometric data without obtaining valid consent','Send unsolicited or abusive communications via messaging or alert features','Access records without legitimate educational authority','Use broadcast messaging for purposes unrelated to school administration or safeguarding','Circumvent or disable any security controls or audit logging'].map(t=>`<div style="display:flex;align-items:flex-start;gap:9px;padding:5px 0;font-size:13px;color:var(--txt2)"><span class="mi" style="font-size:16px;color:#dc2626;flex-shrink:0;margin-top:1px">cancel</span>${t}</div>`).join('')}
+<div style="background:#fff5f5;border:1px solid #fca5a5;border-radius:10px;padding:12px 14px;margin-top:14px;font-size:12px;color:#991b1b">Any breach may result in suspension or termination of access and may be reported to the relevant regulatory authority.</div>`)}
+
+${lsec(4,'fingerprint','Biometric Data','',
+['Schools must obtain valid, freely-given, specific and informed consent from each student (or their parent/guardian for students under 18) before biometric enrolment','Alternative non-biometric attendance (manual register) must always be available to students who do not consent','Biometric fingerprint templates are not stored as photographic images','Schools must maintain a record of consents obtained','Biometric data must be deleted upon consent withdrawal, student departure or subscription termination'].map(t=>`<div style="display:flex;align-items:flex-start;gap:9px;padding:5px 0;font-size:13px;color:var(--txt2)"><span class="mi" style="font-size:16px;color:var(--sec);flex-shrink:0;margin-top:1px">check_circle</span>${t}</div>`).join(''))}
+
+${lsec(5,'balance','Liability, Governing Law & Contact','',`
+<p style="font-size:13px;color:var(--txt2);line-height:1.7;margin-bottom:10px">To the maximum extent permitted by law, Mythros shall not be liable for indirect or consequential losses, loss of profits, data loss resulting from Customer actions, or failures in third-party services (WhatsApp, SMS, biometric hardware). Total liability shall not exceed the fees paid in the preceding twelve months. Nothing excludes liability for death, personal injury caused by negligence, or fraud.</p>
+<p style="font-size:13px;color:var(--txt2);line-height:1.7;margin-bottom:16px">These Terms are governed by the laws of <strong>England and Wales</strong>. Disputes are subject to the exclusive jurisdiction of the courts of England and Wales.</p>
+${lcontact('ede9fe','5b21b6','gavel','Legal Enquiries','<a href="mailto:legal@mythrosltd.co.uk" style="color:var(--tint);text-decoration:none">legal@mythrosltd.co.uk</a>')}
+${lcontact('c6f1b4','1d3314','support_agent','Support','<a href="mailto:support@mythrosltd.co.uk" style="color:var(--tint);text-decoration:none">support@mythrosltd.co.uk</a>')}
+<div style="background:var(--brand-50);border:1px solid var(--brand-200);border-radius:12px;padding:14px 16px;font-size:12px;color:var(--txt2);margin-top:4px">By accessing or using EduCall, users confirm they have read, understood and agreed to these Terms. <strong>Mythros Support Services Ltd · Co. No. 16384279 · www.mythrosltd.co.uk</strong></div>`)}`,
+
+// ────── DATA PROCESSING AGREEMENT ────────────────────────────
+dpa:`
+<div style="padding-bottom:28px;margin-bottom:28px;border-bottom:2px solid var(--brand-200)">
+  <div style="font-size:11px;font-weight:700;color:var(--sec);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px;display:flex;align-items:center;gap:6px"><span class="mi" style="font-size:13px">handshake</span>Legal Document</div>
+  <h2 style="font-family:var(--fh);font-size:26px;font-weight:800;color:var(--pri);letter-spacing:-.03em;margin-bottom:10px">Data Processing Agreement</h2>
+  <p style="font-size:13px;color:var(--txt2);line-height:1.7;margin-bottom:14px">This agreement governs how Mythros Support Services Ltd processes personal data on behalf of your school as Data Controller.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:8px"><span style="display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:600;background:var(--surf-1);color:var(--txt2);border:1px solid var(--out-var)"><span class="mi" style="font-size:13px">calendar_today</span>Effective [Insert Date]</span></div>
+</div>
+
+${lsec('S1','table_chart','Processing Summary','',`
+<div style="border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(29,51,20,.07)"><table style="width:100%;border-collapse:collapse;font-size:13px">
+<thead><tr style="background:var(--pri)"><th style="padding:9px 12px;text-align:left;color:white;font-size:10px;font-weight:700;letter-spacing:.06em">Item</th><th style="padding:9px 12px;text-align:left;color:white;font-size:10px;font-weight:700;letter-spacing:.06em">Description</th></tr></thead>
+<tbody>${[['Controller','Customer School or Institution'],['Processor','Mythros Support Services Ltd (Co. No. 16384279)'],['Service','EduCall Platform'],['Purpose','Educational administration, attendance, safeguarding, parent communication, behaviour and merit management, transport'],['Data Subjects','Students, Parents, Guardians, Authorised Family Collectors, Staff'],['Special Category Data','SEN records, Safeguarding records, Medical/welfare records, Biometric fingerprint templates, Health data (medical break logs)'],['Processing Activities','Collection, storage, access control, automated alerting (WhatsApp/SMS/Email/Telegram), reporting, export, deletion'],['Retention','As defined in the EduCall Data Retention Policy'],['International Transfers','Subject to approved safeguards in accordance with UK GDPR and applicable law'],['Governing Law','England and Wales · UK GDPR · Data Protection Act 2018 · Nigeria Data Protection Act 2023']].map(([i,d],n)=>`<tr style="background:${n%2?'var(--surf-1)':'white'};border-bottom:1px solid var(--surf-2)"><td style="padding:9px 12px;font-weight:700;color:var(--txt)">${i}</td><td style="padding:9px 12px;color:var(--txt2)">${d}</td></tr>`).join('')}</tbody></table></div>`)}
+
+${lsec(1,'shield','Processor Obligations','',
+[['Process only on instructions','Mythros processes personal data solely on documented instructions from the Controller'],['Maintain confidentiality','All personnel with access to personal data are bound by confidentiality obligations'],['Security controls','Encryption in transit and at rest, role-based access, audit logging, backup, security monitoring'],['Breach notification','Notify the Controller without undue delay on becoming aware of a personal data breach'],['Sub-processor management','Maintain appropriate agreements with all trusted third-party providers supporting EduCall'],['Rights assistance','Assist the Controller in responding to data subject rights requests'],['Deletion on termination','Return or securely delete Customer Data on request following subscription termination']].map(([t,d])=>`<div style="display:flex;align-items:flex-start;gap:9px;padding:9px 0;border-bottom:1px solid var(--surf-2);font-size:13px;color:var(--txt2)"><span class="mi" style="font-size:16px;color:var(--sec);flex-shrink:0;margin-top:1px">check_circle</span><span><strong style="color:var(--txt)">${t}</strong> — ${d}</span></div>`).join(''))}
+
+${lsec(2,'fingerprint','Biometric Data Processing','',`<p style="font-size:13px;color:var(--txt2);line-height:1.7">Where biometric attendance is enabled, the Controller (school) is responsible for obtaining valid consent. Alternative attendance methods must always be available. Biometric templates are encrypted and never stored as images. Biometric data is deleted upon consent withdrawal or student departure.</p>`)}
+
+${lsec(3,'contact_mail','Contact & Execution','',`
+${lcontact('d1fae5','065f46','privacy_tip','Data Protection Contact — Mythros Support Services Ltd','<a href="mailto:privacy@mythrosltd.co.uk" style="color:var(--tint);text-decoration:none">privacy@mythrosltd.co.uk</a> · <a href="https://www.mythrosltd.co.uk" style="color:var(--tint);text-decoration:none">www.mythrosltd.co.uk</a>')}
+<div style="background:var(--brand-50);border:1px solid var(--brand-200);border-radius:12px;padding:14px 16px;font-size:12px;color:var(--txt2);margin-top:8px">This DPA forms part of the contractual relationship between the Customer and Mythros Support Services Ltd. A signed copy is available on request from <strong>legal@mythrosltd.co.uk</strong>.</div>`)}`,
+  };
+
+  // ── Helper renderers (defined inline so they close over nothing global) ──
+  function lsec(n,icon,title,sub,body){
+    return`<div style="margin-bottom:32px;scroll-margin-top:24px">
+      <div style="font-size:10px;font-weight:800;color:var(--sec);text-transform:uppercase;letter-spacing:.12em;margin-bottom:5px">Section ${n}</div>
+      <div style="font-family:var(--fh);font-size:18px;font-weight:800;color:var(--pri);margin-bottom:12px;letter-spacing:-.02em;display:flex;align-items:center;gap:9px"><span class="mi" style="font-size:20px;color:var(--sec)">${icon}</span>${title}</div>
+      ${sub?`<p style="font-size:13px;color:var(--txt2);margin-bottom:12px">${sub}</p>`:''}
+      <div>${body}</div>
+      <div style="height:1px;background:var(--surf-2);margin-top:28px"></div>
+    </div>`;
+  }
+  function lcard(icon,title,body){
+    return`<div style="background:var(--surf-1);border-radius:12px;padding:15px 17px;margin-bottom:12px">
+      <div style="font-size:12px;font-weight:700;color:var(--pri);margin-bottom:9px;display:flex;align-items:center;gap:7px"><span class="mi" style="font-size:15px">${icon}</span>${title}</div>
+      <div style="font-size:13px;color:var(--txt2);line-height:1.7">${body.split(' · ').map(t=>`<div style="display:flex;align-items:flex-start;gap:9px;padding:3px 0"><span class="mi" style="font-size:14px;color:var(--sec);flex-shrink:0;margin-top:2px">check_circle</span>${t}</div>`).join('')}</div>
+    </div>`;
+  }
+  function lcontact(ibg,icol,iicon,label,val){
+    return`<div style="display:flex;align-items:center;gap:14px;padding:13px 16px;background:white;border-radius:12px;border:1px solid var(--out-var);margin-bottom:9px;box-shadow:0 2px 8px rgba(29,51,20,.07)">
+      <div style="width:40px;height:40px;border-radius:10px;background:#${ibg};display:flex;align-items:center;justify-content:center;flex-shrink:0"><span class="mi" style="font-size:22px;color:#${icol}">${iicon}</span></div>
+      <div><div style="font-size:10px;font-weight:700;color:var(--out);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px">${label}</div><div style="font-size:13px;font-weight:600;color:var(--pri)">${val}</div></div>
+    </div>`;
+  }
+
+  setC(`
+    <!-- Tab bar -->
+    <div style="display:flex;gap:4px;background:var(--surf-1);border-radius:12px;padding:4px;margin-bottom:28px;border:1px solid var(--out-var)">
+      ${TABS.map(([id,ic,lbl])=>`<button onclick="_legalTab='${id}';renderLegal()" style="flex:1;padding:11px 14px;border-radius:9px;border:none;font-family:var(--fh);font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;background:${tab===id?'var(--pri)':'transparent'};color:${tab===id?'white':'var(--txt2)'}"><span class="mi" style="font-size:15px;vertical-align:middle">${ic}</span> ${lbl}</button>`).join('')}
+    </div>
+    <!-- Content -->
+    <div style="max-width:780px">${sections[tab]||''}</div>
+  `);
+}
+
 document.querySelectorAll('.modal-bg').forEach(el=>el.addEventListener('click',e=>{if(e.target===el)el.classList.remove('open')}));
 document.addEventListener('DOMContentLoaded',()=>{
   pickRole('admin');
